@@ -2,16 +2,20 @@ import { useDispatch } from "react-redux";
 import {
   setSnackbarMessage,
   setSnackbarSeverity,
-} from "../../features/modules/snackbarSlice";
-import { useApi } from "../useApi";
-import { useRegisterMutation } from "../api"; // Import your mutation hook from the API slice
+} from "../../app/modules/snackbarSlice";
+import { useRegisterMutation } from "../api"; // Your RTK mutation
+
+// Define the error type that matches what RTK Query can return
+interface RegisterError {
+  data?: { message: string };
+  status?: number;
+}
 
 export const useRegister = () => {
   const dispatch = useDispatch();
 
-  // Use the useApi hook for the register API
-  const { callApi, isLoading, isError, error, snackbarOpen, backdropOpen } =
-    useApi(useRegisterMutation, {});
+  // Directly use the RTK mutation
+  const [registerMutation, { isLoading, isError, error }] = useRegisterMutation();
 
   const register = async (userData: {
     username: string;
@@ -20,11 +24,16 @@ export const useRegister = () => {
     fullName: string;
   }) => {
     try {
-      await callApi(userData);
+      await registerMutation(userData).unwrap(); // unwrap to catch errors properly
+
       dispatch(setSnackbarMessage("Registration successful!"));
       dispatch(setSnackbarSeverity("success"));
     } catch (err) {
-      dispatch(setSnackbarMessage("Registration failed!"));
+      // Type casting error to RegisterError
+      const errorResponse = err as RegisterError;
+      const errorMessage =
+        errorResponse?.data?.message || "Registration failed due to server error!";
+      dispatch(setSnackbarMessage(errorMessage));
       dispatch(setSnackbarSeverity("error"));
     }
   };
@@ -34,7 +43,5 @@ export const useRegister = () => {
     isLoading,
     isError,
     error,
-    snackbarOpen,
-    backdropOpen,
   };
 };

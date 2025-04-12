@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useRegister } from '../../services/auth/useRegister';
-import { TextField, Button, CircularProgress } from '@mui/material';
+import { TextField, Button, CircularProgress, Snackbar, Backdrop } from '@mui/material';
 
 const RegisterComponent = () => {
-  const { register, isLoading, isError, snackbarOpen, backdropOpen } = useRegister();
+  const { register, isLoading, isError, error } = useRegister();
 
   const [userData, setUserData] = useState({
     username: '',
@@ -11,6 +11,10 @@ const RegisterComponent = () => {
     password: '',
     fullName: '',
   });
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [backdropOpen, setBackdropOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -21,12 +25,17 @@ const RegisterComponent = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setBackdropOpen(true); // Show the backdrop when starting the registration process
     try {
       // Call the register function from useRegister
       await register(userData);
+      setSnackbarMessage('Registration successful!');
+      setSnackbarOpen(true);
     } catch (err) {
-      // Error handling is managed in the useRegister hook
-      console.error('Registration failed:', err);
+      setSnackbarMessage('Registration failed!');
+      setSnackbarOpen(true);
+    } finally {
+      setBackdropOpen(false); // Hide the backdrop once done
     }
   };
 
@@ -79,18 +88,18 @@ const RegisterComponent = () => {
       </form>
 
       {/* Snackbar notification */}
-      {snackbarOpen && (
-        <div className={`snackbar ${snackbarOpen ? 'open' : ''}`}>
-          {isError ? 'Registration failed!' : 'Registration successful!'}
-        </div>
-      )}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        message={snackbarMessage}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
 
       {/* Backdrop or loading spinner */}
-      {backdropOpen && (
-        <div className="backdrop">
-          <CircularProgress />
-        </div>
-      )}
+      <Backdrop open={backdropOpen} style={{ zIndex: 9999 }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
