@@ -1,38 +1,89 @@
-// src/modules/TextFieldComponent.tsx
-import React from 'react';
-import { TextField } from '@mui/material';
+/* eslint-disable react-refresh/only-export-components */
+import React from "react";
+import { TextField } from "@mui/material";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../app/store"; // You’ll need this
+
+// --- 1. Redux Slice ---
+interface FormState {
+  [key: string]: string;
+}
+
+const initialState: FormState = {};
+
+const formSlice = createSlice({
+  name: "form",
+  initialState,
+  reducers: {
+    updateInputValue: (
+      state,
+      action: PayloadAction<{ field: string; value: string }>
+    ) => {
+      const { field, value } = action.payload;
+      state[field] = value;
+    },
+  },
+});
+
+export const { updateInputValue } = formSlice.actions;
+export const formReducer = formSlice.reducer;
+
+// --- 2. Hook (get + update value) ---
+export const useTextField = (field: string) => {
+  const dispatch = useDispatch();
+  const value = useSelector((state: RootState) => state.form[field] || "");
+
+  const setValue = (val: string) => {
+    dispatch(updateInputValue({ field, value: val }));
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setValue(e.target.value);
+  };
+
+  return { value, setValue, handleChange };
+};
 
 interface TextFieldComponentProps {
   label: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
   type?: string;
   error?: boolean;
   helperText?: string;
+  value: string;
+  fullWidth?: boolean;
+  className?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   label,
-  value,
-  onChange,
   name,
-  type = 'text',
+  type = "text",
   error = false,
-  helperText = '',
+  helperText = "",
+  value,
+  fullWidth,
+  className,
+  onChange,
 }) => {
   return (
     <TextField
+      fullWidth={fullWidth}
       label={label}
-      value={value}
-      onChange={onChange}
       name={name}
       type={type}
+      value={value}
+      onChange={onChange}
       error={error}
       helperText={helperText}
-      fullWidth
+      className={className}
     />
   );
 };
+
 
 export default TextFieldComponent;

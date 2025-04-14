@@ -1,21 +1,17 @@
-import { useDispatch } from "react-redux";
-import {
-  setSnackbarMessage,
-  setSnackbarSeverity,
-} from "../../app/modules/snackbarSlice";
-import { useRegisterMutation } from "../api"; // Your RTK mutation
+import { useEffect, useState } from "react";
+import { useRegisterMutation } from "../api";
+import { useSnackbar } from "../../modules/SnackbarComponent";
 
-// Define the error type that matches what RTK Query can return
 interface RegisterError {
   data?: { message: string };
   status?: number;
 }
 
 export const useRegister = () => {
-  const dispatch = useDispatch();
-
-  // Directly use the RTK mutation
-  const [registerMutation, { isLoading, isError, error }] = useRegisterMutation();
+  const { showSnackbar } = useSnackbar();
+  const [registerMutation, { isLoading, isError, error, isSuccess }] =
+    useRegisterMutation();
+  const [backdropOpen, setBackdropOpen] = useState(false);
 
   const register = async (userData: {
     username: string;
@@ -24,24 +20,37 @@ export const useRegister = () => {
     fullName: string;
   }) => {
     try {
-      await registerMutation(userData).unwrap(); // unwrap to catch errors properly
-
-      dispatch(setSnackbarMessage("Registration successful!"));
-      dispatch(setSnackbarSeverity("success"));
+      setBackdropOpen(true);
+      await registerMutation(userData).unwrap();
     } catch (err) {
-      // Type casting error to RegisterError
       const errorResponse = err as RegisterError;
       const errorMessage =
-        errorResponse?.data?.message || "Registration failed due to server error!";
-      dispatch(setSnackbarMessage(errorMessage));
-      dispatch(setSnackbarSeverity("error"));
+        errorResponse?.data?.message ||
+        "Registration failed due to server error!";
+      showSnackbar(errorMessage, "error");
+    } finally {
+      setBackdropOpen(false); // Hide backdrop when done
     }
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      showSnackbar("Registration in progress...", "info");
+    } else if (isError) {
+      const errorMessage =
+        (error as RegisterError)?.data?.message || "Something went wrong!";
+      showSnackbar(errorMessage, "error");
+    } else if (isSuccess) {
+      showSnackbar("Registration successful!", "success");
+    }
+  }, [isLoading, isError, error, isSuccess, showSnackbar]);
 
   return {
     register,
     isLoading,
     isError,
+    isSuccess,
     error,
+    backdropOpen,
   };
 };

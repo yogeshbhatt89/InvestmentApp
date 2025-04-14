@@ -1,13 +1,17 @@
-import RegisterComponent from './features/auth/RegisterComponent' // Import the RegisterComponent
-import './App.css'
-
-function App() {
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import RegisterComponent from "./features/auth/RegisterComponent";
+import LoginComponent from "./features/auth/LoginComponent";
+import HomePage from "./features/HomePage";
+const App = () => {
   return (
-    <div className="App">
-      <h1>Register to the Application</h1>
-      <RegisterComponent />
-    </div>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/register" element={<RegisterComponent />} />
+        <Route path="/login" element={<LoginComponent />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;

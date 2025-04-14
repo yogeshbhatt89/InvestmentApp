@@ -1,6 +1,16 @@
-import React from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+
+export const useBackdrop = () => {
+  const [open, setOpen] = useState(false);
+
+  const showBackdrop = () => setOpen(true);
+  const hideBackdrop = () => setOpen(false);
+
+  return { open, showBackdrop, hideBackdrop };
+};
 
 interface BackdropComponentProps {
   open: boolean;

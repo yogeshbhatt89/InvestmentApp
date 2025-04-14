@@ -1,33 +1,59 @@
-// // useLogin.ts
-// import { useDispatch } from 'react-redux';
-// import { setSnackbarMessage, setSnackbarSeverity } from '../features/modules/snackbarSlice';
-// import { useApi } from './useApi';
-// import { useLoginMutation } from '../services/api'; // Assuming you have a login mutation
+import { useEffect, useState } from "react";
+import { useLoginMutation } from "../api";
+import { useSnackbar } from "../../modules/SnackbarComponent";
 
-// export const useLogin = () => {
-//   const dispatch = useDispatch();
-//   const { callApi, isLoading, isError, error, snackbarOpen, backdropOpen } = useApi(
-//     useLoginMutation,
-//     {}
-//   );
+interface LoginError {
+  data?: { message: string };
+  status?: number;
+}
 
-//   const login = async (userData: { username: string; password: string }) => {
-//     try {
-//       await callApi(() => useLoginMutation(userData));
-//       dispatch(setSnackbarMessage('Login successful!'));
-//       dispatch(setSnackbarSeverity('success'));
-//     } catch (err) {
-//       dispatch(setSnackbarMessage('Login failed!'));
-//       dispatch(setSnackbarSeverity('error'));
-//     }
-//   };
+interface TokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
-//   return {
-//     login,
-//     isLoading,
-//     isError,
-//     error,
-//     snackbarOpen,
-//     backdropOpen,
-//   };
-// };
+export const useLogin = () => {
+  const { showSnackbar } = useSnackbar();
+  const [loginMutation, { isLoading, isError, error, isSuccess }] =
+    useLoginMutation();
+  const [backdropOpen, setBackdropOpen] = useState(false);
+
+  const login = async (userData: { email: string; password: string }) => {
+    try {
+      setBackdropOpen(true);
+      const response = await loginMutation(userData).unwrap();
+
+      const { accessToken, refreshToken } = response as TokenResponse;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+    } catch (err) {
+      const errorResponse = err as LoginError;
+      const errorMessage =
+        errorResponse?.data?.message || "Login failed due to server error!";
+      showSnackbar(errorMessage, "error");
+    } finally {
+      setBackdropOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      showSnackbar("Login in progress...", "info");
+    } else if (isError) {
+      const errorMessage =
+        (error as LoginError)?.data?.message || "Something went wrong!";
+      showSnackbar(errorMessage, "error");
+    } else if (isSuccess) {
+      showSnackbar("Login successful!", "success");
+    }
+  }, [isLoading, isError, error, isSuccess, showSnackbar]);
+
+  return {
+    login,
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+    backdropOpen,
+  };
+};
