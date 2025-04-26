@@ -7,19 +7,30 @@ import type {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "/api",
-  prepareHeaders: (headers) => {
+  prepareHeaders: (headers, { endpoint }) => {
     const token = localStorage.getItem("accessToken");
-    if (token) {
+
+    if (endpoint !== "login" && endpoint !== "register" && token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
+
     headers.set("Content-Type", "application/json");
     return headers;
   },
 });
-
 interface TokenResponse {
   accessToken: string;
   refreshToken: string;
+}
+
+interface SymbolLookupResponse {
+  count: number; // Number of results
+  result: Array<{
+    symbol: string; // Unique symbol
+    displaySymbol: string; // Display symbol name
+    description: string; // Symbol description
+    type: string; // Security type (e.g., "Equity", "ETF")
+  }>;
 }
 
 const baseQueryWithReauth: BaseQueryFn<
@@ -82,7 +93,17 @@ export const api = createApi({
         body: userData,
       }),
     }),
+    symbolLookup: builder.query<
+      SymbolLookupResponse,
+      { query: string; exchange: string }
+    >({
+      query: ({ query, exchange }) => ({
+        url: `/investments/symbolLookup?q=${query}&exchange=${exchange}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = api;
+export const { useRegisterMutation, useLoginMutation, useSymbolLookupQuery } =
+  api;

@@ -19,8 +19,9 @@ interface ButtonProps {
   onClick?: () => void; // The click handler
   type?: "button" | "submit" | "reset"; // Type for the button
   variant?: "text" | "outlined" | "contained"; // Variant type for the button
-  fullWidth?: boolean; // Option to make the button full wi
-  className: string;
+  fullWidth?: boolean; // Option to make the button full width
+  size?: "small" | "medium" | "large"; // NEW: Size for the button
+  className?: string;
   disabled?: boolean; // Disabled state for the button
 }
 
@@ -29,9 +30,10 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   onClick,
   type = "button",
   variant = "contained",
-  fullWidth = true,
+  fullWidth = false,
+  size = "medium", // Default to medium if not provided
   disabled = false,
-  className // Default to false
+  className
 }) => {
   const { handleClick } = useButton();
 
@@ -40,9 +42,10 @@ const ButtonComponent: React.FC<ButtonProps> = ({
       type={type}
       variant={variant}
       fullWidth={fullWidth}
+      size={size}
       onClick={handleClick(onClick)}
       disabled={disabled}
-      className={className}
+      className={`w-72 ${className}`}
     >
       {label}
     </Button>

@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from "react";
 import { TextField } from "@mui/material";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -57,18 +56,20 @@ interface TextFieldComponentProps {
   fullWidth?: boolean;
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autoComplete?: string;
 }
 
-const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
+export const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   label,
   name,
   type = "text",
   error = false,
   helperText = "",
   value,
-  fullWidth,
+  fullWidth = false,
   className,
   onChange,
+  autoComplete,
 }) => {
   return (
     <TextField
@@ -80,10 +81,10 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
       onChange={onChange}
       error={error}
       helperText={helperText}
-      className={className}
+      className={`w-72 ${className}`}
+      autoComplete={autoComplete}
     />
   );
 };
-
 
 export default TextFieldComponent;

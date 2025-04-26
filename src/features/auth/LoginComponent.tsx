@@ -1,39 +1,43 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import { useLogin } from "../../services/auth/useLogin"; // Your custom useLogin hook
-import TextFieldComponent, { useTextField } from "../../modules/TextFieldComponent"; // Your custom TextFieldComponent
-import ButtonComponent from "../../modules/ButtonComponent"; // Your custom ButtonComponent
-import BackdropComponent from "../../modules/BackdropComponent"; // Your custom BackdropComponent
+import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../services/auth/useLogin";
+import TextFieldComponent, { useTextField } from "../../modules/TextFieldComponent";
+import ButtonComponent from "../../modules/ButtonComponent";
+import BackdropComponent from "../../modules/BackdropComponent";
 
 const LoginComponent = () => {
-  const navigate = useNavigate(); // Use navigate hook for redirection
-  const { login, isLoading, backdropOpen, isSuccess } = useLogin(); // Get login and backdropOpen from useLogin
+  const navigate = useNavigate();
+  const { login, isLoading, backdropOpen, isSuccess } = useLogin();
 
   const { value: email, handleChange: handleEmailChange } = useTextField("email");
   const { value: password, handleChange: handlePasswordChange } = useTextField("password");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLoginClick = async () => {
     await login({ email, password });
   };
 
-  // Redirect to Home page on successful login
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
+
   useEffect(() => {
     if (isSuccess) {
-      navigate("/home"); // Redirect to Home page on successful login
+      navigate("/home");
     }
   }, [isSuccess, navigate]);
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
+
         <TextFieldComponent
           label="Email"
           name="email"
           value={email}
           onChange={handleEmailChange}
         />
+
         <TextFieldComponent
           label="Password"
           name="password"
@@ -41,16 +45,22 @@ const LoginComponent = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <ButtonComponent
-          label="Login"
-          type="submit"
-          fullWidth
-          disabled={isLoading}
-          className="mt-4"
-        />
-      </form>
 
-      <BackdropComponent open={backdropOpen} />
+        <div className="mt-6 flex flex-col sm:flex-row gap-4">
+          <ButtonComponent
+            label="Login"
+            onClick={handleLoginClick}
+            disabled={isLoading}
+          />
+          <ButtonComponent
+            label="Go to Register"
+            onClick={handleRegisterClick}
+            variant="outlined"
+          />
+        </div>
+
+        <BackdropComponent open={backdropOpen} />
+      </div>
     </div>
   );
 };

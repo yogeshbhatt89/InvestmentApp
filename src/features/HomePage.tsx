@@ -1,28 +1,35 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import ButtonComponent from "../modules/ButtonComponent";
+import React, { useState } from "react";
+
+import NavbarComponent from "../modules/NavbarComponent";
+import TabComponent from "../modules/TabComponent";
+import BoxComponent from "../modules/BoxComponent";
+import SearchComponent from "../modules/SearchComponent"; // Importing SearchComponent
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const [selectedTab, setSelectedTab] = useState("overview"); // State for keeping track of the selected tab
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    navigate("/login");
+  const handleTabChange = (tabValue: string) => {
+    setSelectedTab(tabValue); // Update selected tab
+    console.log("Selected Tab:", tabValue);
   };
+
+  const tabs = [
+    { label: "Overview", value: "overview" },
+    { label: "Portfolio", value: "portfolio" },
+    { label: "Markets", value: "markets" },
+    { label: "Search", value: "search" }, // Adding the "Search" tab
+  ];
 
   return (
     <div>
-      <h2>Welcome to the Home Page</h2>
-      <p>You are logged in!</p>
+      <NavbarComponent />
+      <BoxComponent display="flex" justifyContent="center" alignItems="center">
+        <TabComponent tabs={tabs} onTabChange={handleTabChange} />
+      </BoxComponent>
 
-      <ButtonComponent
-        label="Logout"
-        onClick={handleLogout}
-        variant="contained"
-        fullWidth={false}
-        className="mt-4"
-      />
+      <BoxComponent display="flex" justifyContent="center" alignItems="center" style={{ marginTop: '20px' }}>
+        {selectedTab === "search" && <SearchComponent />} {/* Conditionally render SearchComponent when "Search" tab is selected */}
+      </BoxComponent>
     </div>
   );
 };
