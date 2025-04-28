@@ -1,7 +1,7 @@
 import { useSymbolLookupQuery } from "../api";
 import { useState, useEffect } from "react";
 import { useSnackbar } from "../../modules/SnackbarComponent";
-import { debounce } from "lodash"; // Import debounce from lodash
+import { debounce } from "lodash";
 
 interface Symbol {
   symbol: string;
@@ -17,25 +17,29 @@ interface SymbolLookupError {
 
 export const useSymbolLookup = (query: string, exchange: string) => {
   const { showSnackbar } = useSnackbar();
-  const [debouncedQuery, setDebouncedQuery] = useState(query); // Store the debounced query
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
 
   // Debounce the search query
   const debouncedSearch = debounce((value: string) => {
-    setDebouncedQuery(value); // Set the debounced query to trigger the API call
-  }, 500); // Adjust debounce delay as needed (500ms is a common delay)
+    setDebouncedQuery(value);
+  }, 500);
 
-  // Debounce the query input
   useEffect(() => {
-    debouncedSearch(query); // Call the debounced function whenever query changes
+    debouncedSearch(query);
     return () => {
-      debouncedSearch.cancel(); // Cancel any pending debounced calls when component unmounts
+      debouncedSearch.cancel();
     };
   }, [query, debouncedSearch]);
 
-  const { data, error, isLoading, isError, isSuccess } = useSymbolLookupQuery({
-    query: debouncedQuery, // Use the debounced query for the API request
-    exchange,
-  });
+  const shouldSkipQuery = debouncedQuery.trim() === "";
+
+  const { data, error, isLoading, isError, isSuccess } = useSymbolLookupQuery(
+    {
+      query: debouncedQuery,
+      exchange,
+    },
+    { skip: shouldSkipQuery }
+  );
 
   const [symbols, setSymbols] = useState<Symbol[]>([]);
 

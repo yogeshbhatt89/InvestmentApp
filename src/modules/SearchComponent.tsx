@@ -1,45 +1,99 @@
 import React, { useState } from "react";
-import { CircularProgress, TextField, Box } from "@mui/material";
+import { CircularProgress, TextField, Box, IconButton, InputAdornment, Paper, Typography } from "@mui/material";
 import { debounce } from "lodash";
-import { useSymbolLookup } from "../services/finnhub/useSymbolLookup"; // Adjust import based on where your hook is defined
-import GridComponent from "./GridComponent"; // Import the GridComponent
+import { useSymbolLookup } from "../services/finnhub/useSymbolLookup";
+import GridComponent from "./GridComponent";
+import ClearIcon from "@mui/icons-material/Clear"; // Clear icon for input
 
 const SearchComponent = () => {
-  const [inputValue, setInputValue] = useState(""); // Search input value
-  // const [exchange, setExchange] = useState("US"); // Default exchange
-  const { symbols, isLoading } = useSymbolLookup(inputValue, 'US'); // Fetch results based on the search query and exchange
+  const [inputValue, setInputValue] = useState("");
+  const [query, setQuery] = useState("");
+  const [hasTouchedInput, setHasTouchedInput] = useState(false);
+
+  const { symbols, isLoading } = useSymbolLookup(hasTouchedInput ? query : "", "US");
 
   const debouncedSearch = debounce((query: string) => {
-    setInputValue(query); // Set the search query after debounce
+    if (query.trim() !== "") {
+      setQuery(query);
+    } else {
+      setQuery("");
+    }
   }, 500);
 
-  // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    debouncedSearch(e.target.value); // Trigger the debounced function on input change
+    setInputValue(e.target.value);
+    debouncedSearch(e.target.value);
   };
 
-  // Prepare symbols data for GridComponent
-  const symbolData = symbols.map((symbol) => symbol.displaySymbol); // Extracting just the displaySymbol to pass to the GridComponent
+  const handleInputFocus = () => {
+    setHasTouchedInput(true);
+  };
+
+  const handleClearSearch = () => {
+    setInputValue("");
+    setQuery("");
+  };
+
+  const symbolData = symbols.map((symbol) => symbol.displaySymbol);
 
   return (
-    <div>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 3,
+        width: 600,
+        maxWidth: 600,
+        margin: "20px auto",
+        height: 500,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <Typography variant="h6" gutterBottom>
+        Search Symbols
+      </Typography>
+
       <TextField
         label="Search Symbol"
         value={inputValue}
         onChange={handleInputChange}
+        onFocus={handleInputFocus}
         fullWidth
         variant="outlined"
         size="small"
+        InputProps={{
+          endAdornment: (
+            inputValue && (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClearSearch}
+                  edge="end"
+                  size="small"
+                >
+                  <ClearIcon />
+                </IconButton>
+              </InputAdornment>
+            )
+          ),
+        }}
       />
-      {isLoading && <CircularProgress />}
-      <Box mt={2}>
-        {symbols.length > 0 && !isLoading ? (
+
+      {isLoading && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <CircularProgress />
+        </Box>
+      )}
+
+      <Box mt={2} flexGrow={1} overflow="auto">
+        {query !== "" && symbols.length > 0 && !isLoading ? (
           <GridComponent data={symbolData} />
         ) : (
-          !isLoading && <div>No results found</div>
+          query !== "" && !isLoading && <Typography>No results found</Typography>
         )}
       </Box>
-    </div>
+    </Paper>
+
   );
 };
 
