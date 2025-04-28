@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import { ExitToApp } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
