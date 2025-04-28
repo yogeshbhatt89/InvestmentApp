@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../services/auth/useRegister";
 import TextFieldComponent from "../../modules/TextFieldComponent";
