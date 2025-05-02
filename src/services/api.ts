@@ -6,7 +6,7 @@ import type {
 } from "@reduxjs/toolkit/query";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "/api",
+  baseUrl: import.meta.env.VITE_API_BASE_URL,
   prepareHeaders: (headers, { endpoint }) => {
     const token = localStorage.getItem("accessToken");
 
@@ -18,6 +18,7 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
+
 interface TokenResponse {
   accessToken: string;
   refreshToken: string;
@@ -33,11 +34,7 @@ interface SymbolLookupResponse {
   }>;
 }
 
-const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const baseQueryWithReauth: BaseQueryFn< string | FetchArgs,  unknown,  FetchBaseQueryError> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error?.status === 401) {
