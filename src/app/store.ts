@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { api } from "../services/api";
-import { formReducer } from "../modules/TextFieldComponent";
-import { snackbarReducer } from "../modules/SnackbarComponent";
+import { configureStore } from '@reduxjs/toolkit'
+import { api } from '../services/api'
+import { formReducer } from '../modules/TextFieldComponent'
+import { snackbarReducer } from '../modules/SnackbarComponent'
 
 export const store = configureStore({
   reducer: {
@@ -9,11 +9,10 @@ export const store = configureStore({
     form: formReducer,
     [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
-});
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

@@ -1,11 +1,11 @@
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 
-import store from './app/store';
-import App from './App';
-import theme from './theme';
+import store from './app/store'
+import App from './App'
+import theme from './theme'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
@@ -13,5 +13,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <CssBaseline />
       <App />
     </ThemeProvider>
-  </Provider>
-);
+  </Provider>,
+)

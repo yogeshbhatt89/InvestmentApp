@@ -1,9 +1,9 @@
-import React from "react";
-import { Container, ContainerProps } from "@mui/material";
+import React from 'react'
+import { Container, ContainerProps } from '@mui/material'
 
 interface CustomContainerProps extends ContainerProps {
-  children: React.ReactNode;
-  className?: string;
+  children: React.ReactNode
+  className?: string
 }
 
 /**
@@ -12,18 +12,14 @@ interface CustomContainerProps extends ContainerProps {
 const ContainerComponent: React.FC<CustomContainerProps> = ({
   children,
   className,
-  maxWidth = "sm",
+  maxWidth = 'sm',
   ...rest
 }) => {
   return (
-    <Container
-      maxWidth={maxWidth}
-      className={className}
-      {...rest}
-    >
+    <Container maxWidth={maxWidth} className={className} {...rest}>
       {children}
     </Container>
-  );
-};
+  )
+}
 
-export default ContainerComponent;
+export default ContainerComponent
