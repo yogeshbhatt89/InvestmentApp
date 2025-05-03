@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "eslintConfig": "./eslint.config.js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "test": "jest --coverage",
+    "test": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}' --passWithNoTests",
     "test:watch": "jest --watch"
   },
   "dependencies": {
