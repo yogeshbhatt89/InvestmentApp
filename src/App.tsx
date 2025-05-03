@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import RegisterComponent from "./features/auth/RegisterComponent";
-import LoginComponent from "./features/auth/LoginComponent";
-import HomePage from "./features/HomePage";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import RegisterComponent from './features/auth/RegisterComponent'
+import LoginComponent from './features/auth/LoginComponent'
+import HomePage from './features/HomePage'
 const App = () => {
   return (
     <Router>
@@ -11,7 +11,7 @@ const App = () => {
         <Route path="/home" element={<HomePage />} />
       </Routes>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,15 +1,15 @@
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
-import { ExitToApp } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material'
+import { ExitToApp } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 
 const AppBarComponent = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    navigate('/login');
-  };
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    navigate('/login')
+  }
 
   return (
     <AppBar position="static">
@@ -22,7 +22,7 @@ const AppBarComponent = () => {
         </IconButton>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default AppBarComponent;
+export default AppBarComponent

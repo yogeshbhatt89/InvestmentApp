@@ -1,16 +1,12 @@
-import React from "react";
-import { Box, BoxProps } from "@mui/material";
+import React from 'react'
+import { Box, BoxProps } from '@mui/material'
 
 interface BoxComponentProps extends BoxProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const BoxComponent: React.FC<BoxComponentProps> = ({ children, ...props }) => {
-  return (
-    <Box {...props}>
-      {children}
-    </Box>
-  );
-};
+  return <Box {...props}>{children}</Box>
+}
 
-export default BoxComponent;
+export default BoxComponent
