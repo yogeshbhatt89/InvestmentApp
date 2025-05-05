@@ -71,7 +71,7 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
-    // I am able to register empty form. gotta fix this in back end.
+
     register: builder.mutation({
       query: userData => ({
         url: '/auth/register',
