@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
-# husky
+# husky to prevent pushing if tests fail
 # This script is executed before pushing changes to the remote repository.
 # Run formatting
 npm run format
