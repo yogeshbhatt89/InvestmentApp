@@ -1,1 +1,4 @@
+npm format
+npm lint
 npm test
+
