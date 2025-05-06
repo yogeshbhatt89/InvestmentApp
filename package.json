@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
     "eslintConfig": "./eslint.config.js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "test": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}' --passWithNoTests",
