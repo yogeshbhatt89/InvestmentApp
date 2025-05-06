@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/husky.sh"
+. "$(dirname "$0")/_/husky.sh"
 # husky
 # This script is executed before pushing changes to the remote repository.
 # Run formatting
