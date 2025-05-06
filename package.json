@@ -12,7 +12,7 @@
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "test": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}' --passWithNoTests",
     "test:watch": "jest --watch",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
