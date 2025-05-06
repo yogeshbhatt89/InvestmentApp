@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/h"
+
 # husky to prevent pushing if tests fail
 # This script is executed before pushing changes to the remote repository.
 # Run formatting
@@ -30,3 +31,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo "Type checking passed. Proceeding with push."
+
