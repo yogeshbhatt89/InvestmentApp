@@ -9,6 +9,8 @@ const App = () => {
         <Route path="/register" element={<RegisterComponent />} />
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<LoginComponent />} />
+        {/* needs work */}
       </Routes>
     </Router>
   )
