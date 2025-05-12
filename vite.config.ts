@@ -14,4 +14,10 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@modules': '/src/modules',
+    },
+  },
 })

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRegisterMutation } from '../api'
-import { useSnackbar } from '../../modules/SnackbarComponent'
+import { useSnackbar } from '../../modules/Snackbar/SnackbarComponent'
 
 interface RegisterError {
   data?: { message: string }
