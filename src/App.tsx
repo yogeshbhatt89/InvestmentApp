@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // import LoginComponent from './features/auth/LoginComponent'
 // import HomePage from './features/HomePage'
 // import LandingPage from './features/LandingPage';
-import DemoComponent from './features/DemoComponent';
+import DemoComponent from './features/DemoComponent'
 const App = () => {
   return (
     <Router>

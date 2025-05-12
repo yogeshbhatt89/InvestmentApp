@@ -1,16 +1,16 @@
-import React from 'react';
-import { TextField } from '@mui/material';
-import { useTextField } from './useTextField';
+import React from 'react'
+import { TextField } from '@mui/material'
+import { useTextField } from './useTextField'
 
 interface TextFieldComponentProps {
-  label: string;
-  reduxId: string;
-  error?: boolean;
-  helperText?: string;
-  fullWidth?: boolean;
-  className?: string;
-  autoComplete?: string;
-  placeholder?: string;
+  label: string
+  reduxId: string
+  error?: boolean
+  helperText?: string
+  fullWidth?: boolean
+  className?: string
+  autoComplete?: string
+  placeholder?: string
 }
 
 const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
@@ -23,7 +23,7 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   autoComplete,
   placeholder,
 }) => {
-  const { getTextFieldValue, setTextFieldValue } = useTextField(reduxId);
+  const { getTextFieldValue, setTextFieldValue } = useTextField(reduxId)
 
   return (
     <TextField
@@ -32,19 +32,19 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
           className,
         },
         input: {
-          className
+          className,
         },
       }}
       fullWidth={fullWidth}
       label={label}
       value={getTextFieldValue}
-      onChange={(e) => setTextFieldValue(e.target.value)}
+      onChange={e => setTextFieldValue(e.target.value)}
       error={error}
       helperText={helperText}
       autoComplete={autoComplete}
       placeholder={placeholder}
     />
-  );
-};
+  )
+}
 
-export default TextFieldComponent;
+export default TextFieldComponent
