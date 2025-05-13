@@ -28,6 +28,6 @@ const buttonSlice = createSlice({
   },
 })
 
-export const { updateButtonDisabled } = buttonSlice.actions
+export const { updateButtonDisabled, updateButtonLoading } = buttonSlice.actions
 
 export const buttonReducer = buttonSlice.reducer

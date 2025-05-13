@@ -9,8 +9,6 @@ interface TextFieldComponentProps {
   helperText?: string
   fullWidth?: boolean
   className?: string
-  autoComplete?: string
-  placeholder?: string
 }
 
 const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
@@ -18,31 +16,20 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   reduxId,
   error = false,
   helperText = '',
-  fullWidth = false,
+  fullWidth = true,
   className,
-  autoComplete,
-  placeholder,
 }) => {
   const { getTextFieldValue, setTextFieldValue } = useTextField(reduxId)
 
   return (
     <TextField
-      slotProps={{
-        root: {
-          className,
-        },
-        input: {
-          className,
-        },
-      }}
+      className={className}
       fullWidth={fullWidth}
       label={label}
       value={getTextFieldValue}
       onChange={e => setTextFieldValue(e.target.value)}
       error={error}
       helperText={helperText}
-      autoComplete={autoComplete}
-      placeholder={placeholder}
     />
   )
 }

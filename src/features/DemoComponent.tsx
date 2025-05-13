@@ -34,11 +34,7 @@ const DemoComponent = () => {
           onClick={handleButtonClick}
         />
 
-        <TextFieldComponent
-          label="text field label"
-          reduxId="demo-text-field"
-          className="ml-30 bg-black"
-        />
+        <TextFieldComponent label="text field label" reduxId="demo-text-field" className="ml-30" />
         <TextFieldComponent
           label="Error text field"
           reduxId="error"
