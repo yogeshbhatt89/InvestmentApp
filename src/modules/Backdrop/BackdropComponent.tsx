@@ -1,30 +1,43 @@
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
+import React from 'react'
+import { Backdrop, CircularProgress, BackdropProps } from '@mui/material'
 import { useBackdrop } from './useBackdrop'
 
-interface BackdropComponentProps {
+type OmittedProps = 'open' | 'children'
+
+interface BackdropComponentProps extends Omit<BackdropProps, OmittedProps> {
   reduxId: string
+  className?: string
 }
 
-const BackdropComponent = ({ reduxId }: BackdropComponentProps) => {
-  const { open } = useBackdrop(reduxId)
-  console.log('BackdropComponent open:', open)
+const BackdropComponent: React.FC<BackdropComponentProps> = ({
+  reduxId,
+  className,
+  ...muiProps
+}) => {
+  const { isOpen } = useBackdrop(reduxId)
+
   return (
     <Backdrop
-      component="div"
-      sx={theme => ({
+      {...muiProps}
+      className={className}
+      sx={{
         color: '#fff',
-        zIndex: theme.zIndex.drawer + 1,
+        zIndex: theme => theme.zIndex.drawer + 1,
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-      })}
-      open={open}
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...muiProps.sx
+      }}
+      open={isOpen}
     >
       <CircularProgress color="inherit" />
     </Backdrop>
   )
 }
+
 export default BackdropComponent

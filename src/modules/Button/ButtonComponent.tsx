@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, CircularProgress } from '@mui/material'
+import { SxProps, Theme } from '@mui/material/styles'
 import useButton from './useButton'
 
 interface ButtonProps {
@@ -13,6 +14,8 @@ interface ButtonProps {
   endIcon?: React.ReactNode
   className?: string
   fullWidth?: boolean
+  size?: 'small' | 'medium' | 'large'
+  sx?: SxProps<Theme>
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -24,8 +27,10 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   disabled = false,
   startIcon,
   endIcon,
-  className,
+  className = '',
   fullWidth = false,
+  size = 'small',
+  sx,
 }) => {
   const { buttonState } = useButton(reduxId)
 
@@ -33,12 +38,14 @@ const ButtonComponent: React.FC<ButtonProps> = ({
     <Button
       variant={variant}
       color={color}
+      size={size}
       disabled={disabled || buttonState.disabled || buttonState.loading}
       startIcon={buttonState.loading ? <CircularProgress size={20} color="inherit" /> : startIcon}
       endIcon={endIcon}
       onClick={onClick}
       className={className}
       fullWidth={fullWidth}
+      sx={sx}
     >
       {label}
     </Button>

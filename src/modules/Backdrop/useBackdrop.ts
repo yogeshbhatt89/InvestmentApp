@@ -1,13 +1,30 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/app/store'
-import { showUi, hideUi } from './BackdropSlice'
+import { showBackdrop, hideBackdrop, selectBackdropState } from './BackdropSlice'
 
 export const useBackdrop = (backdropId: string) => {
+  if (!backdropId) {
+    throw new Error('useBackdrop hook requires a backdropId parameter')
+  }
+
   const dispatch = useDispatch()
-  const open = useSelector((state: RootState) => state.backdrop[backdropId]?.open ?? false)
 
-  const showBackdrop = () => dispatch(showUi({ backdropId }))
-  const hideBackdrop = () => dispatch(hideUi({ backdropId }))
+  const isOpen = useSelector((state: RootState) => selectBackdropState(state, backdropId))
 
-  return { open, showBackdrop, hideBackdrop }
+  const show = () => {
+    dispatch(showBackdrop({ backdropId }))
+  }
+
+  const hide = () => {
+    dispatch(hideBackdrop({ backdropId }))
+  }
+
+  return {
+    isOpen,
+    show,
+    hide,
+  }
 }
+
+// Type for the hook return value
+export type UseBackdropReturn = ReturnType<typeof useBackdrop>
