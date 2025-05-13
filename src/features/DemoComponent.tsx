@@ -51,7 +51,7 @@ const DemoComponent = () => {
           label="Increment counter"
           reduxId="button"
           onClick={handleButtonClick}
-          size='medium'
+          size="medium"
         />
         {/* Multiline TextField example */}
         <TextFieldComponent
@@ -70,17 +70,8 @@ const DemoComponent = () => {
           disabled
           className="[&_.MuiInputBase-root.Mui-disabled]:bg-gray-100 [&_.MuiInputBase-root.Mui-disabled_.MuiOutlinedInput-notchedOutline]:border-gray-300 [&_.MuiFormHelperText-root.Mui-disabled]:text-gray-500"
         />
-        <TextFieldComponent
-          label="Custom Width"
-          reduxId="custom-width"
-          className="w-[200px]"
-        />
-        <TextFieldComponent
-          label="Full Width"
-          reduxId="full-width"
-          fullWidth
-          size="medium"
-        />
+        <TextFieldComponent label="Custom Width" reduxId="custom-width" className="w-[200px]" />
+        <TextFieldComponent label="Full Width" reduxId="full-width" fullWidth size="medium" />
         <TextFieldComponent
           label="Custom Styles"
           reduxId="custom-styles"
@@ -91,7 +82,7 @@ const DemoComponent = () => {
           reduxId="email-field"
           type="email"
           error={hasEmailError}
-          helperText={hasEmailError ? "Please enter a valid email address" : ""}
+          helperText={hasEmailError ? 'Please enter a valid email address' : ''}
           placeholder="example@email.com"
           className="[&_.Mui-error]:text-red-600 [&_.MuiOutlinedInput-root.Mui-error_.MuiOutlinedInput-notchedOutline]:border-red-600 [&_.MuiOutlinedInput-root.Mui-error:hover_.MuiOutlinedInput-notchedOutline]:border-red-600"
         />
@@ -101,7 +92,7 @@ const DemoComponent = () => {
 
       <div className="flex justify-center mb-8">
         <ButtonComponent
-          label={isSnackbarVisible ? "Hide Snackbar" : "Show Snackbar"}
+          label={isSnackbarVisible ? 'Hide Snackbar' : 'Show Snackbar'}
           reduxId="snackbar-button"
           onClick={handleSnackbarButtonClick}
           variant="contained"

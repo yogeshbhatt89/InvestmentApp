@@ -31,7 +31,7 @@ const BackdropComponent: React.FC<BackdropComponentProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        ...muiProps.sx
+        ...muiProps.sx,
       }}
       open={isOpen}
     >
