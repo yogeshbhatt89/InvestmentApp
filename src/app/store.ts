@@ -4,12 +4,17 @@ import { inputFieldReducer } from '@/modules/TextField'
 import { buttonReducer } from '@/modules/Button'
 import { snackbarReducer } from '@/modules/Snackbar'
 import { backdropReducer } from '@/modules/Backdrop'
+import { tabReducer } from '@/modules/Tab'
+import { dropdownReducer } from '@/modules/Dropdown'
+
 export const store = configureStore({
   reducer: {
     textField: inputFieldReducer,
     button: buttonReducer,
     snackbar: snackbarReducer,
     backdrop: backdropReducer,
+    tab: tabReducer,
+    dropdown: dropdownReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),

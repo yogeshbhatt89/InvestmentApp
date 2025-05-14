@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLoginMutation } from '../api'
-import { useSnackbar } from '../../modules/Snackbar/SnackbarComponent'
+import { useSnackbar } from '@/modules/Snackbar'
 
 interface LoginError {
   data?: { message: string }

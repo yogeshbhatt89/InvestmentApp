@@ -1,53 +1,77 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+/* cspell:disable */
+import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit'
+import { RootState } from '@/app/store'
 
 interface SnackbarState {
-  message: string
-  severity: 'success' | 'error' | 'info' | 'warning'
-  open: boolean
-  position:
-    | 'top-left'
-    | 'top-center'
-    | 'top-right'
-    | 'bottom-left'
-    | 'bottom-center'
-    | 'bottom-right'
+  [snackbarId: string]: {
+    message: string
+    severity: 'success' | 'error' | 'info' | 'warning'
+    open: boolean
+    position:
+      | 'top-left'
+      | 'top-center'
+      | 'top-right'
+      | 'bottom-left'
+      | 'bottom-center'
+      | 'bottom-right'
+  }
 }
 
-const initialState: SnackbarState = {
-  message: '',
-  severity: 'info',
-  open: false,
-  position: 'bottom-center',
-}
+const initialState: SnackbarState = {}
 
 const snackbarSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    setSnackbarMessage: (state, action: PayloadAction<string>) => {
-      state.message = action.payload
-      state.open = true
-    },
-    setSnackbarSeverity: (
+    showSnackbar: (
       state,
-      action: PayloadAction<'success' | 'error' | 'info' | 'warning'>,
+      action: PayloadAction<{
+        snackbarId: string
+        message: string
+        severity: 'success' | 'error' | 'info' | 'warning'
+        position:
+          | 'top-left'
+          | 'top-center'
+          | 'top-right'
+          | 'bottom-left'
+          | 'bottom-center'
+          | 'bottom-right'
+      }>,
     ) => {
-      state.severity = action.payload
+      const { snackbarId, message, severity, position } = action.payload
+      state[snackbarId] = {
+        message,
+        severity,
+        position,
+        open: true,
+      }
     },
-    setSnackbarPosition: (
-      state,
-      action: PayloadAction<
-        'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
-      >,
-    ) => {
-      state.position = action.payload
-    },
-    closeSnackbar: state => {
-      state.open = false
+    closeSnackbar: (state, action: PayloadAction<{ snackbarId: string }>) => {
+      const { snackbarId } = action.payload
+      if (state[snackbarId]) {
+        state[snackbarId].open = false
+      }
     },
   },
 })
 
+export const { showSnackbar, closeSnackbar } = snackbarSlice.actions
+
+// Base selector
+const selectSnackbars = (state: RootState) => state.snackbar
+
+// Default snackbar state
+const defaultSnackbarState = {
+  message: '',
+  severity: 'info' as const,
+  position: 'bottom-center' as const,
+  open: false,
+}
+
+// Memoized selector
+export const selectSnackbarState = createSelector(
+  [selectSnackbars, (_state: RootState, snackbarId: string) => snackbarId],
+  (snackbars, snackbarId) => snackbars[snackbarId] || defaultSnackbarState,
+)
+
 export const snackbarReducer = snackbarSlice.reducer
-export const { setSnackbarMessage, setSnackbarSeverity, setSnackbarPosition, closeSnackbar } =
-  snackbarSlice.actions

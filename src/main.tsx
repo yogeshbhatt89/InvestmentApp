@@ -9,7 +9,7 @@ import store from './app/store'
 import App from './App'
 import theme from './theme'
 import './index.css'
-import DemoComponent from './features/DemoComponent'
+import DemoComponent from './demo/DemoComponent'
 
 initializeUserActivityListeners()
 

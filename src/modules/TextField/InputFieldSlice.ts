@@ -22,7 +22,7 @@ const inputFieldSlice = createSlice({
         if (typeof value === 'number') {
           state[field] = value.toString()
         } else if (typeof value === 'string') {
-          state[field] = value
+      state[field] = value
         }
       }
     },

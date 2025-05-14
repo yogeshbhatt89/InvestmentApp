@@ -1,3 +1,3 @@
 export * from './SnackbarSlice'
-export { default as SnackbarComponent } from './SnackbarComponent'
+export { default } from './SnackbarComponent'
 export * from './useSnackbar'

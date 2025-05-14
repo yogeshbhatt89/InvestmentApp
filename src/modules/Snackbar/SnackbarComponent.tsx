@@ -1,37 +1,42 @@
 import React from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/app/store'
-import { closeSnackbar } from './SnackbarSlice'
+import { useSnackbar } from './useSnackbar'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-const SnackbarComponent = () => {
-  const dispatch = useDispatch()
-  const { open, message, severity, position } = useSelector((state: RootState) => state.snackbar)
+interface SnackbarComponentProps {
+  reduxId: string
+}
 
-  const hideSnackbar = () => {
-    dispatch(closeSnackbar())
-  }
+const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ reduxId }) => {
+  const { isOpen, message, severity, position, hide } = useSnackbar(reduxId)
+
+  // Calculate vertical and horizontal positions
+  const vertical = position.includes('top') ? 'top' : 'bottom'
+  const horizontal = position.includes('left')
+    ? 'left'
+    : position.includes('right')
+      ? 'right'
+      : 'center'
 
   return (
     <Snackbar
-      open={open}
+      open={isOpen}
       autoHideDuration={6000}
-      onClose={hideSnackbar}
-      anchorOrigin={{
-        vertical: position.includes('top') ? 'top' : 'bottom',
-        horizontal: position.includes('left')
-          ? 'left'
-          : position.includes('right')
-            ? 'right'
-            : 'center',
+      onClose={hide}
+      anchorOrigin={{ vertical, horizontal }}
+      key={reduxId}
+      sx={{
+        position: 'fixed',
+        [`& + .MuiSnackbar-root`]: {
+          marginTop: '10px',
+        },
       }}
     >
-      <Alert onClose={hideSnackbar} severity={severity}>
+      <Alert onClose={hide} severity={severity}>
         {message}
       </Alert>
     </Snackbar>

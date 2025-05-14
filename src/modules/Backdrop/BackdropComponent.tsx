@@ -2,16 +2,16 @@ import React from 'react'
 import { Backdrop, CircularProgress, BackdropProps } from '@mui/material'
 import { useBackdrop } from './useBackdrop'
 
-type OmittedProps = 'open' | 'children'
-
-interface BackdropComponentProps extends Omit<BackdropProps, OmittedProps> {
+interface BackdropComponentProps extends Omit<BackdropProps, 'open' | 'children'> {
   reduxId: string
   className?: string
+  scoped?: boolean
 }
 
 const BackdropComponent: React.FC<BackdropComponentProps> = ({
   reduxId,
   className,
+  scoped = false,
   ...muiProps
 }) => {
   const { isOpen } = useBackdrop(reduxId)
@@ -20,10 +20,11 @@ const BackdropComponent: React.FC<BackdropComponentProps> = ({
     <Backdrop
       {...muiProps}
       className={className}
+      open={isOpen}
       sx={{
         color: '#fff',
         zIndex: theme => theme.zIndex.drawer + 1,
-        position: 'absolute',
+        position: scoped ? 'absolute' : 'fixed',
         top: 0,
         left: 0,
         width: '100%',
@@ -33,7 +34,6 @@ const BackdropComponent: React.FC<BackdropComponentProps> = ({
         justifyContent: 'center',
         ...muiProps.sx,
       }}
-      open={isOpen}
     >
       <CircularProgress color="inherit" />
     </Backdrop>
