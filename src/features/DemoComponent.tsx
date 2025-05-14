@@ -33,7 +33,7 @@ const DemoComponent = () => {
     }
   }
 
-  // Simple email validation
+  // Simple email validation to show error state
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
