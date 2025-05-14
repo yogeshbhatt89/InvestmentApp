@@ -1,4 +1,3 @@
-import React from 'react'
 import TabComponent from '@/modules/Tab'
 import IconWrapper from '@/modules/Icon'
 

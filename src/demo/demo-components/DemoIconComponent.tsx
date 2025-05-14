@@ -1,6 +1,4 @@
-import React from 'react'
-import IconWrapper from '@/modules/Icon'
-import { Icons } from '@/modules/Icon'
+import IconWrapper, { Icons } from '@/modules/Icon'
 
 const DemoIconComponent = () => {
   return (

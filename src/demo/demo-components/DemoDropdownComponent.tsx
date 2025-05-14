@@ -1,4 +1,3 @@
-import React from 'react'
 import DropdownComponent from '@/modules/Dropdown'
 import IconWrapper from '@/modules/Icon'
 

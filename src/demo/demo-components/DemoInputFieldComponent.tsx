@@ -1,7 +1,6 @@
 import React from 'react'
-import TextFieldComponent from '@/modules/TextField'
+import TextFieldComponent, { useTextField } from '@/modules/TextField'
 import ButtonComponent from '@/modules/Button'
-import { useTextField } from '@/modules/TextField'
 
 const DemoInputFieldComponent = () => {
   const { setTextFieldValue } = useTextField('demo-text-field')

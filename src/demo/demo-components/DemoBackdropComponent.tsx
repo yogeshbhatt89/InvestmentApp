@@ -1,6 +1,5 @@
 import ButtonComponent from '@/modules/Button'
-import { useBackdrop } from '@/modules/Backdrop'
-import BackdropComponent from '@/modules/Backdrop'
+import BackdropComponent, { useBackdrop } from '@/modules/Backdrop'
 
 const DemoBackdropComponent = () => {
   const backdrop = useBackdrop('demo-backdrop')
