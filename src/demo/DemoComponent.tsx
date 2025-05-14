@@ -23,7 +23,7 @@ const DemoComponent = () => {
         sx={{
           '& .MuiTabs-root': {
             borderBottom: '1px solid #e2e8f0',
-            minHeight: '48px'
+            minHeight: '48px',
           },
           '& .MuiTab-root': {
             textTransform: 'none',
@@ -32,49 +32,49 @@ const DemoComponent = () => {
             color: '#64748b',
             '&:hover': {
               color: '#334155',
-              backgroundColor: '#f8fafc'
-            }
+              backgroundColor: '#f8fafc',
+            },
           },
           '& .Mui-selected': {
             color: '#0f172a !important',
-            fontWeight: 600
+            fontWeight: 600,
           },
           '& .MuiTabs-indicator': {
             backgroundColor: '#3b82f6',
-            height: '3px'
-          }
+            height: '3px',
+          },
         }}
         tabs={[
           {
-            label: "Input Fields",
+            label: 'Input Fields',
             icon: <IconWrapper name="Email" size="small" />,
-            content: <DemoInputFieldComponent />
+            content: <DemoInputFieldComponent />,
           },
           {
-            label: "Snackbar",
+            label: 'Snackbar',
             icon: <IconWrapper name="Notifications" size="small" />,
-            content: <DemoSnackbarComponent />
+            content: <DemoSnackbarComponent />,
           },
           {
-            label: "Backdrop",
+            label: 'Backdrop',
             icon: <IconWrapper name="Visibility" size="small" />,
-            content: <DemoBackdropComponent />
+            content: <DemoBackdropComponent />,
           },
           {
-            label: "Tabs Demo",
+            label: 'Tabs Demo',
             icon: <IconWrapper name="Tab" size="small" />,
-            content: <DemoTabsComponent />
+            content: <DemoTabsComponent />,
           },
           {
-            label: "Dropdown",
+            label: 'Dropdown',
             icon: <IconWrapper name="Menu" size="small" />,
-            content: <DemoDropdownComponent />
+            content: <DemoDropdownComponent />,
           },
           {
-            label: "Icons",
+            label: 'Icons',
             icon: <IconWrapper name="ColorLens" size="small" />,
-            content: <DemoIconComponent />
-          }
+            content: <DemoIconComponent />,
+          },
         ]}
       />
     </div>

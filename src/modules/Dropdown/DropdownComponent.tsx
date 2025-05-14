@@ -73,12 +73,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         disabled={disabled}
         multiple={multiple}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option.value}
-            value={option.value}
-            disabled={option.disabled}
-          >
+        {options.map(option => (
+          <MenuItem key={option.value} value={option.value} disabled={option.disabled}>
             {option.icon && <span className="mr-2">{option.icon}</span>}
             {option.label}
           </MenuItem>

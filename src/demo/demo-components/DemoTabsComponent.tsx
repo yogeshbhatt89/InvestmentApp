@@ -15,17 +15,17 @@ const DemoTabsComponent = () => {
             reduxId="horizontal-tabs"
             tabs={[
               {
-                label: "Tab 1",
-                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 1</div>
+                label: 'Tab 1',
+                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 1</div>,
               },
               {
-                label: "Tab 2",
-                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 2</div>
+                label: 'Tab 2',
+                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 2</div>,
               },
               {
-                label: "Tab 3",
-                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 3</div>
-              }
+                label: 'Tab 3',
+                content: <div className="p-4 bg-gray-100 rounded">Content for Tab 3</div>,
+              },
             ]}
           />
         </div>
@@ -37,24 +37,24 @@ const DemoTabsComponent = () => {
             orientation="vertical"
             tabs={[
               {
-                label: "Settings",
+                label: 'Settings',
                 icon: <IconWrapper name="Settings" size="small" />,
-                content: <div className="p-4 bg-gray-100 rounded">Settings Content</div>
+                content: <div className="p-4 bg-gray-100 rounded">Settings Content</div>,
               },
               {
-                label: "Profile",
+                label: 'Profile',
                 icon: <IconWrapper name="Person" size="small" />,
-                content: <div className="p-4 bg-gray-100 rounded">Profile Content</div>
+                content: <div className="p-4 bg-gray-100 rounded">Profile Content</div>,
               },
               {
-                label: "Security",
+                label: 'Security',
                 icon: <IconWrapper name="Security" size="small" />,
-                content: <div className="p-4 bg-gray-100 rounded">Security Content</div>
-              }
+                content: <div className="p-4 bg-gray-100 rounded">Security Content</div>,
+              },
             ]}
             sx={{
               '& .MuiTabs-root': { minWidth: '200px' },
-              '& .MuiTab-root': { alignItems: 'start', justifyContent: 'flex-start' }
+              '& .MuiTab-root': { alignItems: 'start', justifyContent: 'flex-start' },
             }}
           />
         </div>
@@ -66,29 +66,29 @@ const DemoTabsComponent = () => {
             variant="scrollable"
             tabs={[
               {
-                label: "Item One",
-                content: <div className="p-4 bg-gray-100 rounded">Content One</div>
+                label: 'Item One',
+                content: <div className="p-4 bg-gray-100 rounded">Content One</div>,
               },
               {
-                label: "Item Two",
-                content: <div className="p-4 bg-gray-100 rounded">Content Two</div>
+                label: 'Item Two',
+                content: <div className="p-4 bg-gray-100 rounded">Content Two</div>,
               },
               {
-                label: "Item Three",
-                content: <div className="p-4 bg-gray-100 rounded">Content Three</div>
+                label: 'Item Three',
+                content: <div className="p-4 bg-gray-100 rounded">Content Three</div>,
               },
               {
-                label: "Item Four",
-                content: <div className="p-4 bg-gray-100 rounded">Content Four</div>
+                label: 'Item Four',
+                content: <div className="p-4 bg-gray-100 rounded">Content Four</div>,
               },
               {
-                label: "Item Five",
-                content: <div className="p-4 bg-gray-100 rounded">Content Five</div>
+                label: 'Item Five',
+                content: <div className="p-4 bg-gray-100 rounded">Content Five</div>,
               },
               {
-                label: "Item Six",
-                content: <div className="p-4 bg-gray-100 rounded">Content Six</div>
-              }
+                label: 'Item Six',
+                content: <div className="p-4 bg-gray-100 rounded">Content Six</div>,
+              },
             ]}
             sx={{ maxWidth: '100%', borderBottom: 1, borderColor: 'divider' }}
           />
@@ -101,17 +101,17 @@ const DemoTabsComponent = () => {
             variant="fullWidth"
             tabs={[
               {
-                label: "Left Tab",
-                content: <div className="p-4 bg-gray-100 rounded">Left Content</div>
+                label: 'Left Tab',
+                content: <div className="p-4 bg-gray-100 rounded">Left Content</div>,
               },
               {
-                label: "Middle Tab",
-                content: <div className="p-4 bg-gray-100 rounded">Middle Content</div>
+                label: 'Middle Tab',
+                content: <div className="p-4 bg-gray-100 rounded">Middle Content</div>,
               },
               {
-                label: "Right Tab",
-                content: <div className="p-4 bg-gray-100 rounded">Right Content</div>
-              }
+                label: 'Right Tab',
+                content: <div className="p-4 bg-gray-100 rounded">Right Content</div>,
+              },
             ]}
           />
         </div>

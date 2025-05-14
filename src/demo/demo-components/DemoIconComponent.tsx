@@ -9,7 +9,10 @@ const DemoIconComponent = () => {
         <h3 className="text-lg font-semibold mb-4">Available Icons</h3>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {Object.entries(Icons).map(([name]) => (
-            <div key={name} className="p-4 border rounded-lg flex items-center gap-3 hover:bg-gray-50">
+            <div
+              key={name}
+              className="p-4 border rounded-lg flex items-center gap-3 hover:bg-gray-50"
+            >
               <IconWrapper name={name as keyof typeof Icons} />
               <span className="text-sm text-gray-600">{name}</span>
             </div>
@@ -78,35 +81,19 @@ const DemoIconComponent = () => {
             <h4 className="text-md font-medium mb-3">Custom Colors</h4>
             <div className="flex flex-wrap gap-8 items-center">
               <div className="flex flex-col items-center gap-2">
-                <IconWrapper
-                  name="Star"
-                  size="large"
-                  sx={{ color: '#FF6B6B' }}
-                />
+                <IconWrapper name="Star" size="large" sx={{ color: '#FF6B6B' }} />
                 <span className="text-sm text-gray-600">Custom Red</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <IconWrapper
-                  name="Star"
-                  size="large"
-                  sx={{ color: '#4ECDC4' }}
-                />
+                <IconWrapper name="Star" size="large" sx={{ color: '#4ECDC4' }} />
                 <span className="text-sm text-gray-600">Custom Teal</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <IconWrapper
-                  name="Star"
-                  size="large"
-                  sx={{ color: '#FFD93D' }}
-                />
+                <IconWrapper name="Star" size="large" sx={{ color: '#FFD93D' }} />
                 <span className="text-sm text-gray-600">Custom Yellow</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <IconWrapper
-                  name="Star"
-                  size="large"
-                  sx={{ color: '#6C5CE7' }}
-                />
+                <IconWrapper name="Star" size="large" sx={{ color: '#6C5CE7' }} />
                 <span className="text-sm text-gray-600">Custom Purple</span>
               </div>
             </div>
@@ -176,9 +163,9 @@ const DemoIconComponent = () => {
                     animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     '@keyframes pulse': {
                       '0%, 100%': { opacity: 1 },
-                      '50%': { opacity: .5 }
+                      '50%': { opacity: 0.5 },
                     },
-                    color: '#E53E3E'
+                    color: '#E53E3E',
                   }}
                 />
                 <span className="text-sm text-gray-600">Pulse Effect</span>
@@ -191,9 +178,9 @@ const DemoIconComponent = () => {
                     animation: 'bounce 1s infinite',
                     '@keyframes bounce': {
                       '0%, 100%': { transform: 'translateY(0)' },
-                      '50%': { transform: 'translateY(-10px)' }
+                      '50%': { transform: 'translateY(-10px)' },
                     },
-                    color: '#D69E2E'
+                    color: '#D69E2E',
                   }}
                 />
                 <span className="text-sm text-gray-600">Bounce Effect</span>

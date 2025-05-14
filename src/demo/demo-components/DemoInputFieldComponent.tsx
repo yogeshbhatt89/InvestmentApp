@@ -2,7 +2,6 @@ import React from 'react'
 import TextFieldComponent from '@/modules/TextField'
 import ButtonComponent from '@/modules/Button'
 import { useTextField } from '@/modules/TextField'
-import IconWrapper from '@/modules/Icon'
 
 const DemoInputFieldComponent = () => {
   const { setTextFieldValue } = useTextField('demo-text-field')

@@ -24,9 +24,21 @@ const DemoDropdownComponent = () => {
           reduxId="icon-dropdown"
           label="Select Theme"
           options={[
-            { value: 'light', label: 'Light Theme', icon: <IconWrapper name="ColorLens" size="small" /> },
-            { value: 'dark', label: 'Dark Theme', icon: <IconWrapper name="ColorLens" size="small" /> },
-            { value: 'system', label: 'System Theme', icon: <IconWrapper name="Settings" size="small" /> },
+            {
+              value: 'light',
+              label: 'Light Theme',
+              icon: <IconWrapper name="ColorLens" size="small" />,
+            },
+            {
+              value: 'dark',
+              label: 'Dark Theme',
+              icon: <IconWrapper name="ColorLens" size="small" />,
+            },
+            {
+              value: 'system',
+              label: 'System Theme',
+              icon: <IconWrapper name="Settings" size="small" />,
+            },
           ]}
           className="min-w-[200px]"
         />
