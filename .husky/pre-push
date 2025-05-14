@@ -1,9 +1,13 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/h"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
 # Run formatting
 npm run format
-if [ $? -ne 0 ]; then
+FORMAT_EXIT_CODE=$?
+if [ $FORMAT_EXIT_CODE -eq 0 ]; then
+  # If formatting changed files, add them
+  git add -A
+else
   echo "Formatting failed. Push aborted."
   exit 1
 fi
@@ -32,3 +36,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo "Type checking passed. Proceeding with push."
+

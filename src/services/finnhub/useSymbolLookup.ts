@@ -1,6 +1,6 @@
 import { useSymbolLookupQuery } from '../api'
 import { useState, useEffect } from 'react'
-import { useSnackbar } from '../../modules/SnackbarComponent'
+import { useSnackbar } from '../../modules/Snackbar/SnackbarComponent'
 import { debounce } from 'lodash'
 
 interface Symbol {

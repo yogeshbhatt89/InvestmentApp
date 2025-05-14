@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { api } from '../services/api'
-import { formReducer } from '../modules/TextFieldComponent'
-import { snackbarReducer } from '../modules/SnackbarComponent'
-
+import { inputFieldReducer } from '@/modules/TextField'
+import { buttonReducer } from '@/modules/Button'
+import { snackbarReducer } from '@/modules/Snackbar'
+import { backdropReducer } from '@/modules/Backdrop'
 export const store = configureStore({
   reducer: {
+    textField: inputFieldReducer,
+    button: buttonReducer,
     snackbar: snackbarReducer,
-    form: formReducer,
+    backdrop: backdropReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
