@@ -1,28 +1,28 @@
-import React from 'react';
-import ButtonComponent from '@/modules/Button';
+import React from 'react'
+import ButtonComponent from '@/modules/Button'
 
-import ChartComponent, { useChart } from '@/modules/Chart';
+import ChartComponent, { useChart } from '@/modules/Chart'
 
 const DemoChartComponent = () => {
-  const { updateChart, handleUpdateChartData } = useChart('demo-chart');
-  const [chartType, setChartType] = React.useState('line');
+  const { updateChart, handleUpdateChartData } = useChart('demo-chart')
+  const [chartType, setChartType] = React.useState('line')
   const chartData = [
     { x: 1, y: 10 },
     { x: 2, y: 20 },
     { x: 3, y: 30 },
     { x: 4, y: 40 },
     { x: 5, y: 50 },
-  ];
+  ]
 
   const handleChartTypeChange = () => {
-    setChartType(chartType === 'line' ? 'bar' : 'line');
-    const newChartType = chartType === 'line' ? 'bar' : 'line';
+    setChartType(chartType === 'line' ? 'bar' : 'line')
+    const newChartType = chartType === 'line' ? 'bar' : 'line'
     if (newChartType === 'line' || newChartType === 'bar' || newChartType === 'candlestick') {
-      updateChart(newChartType);
+      updateChart(newChartType)
     } else {
-      console.error('Invalid chart type');
+      console.error('Invalid chart type')
     }
-  };
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,7 +62,7 @@ const DemoChartComponent = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DemoChartComponent;
+export default DemoChartComponent
