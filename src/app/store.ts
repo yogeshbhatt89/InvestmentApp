@@ -6,6 +6,7 @@ import { snackbarReducer } from '@/modules/Snackbar'
 import { backdropReducer } from '@/modules/Backdrop'
 import { tabReducer } from '@/modules/Tab'
 import { dropdownReducer } from '@/modules/Dropdown'
+import { chartReducer } from '@/modules/Chart'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     backdrop: backdropReducer,
     tab: tabReducer,
     dropdown: dropdownReducer,
+    chartReducer: chartReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),

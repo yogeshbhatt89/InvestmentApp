@@ -8,6 +8,7 @@ import DemoBackdropComponent from '@/demo/demo-components/DemoBackdropComponent'
 import DemoTabsComponent from '@/demo/demo-components/DemoTabsComponent'
 import DemoDropdownComponent from '@/demo/demo-components/DemoDropdownComponent'
 import DemoIconComponent from '@/demo/demo-components/DemoIconComponent'
+import DemoChartComponent from './demo-components/DemoChartComponent'
 
 const DemoComponent = () => {
   return (
@@ -74,6 +75,11 @@ const DemoComponent = () => {
             label: 'Icons',
             icon: <IconWrapper name="ColorLens" size="small" />,
             content: <DemoIconComponent />,
+          },
+          {
+            label: 'Chart',
+            icon: <IconWrapper name="ColorLens" size="small" />,
+            content: <DemoChartComponent />,
           },
         ]}
       />
