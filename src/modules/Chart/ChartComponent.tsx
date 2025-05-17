@@ -1,49 +1,42 @@
 import React from 'react'
-import { LineChart, LineSeriesType, BarChart, BarSeriesType } from '@mui/x-charts'
+import ReactApexChart from 'react-apexcharts'
 import { useChart } from './useChart'
 
 interface ChartProps {
   reduxId: string
-  chartType: 'line' | 'bar'
   series: {
-    type: string
     name: string
-    data: { x: number; y: number }[]
+    data: any[]
   }[]
-  lineChartProps: {
-    width: number
-    height: number
-    margin: { top: number; right: number; bottom: number; left: number }
-  }
-  barChartProps: {
-    width: number
-    height: number
-    margin: { top: number; right: number; bottom: number; left: number }
-  }
+  chartOptions?: any
+  height?: number
+  width?: number
 }
 
 const ChartComponent: React.FC<ChartProps> = ({
   reduxId,
-  chartType,
   series,
-  lineChartProps,
-  barChartProps,
+  chartOptions = {},
+  height = 600,
+  width = 800,
 }) => {
-  const { data } = useChart(reduxId)
+  const { chartType, data } = useChart(reduxId)
+
+  const chartSeries = series.map(s => ({
+    ...s,
+    data: data && data.length > 0 ? data : s.data,
+  }))
 
   return (
     <div>
-      {chartType === 'line' ? (
-        <LineChart
-          series={series.map(s => ({ ...s, data })) as LineSeriesType[]}
-          {...lineChartProps}
-        />
-      ) : (
-        <BarChart
-          series={series.map(s => ({ ...s, data })) as BarSeriesType[]}
-          {...barChartProps}
-        />
-      )}
+      <ReactApexChart
+        key={chartType}
+        type={chartType}
+        series={chartSeries}
+        options={chartOptions}
+        height={height}
+        width={width}
+      />
     </div>
   )
 }

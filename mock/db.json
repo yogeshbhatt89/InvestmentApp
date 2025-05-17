@@ -1,0 +1,10 @@
+{
+  "login": { "accessToken": "mock-token", "refreshToken": "mock-refresh" },
+  "register": { "success": true },
+  "symbolLookup": {
+    "count": 1,
+    "result": [
+      { "symbol": "AAPL", "displaySymbol": "AAPL", "description": "Apple Inc.", "type": "Equity" }
+    ]
+  }
+}

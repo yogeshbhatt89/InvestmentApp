@@ -1,7 +1,6 @@
 import TabComponent from '@/modules/Tab'
 import IconWrapper from '@/modules/Icon'
 import SnackbarComponent from '@/modules/Snackbar'
-import BackdropComponent from '@/modules/Backdrop'
 import DemoInputFieldComponent from '@/demo/demo-components/DemoInputFieldComponent'
 import DemoSnackbarComponent from '@/demo/demo-components/DemoSnackbarComponent'
 import DemoBackdropComponent from '@/demo/demo-components/DemoBackdropComponent'
@@ -17,8 +16,6 @@ const DemoComponent = () => {
       <SnackbarComponent reduxId="error-snackbar" />
       <SnackbarComponent reduxId="success-snackbar" />
       <SnackbarComponent reduxId="info-snackbar" />
-      <BackdropComponent reduxId="demo-backdrop" scoped={true} />
-
       <TabComponent
         reduxId="main-demo-tabs"
         sx={{

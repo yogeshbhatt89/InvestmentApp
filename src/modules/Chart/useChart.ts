@@ -3,8 +3,7 @@ import { RootState } from '@/app/store'
 import { updateChartType, updateChartData } from './ChartSlice'
 import { createSelector } from '@reduxjs/toolkit'
 
-type ReduxId = keyof RootState
-const selectChartData = (state: RootState, reduxId: ReduxId) => state[reduxId]
+const selectChartData = (state: RootState, reduxId: string) => state.chartReducer[reduxId]
 
 const selectChartState = createSelector([selectChartData], (chartData: any) => ({
   chartType: chartData?.chartType,
@@ -13,7 +12,7 @@ const selectChartState = createSelector([selectChartData], (chartData: any) => (
 
 export const useChart = (reduxId: string) => {
   const dispatch = useDispatch()
-  const chartState = useSelector((state: RootState) => selectChartState(state, reduxId as ReduxId))
+  const chartState = useSelector((state: RootState) => selectChartState(state, reduxId))
 
   const updateChart = (newChartType: 'line' | 'bar' | 'candlestick') => {
     dispatch(updateChartType({ reduxId, chartType: newChartType }))
@@ -24,8 +23,8 @@ export const useChart = (reduxId: string) => {
   }
 
   return {
-    chartType: chartState.chartType,
-    data: chartState.data,
+    chartType: chartState?.chartType,
+    data: chartState?.data,
     updateChart,
     handleUpdateChartData,
   }
