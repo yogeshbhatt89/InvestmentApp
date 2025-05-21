@@ -4,7 +4,7 @@ import * as tsPlugin from '@typescript-eslint/eslint-plugin'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
-const parser = require('@typescript-eslint/parser'); // Import the parser module using require
+const parser = (await import('@typescript-eslint/parser')).default.parser;
 
 const compat = new FlatCompat()
 
