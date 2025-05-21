@@ -7,12 +7,13 @@ interface TypographyComponentProps extends TypographyProps {
   [key: string]: any
 }
 
-const TypographyComponent: React.FC<TypographyComponentProps> = ({ children, className, ...props }) => {
+const TypographyComponent: React.FC<TypographyComponentProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <Typography
-      {...props}
-      className={`${className} ${props.className}`}
-    >
+    <Typography {...props} className={`${className} ${props.className}`}>
       {children}
     </Typography>
   )

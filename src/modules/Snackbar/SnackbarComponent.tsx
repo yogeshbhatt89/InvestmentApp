@@ -12,7 +12,11 @@ interface SnackbarComponentProps {
   reduxId: string
 }
 
-const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ reduxId, anchorOrigin, ...props }) => {
+const SnackbarComponent: React.FC<SnackbarComponentProps> = ({
+  reduxId,
+  anchorOrigin,
+  ...props
+}) => {
   const { isOpen, message, severity, position, hide } = useSnackbar(reduxId)
 
   const fallbackVertical = position.includes('top') ? 'top' : 'bottom'

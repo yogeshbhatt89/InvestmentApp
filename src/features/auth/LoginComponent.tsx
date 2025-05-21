@@ -45,18 +45,10 @@ const LoginComponent = () => {
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
         <BoxComponent component="form" onSubmit={handleLoginSubmit} noValidate>
           <FormControlWrapper>
-            <TextFieldComponent
-              label="Email"
-              reduxId="email"
-              type="email"
-            />
+            <TextFieldComponent label="Email" reduxId="email" type="email" />
           </FormControlWrapper>
           <FormControlWrapper>
-            <TextFieldComponent
-              label="Password"
-              reduxId="password"
-              type="password"
-            />
+            <TextFieldComponent label="Password" reduxId="password" type="password" />
           </FormControlWrapper>
           <div className="mt-6 flex flex-col sm:flex-row gap-4">
             <ButtonComponent

@@ -57,7 +57,7 @@ const RegisterComponent = () => {
   useEffect(() => {
     setErrors(prev => ({
       ...prev,
-      username: !username ? 'Username is required' : ''
+      username: !username ? 'Username is required' : '',
     }))
   }, [username])
 
@@ -74,7 +74,7 @@ const RegisterComponent = () => {
   useEffect(() => {
     setErrors(prev => ({
       ...prev,
-      fullName: !fullName ? 'Full Name is required' : ''
+      fullName: !fullName ? 'Full Name is required' : '',
     }))
   }, [fullName])
 
@@ -120,8 +120,7 @@ const RegisterComponent = () => {
       : ''
   const fullNameError = !fullName ? 'Full Name is required' : ''
 
-  const hasAnyError =
-    !!usernameError || !!emailError || !!passwordError || !!fullNameError
+  const hasAnyError = !!usernameError || !!emailError || !!passwordError || !!fullNameError
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">

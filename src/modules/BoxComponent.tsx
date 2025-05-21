@@ -9,10 +9,7 @@ interface BoxComponentProps extends BoxProps {
 
 const BoxComponent: React.FC<BoxComponentProps> = ({ children, className, ...props }) => {
   return (
-    <Box
-      {...props}
-      className={`${className} ${props.className}`}
-    >
+    <Box {...props} className={`${className} ${props.className}`}>
       {children}
     </Box>
   )

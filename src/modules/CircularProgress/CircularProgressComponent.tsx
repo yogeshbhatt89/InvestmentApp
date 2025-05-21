@@ -1,12 +1,12 @@
-import { CircularProgress, Box, Typography } from '@mui/material';
-import { useCircularProgress } from './useCircularProgress';
+import { CircularProgress, Box, Typography } from '@mui/material'
+import { useCircularProgress } from './useCircularProgress'
 
 interface CircularProgressComponentProps {
-  message: string;
+  message: string
 }
 
 const CircularProgressComponent: React.FC<CircularProgressComponentProps> = ({ message }) => {
-  const { progress } = useCircularProgress();
+  const { progress } = useCircularProgress()
 
   return (
     <Box position="relative" display="inline-flex" flexDirection="column" alignItems="center">
@@ -31,7 +31,7 @@ const CircularProgressComponent: React.FC<CircularProgressComponentProps> = ({ m
         {message}
       </Typography>
     </Box>
-  );
-};
+  )
+}
 
-export default CircularProgressComponent;
+export default CircularProgressComponent

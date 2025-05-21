@@ -26,6 +26,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.es2021,
       },
     },
     plugins: {
@@ -37,12 +38,6 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
-    },
-  },
-  {
-    env: {
-      node: true,
-      es2021: true,
     },
   },
 ]

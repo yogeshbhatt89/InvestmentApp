@@ -7,7 +7,10 @@ const App = () => {
     <>
       <Outlet />
       <BackdropComponent reduxId="global-backdrop" />
-      <SnackbarComponent reduxId="global-snackbar" anchorOrigin={{ vertical: 'top', horizontal: 'center' }} />
+      <SnackbarComponent
+        reduxId="global-snackbar"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      />
     </>
   )
 }

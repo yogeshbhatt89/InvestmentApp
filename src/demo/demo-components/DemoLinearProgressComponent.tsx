@@ -1,8 +1,8 @@
-import ButtonComponent from '@/modules/Button';
-import LinearProgressComponent, { useLinearProgress } from '@/modules/LinearProgress';
+import ButtonComponent from '@/modules/Button'
+import LinearProgressComponent, { useLinearProgress } from '@/modules/LinearProgress'
 
 const DemoLinearProgressComponent = () => {
-  const { setProgress } = useLinearProgress('demo-linear-progress');
+  const { setProgress } = useLinearProgress('demo-linear-progress')
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -43,7 +43,7 @@ const DemoLinearProgressComponent = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DemoLinearProgressComponent;
+export default DemoLinearProgressComponent
