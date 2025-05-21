@@ -4,7 +4,8 @@ import * as tsPlugin from '@typescript-eslint/eslint-plugin'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
-import { parser } from '@typescript-eslint/parser'
+const parser = require('@typescript-eslint/parser'); // Import the parser module using require
+
 const compat = new FlatCompat()
 
 export default [
@@ -13,7 +14,7 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: parser,
+      parser: parser, // Pass the parser module as an object
       globals: {
         console: true,
         document: true,
