@@ -33,13 +33,9 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },
-    globals: {
-      setTimeout: true,
-      HTMLElement: true,
-      localStorage: true,
-      HTMLInputElement: true,
-      HTMLDivElement: true,
-      process: true,
+    env: {
+      browser: true,
+      node: true,
     },
   },
 ]
