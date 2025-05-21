@@ -12,7 +12,7 @@ export default [
   js.configs.recommended,
   ...compat.extends('plugin:react/recommended'),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx}', 'mock/*.cjs'],
     languageOptions: {
       parser: parser,
       globals: {
