@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRegisterMutation } from '../api'
 import { useSnackbar } from '@/modules/Snackbar'
+import { useBackdrop } from '@/modules/Backdrop/useBackdrop'
+import { useApiCallTracker } from '@/services/useApiCallTracker'
 
 interface RegisterError {
   data?: { message: string }
@@ -8,39 +10,44 @@ interface RegisterError {
 }
 
 export const useRegister = () => {
-  const { showSnackbar } = useSnackbar()
+  const snackbar = useSnackbar('global-snackbar')
+  const backdrop = useBackdrop('global-backdrop')
+  const { updateApiCallProgress, endApiCall } = useApiCallTracker({
+    apiCallId: 'register',
+    totalApiCalls: 1,
+  })
   const [registerMutation, { isLoading, isError, error, isSuccess }] = useRegisterMutation()
-  const [backdropOpen, setBackdropOpen] = useState(false)
 
-  const register = async (userData: {
+  const register = (userData: {
     username: string
     email: string
     password: string
     fullName: string
   }) => {
-    try {
-      setBackdropOpen(true)
-      await registerMutation(userData).unwrap()
-    } catch (err) {
-      const errorResponse = err as RegisterError
-      const errorMessage =
-        errorResponse?.data?.message || 'Registration failed due to server error!'
-      showSnackbar(errorMessage, 'error')
-    } finally {
-      setBackdropOpen(false) // Hide backdrop when done
-    }
+    updateApiCallProgress(10, 'Preparing registration...')
+    backdrop.show()
+    registerMutation(userData).unwrap()
   }
 
   useEffect(() => {
-    if (isLoading) {
-      showSnackbar('Registration in progress...', 'info')
-    } else if (isError) {
-      const errorMessage = (error as RegisterError)?.data?.message || 'Something went wrong!'
-      showSnackbar(errorMessage, 'error')
-    } else if (isSuccess) {
-      showSnackbar('Registration successful!', 'success')
+    if (isLoading && !isSuccess) {
+      updateApiCallProgress(50, 'Registering user...')
     }
-  }, [isLoading, isError, error, isSuccess, showSnackbar])
+    if (isError) {
+      endApiCall('error', 'Registration failed!')
+      const errorMessage = (error as RegisterError)?.data?.message || 'Something went wrong!'
+      snackbar.show(errorMessage, 'error')
+    } else if (isSuccess) {
+      endApiCall('success', 'Registration successful!')
+    }
+  }, [isLoading, isError, error, isSuccess])
+
+  useEffect(() => {
+    if (!isLoading && !isError && !isSuccess) {
+      updateApiCallProgress(0, '')
+      backdrop.hide()
+    }
+  }, [isLoading, isError, isSuccess])
 
   return {
     register,
@@ -48,6 +55,5 @@ export const useRegister = () => {
     isError,
     isSuccess,
     error,
-    backdropOpen,
   }
 }

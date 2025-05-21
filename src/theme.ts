@@ -69,18 +69,18 @@ const theme = createTheme({
         },
       },
     },
-    MuiBackdrop: {
-      defaultProps: {
-        invisible: false,
-      },
-      styleOverrides: {
-        root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          backdropFilter: 'blur(2px)',
-          transition: 'opacity 0.3s ease-in-out',
-        },
+  MuiBackdrop: {
+    defaultProps: {
+      invisible: false,
+    },
+    styleOverrides: {
+      root: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjusted opacity from 0.7 to 0.5
+        backdropFilter: 'blur(2px)',
+        transition: 'opacity 0.3s ease-in-out',
       },
     },
+  },
     MuiCircularProgress: {
       defaultProps: {
         size: 40,

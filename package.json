@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "mock-api": "json-server --watch mock/db.json --port 4000",
-    "dev:all": "concurrently \"npm run mock-api\" \"npm run dev\"",
+    "mock-api": "json-server mock/db.json --routes mock/routes.json --middlewares mock/delay.cjs --port 3001",
+    "dev:mock": "concurrently \"npm run mock-api\" \"npm run dev\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -62,6 +62,7 @@
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "json-server": "^0.17.4",
     "postcss": "^8.5.3",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1",

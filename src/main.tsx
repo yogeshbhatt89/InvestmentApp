@@ -10,6 +10,9 @@ import App from './App'
 import theme from './theme'
 import './index.css'
 import DemoComponent from './demo/DemoComponent'
+import LoginComponent from '@/features/auth/LoginComponent'
+import RegisterComponent from '@/features/auth/RegisterComponent'
+import HomePage from '@/features/HomePage'
 
 initializeUserActivityListeners()
 
@@ -22,6 +25,18 @@ const router = createBrowserRouter(
         {
           path: '',
           element: <DemoComponent />,
+        },
+        {
+          path: 'login',
+          element: <LoginComponent />,
+        },
+        {
+          path: 'register',
+          element: <RegisterComponent />,
+        },
+        {
+          path: 'home',
+          element: <HomePage />,
         },
       ],
     },

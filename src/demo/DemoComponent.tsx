@@ -8,10 +8,23 @@ import DemoTabsComponent from '@/demo/demo-components/DemoTabsComponent'
 import DemoDropdownComponent from '@/demo/demo-components/DemoDropdownComponent'
 import DemoIconComponent from '@/demo/demo-components/DemoIconComponent'
 import DemoChartComponent from './demo-components/DemoChartComponent'
+import DemoLinearProgressComponent from './demo-components/DemoLinearProgressComponent'
+import { useNavigate } from 'react-router-dom'
+import ButtonComponent from '@/modules/Button'
 
 const DemoComponent = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="max-w-4xl mx-auto p-4">
+      <div className="flex justify-end mb-4">
+        <ButtonComponent
+          reduxId="goToLoginDemo"
+          label="Go to Login"
+          onClick={() => navigate('/login')}
+          variant="outlined"
+        />
+      </div>
       <h1 className="text-3xl font-bold text-center mb-8">Demo of MUI</h1>
       <SnackbarComponent reduxId="error-snackbar" />
       <SnackbarComponent reduxId="success-snackbar" />
@@ -75,8 +88,13 @@ const DemoComponent = () => {
           },
           {
             label: 'Chart',
-            icon: <IconWrapper name="ColorLens" size="small" />,
+            icon: <IconWrapper name="BarChart" size="small" />,
             content: <DemoChartComponent />,
+          },
+          {
+            label: 'Linear Progress',
+            icon: <IconWrapper name="Timer" size="small" />,
+            content: <DemoLinearProgressComponent />,
           },
         ]}
       />

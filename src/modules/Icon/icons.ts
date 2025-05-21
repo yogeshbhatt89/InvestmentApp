@@ -24,6 +24,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import StarIcon from '@mui/icons-material/Star'
+import LoopIcon from '@mui/icons-material/Loop'
+import TimerIcon from '@mui/icons-material/Timer'
+import BarChartIcon from '@mui/icons-material/BarChart'
 
 export const Icons = {
   Email: EmailIcon,
@@ -52,6 +55,9 @@ export const Icons = {
   Dashboard: DashboardIcon,
   Favorite: FavoriteIcon,
   Star: StarIcon,
+  Loop: LoopIcon,
+  Timer: TimerIcon,
+  BarChart: BarChartIcon,
 } as const
 
 export type IconName = keyof typeof Icons

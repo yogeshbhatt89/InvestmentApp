@@ -7,7 +7,8 @@ import { backdropReducer } from '@/modules/Backdrop'
 import { tabReducer } from '@/modules/Tab'
 import { dropdownReducer } from '@/modules/Dropdown'
 import { chartReducer } from '@/modules/Chart'
-
+import { linearProgressReducer } from '@/modules/LinearProgress'
+import { apiCallTrackerReducer } from '@/services/apiCallTrackerSlice'
 export const store = configureStore({
   reducer: {
     textField: inputFieldReducer,
@@ -17,6 +18,8 @@ export const store = configureStore({
     tab: tabReducer,
     dropdown: dropdownReducer,
     chartReducer: chartReducer,
+    linearProgress: linearProgressReducer,
+    apiCallTracker: apiCallTrackerReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),

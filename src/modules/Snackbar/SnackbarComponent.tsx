@@ -8,15 +8,15 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 })
 
 interface SnackbarComponentProps {
+  anchorOrigin?: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'center' | 'right' }
   reduxId: string
 }
 
-const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ reduxId }) => {
+const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ reduxId, anchorOrigin, ...props }) => {
   const { isOpen, message, severity, position, hide } = useSnackbar(reduxId)
 
-  // Calculate vertical and horizontal positions
-  const vertical = position.includes('top') ? 'top' : 'bottom'
-  const horizontal = position.includes('left')
+  const fallbackVertical = position.includes('top') ? 'top' : 'bottom'
+  const fallbackHorizontal = position.includes('left')
     ? 'left'
     : position.includes('right')
       ? 'right'
@@ -24,10 +24,11 @@ const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ reduxId }) => {
 
   return (
     <Snackbar
+      {...props}
       open={isOpen}
-      autoHideDuration={6000}
+      autoHideDuration={3000}
       onClose={hide}
-      anchorOrigin={{ vertical, horizontal }}
+      anchorOrigin={anchorOrigin ?? { vertical: fallbackVertical, horizontal: fallbackHorizontal }}
       key={reduxId}
       sx={{
         position: 'fixed',

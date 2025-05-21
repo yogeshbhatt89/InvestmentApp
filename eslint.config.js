@@ -39,4 +39,10 @@ export default [
       'react/jsx-uses-react': 'off',
     },
   },
+  {
+    env: {
+      node: true,
+      es2021: true,
+    },
+  },
 ]

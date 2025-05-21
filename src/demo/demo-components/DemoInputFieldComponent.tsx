@@ -2,7 +2,7 @@ import React from 'react'
 import TextFieldComponent, { useTextField } from '@/modules/TextField'
 import ButtonComponent from '@/modules/Button'
 
-const DemoInputFieldComponent = () => {
+const DemoTextFieldComponent = () => {
   const { setTextFieldValue } = useTextField('demo-text-field')
   const emailField = useTextField('email-field')
   const [counter, setCounter] = React.useState(0)
@@ -56,4 +56,4 @@ const DemoInputFieldComponent = () => {
   )
 }
 
-export default DemoInputFieldComponent
+export default DemoTextFieldComponent

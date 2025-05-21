@@ -1,10 +1,932 @@
 {
-  "login": { "accessToken": "mock-token", "refreshToken": "mock-refresh" },
-  "register": { "success": true },
-  "symbolLookup": {
-    "count": 1,
-    "result": [
-      { "symbol": "AAPL", "displaySymbol": "AAPL", "description": "Apple Inc.", "type": "Equity" }
-    ]
-  }
+  "login": [
+    {
+      "id": 1,
+      "accessToken": "mock-token",
+      "refreshToken": "mock-refresh"
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdasdf",
+      "id": 2
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 3
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 4
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 5
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 6
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdff",
+      "id": 7
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 8
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 9
+    },
+    {
+      "email": "asdfasdfa@gmail.com",
+      "password": "asdfasd",
+      "id": 10
+    },
+    {
+      "email": "asdfasdf",
+      "password": "asdfafsd",
+      "id": 11
+    },
+    {
+      "email": "asdfasdfasdfasdf@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 12
+    },
+    {
+      "email": "asdf@gmail.com",
+      "password": "asdfasdf",
+      "id": 13
+    },
+    {
+      "email": "asdfsdf@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 14
+    },
+    {
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdf",
+      "id": 15
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 16
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 17
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "aasdfadsf",
+      "id": 18
+    },
+    {
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdf",
+      "id": 19
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 20
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfas",
+      "id": 21
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 22
+    },
+    {
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdfasfd",
+      "id": 23
+    },
+    {
+      "email": "asdfaf@gmail.com",
+      "password": "asdfasdf",
+      "id": 24
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 25
+    },
+    {
+      "email": "asdfasdf@gmail.com",
+      "password": "123dasdfadfafd",
+      "id": 26
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 27
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 28
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 29
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 30
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 31
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 32
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 33
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 34
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 35
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 36
+    },
+    {
+      "email": "yogeshbhatt89@gmail.comasdf",
+      "password": "aasdf",
+      "id": 37
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 38
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "id": 39
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asadsf123123",
+      "id": 40
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfadsfasdf",
+      "id": 41
+    },
+    {
+      "email": "asdfasdfa@gmail.com",
+      "password": "asdffffffff",
+      "id": 42
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadfs",
+      "id": 43
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "22233333123123",
+      "id": 44
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 45
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "12323123123",
+      "id": 46
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "sdfgsdfgsdfg",
+      "id": 47
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 48
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 49
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadfs",
+      "id": 50
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "id": 51
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 52
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "id": 53
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasd",
+      "id": 54
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 55
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "id": 56
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 57
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "adsfasdfafds",
+      "id": 58
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 59
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 60
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 61
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 62
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 63
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "id": 64
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 65
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdfssss",
+      "id": 66
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf12312",
+      "id": 67
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadf",
+      "id": 68
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 69
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 70
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 71
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 72
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 73
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 74
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "id": 75
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 76
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 77
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 78
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 79
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 80
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 81
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 82
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 83
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadf",
+      "id": 84
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 85
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 86
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasd",
+      "id": 87
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "adsfasdf",
+      "id": 88
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 89
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 90
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 91
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 92
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 93
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfa",
+      "id": 94
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfadsf",
+      "id": 95
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 96
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 97
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 98
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 99
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 100
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfadsf",
+      "id": 101
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 102
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 103
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 104
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "id": 105
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 106
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 107
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 108
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 109
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadfs",
+      "id": 110
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 111
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 112
+    },
+    {
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "id": 113
+    }
+  ],
+  "register": [
+    {
+      "id": 1,
+      "success": true
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfasdf",
+      "password": "asdfasdf",
+      "fullName": "asdfasfd",
+      "id": 2
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdf",
+      "fullName": "asdf",
+      "id": 3
+    },
+    {
+      "username": "asdf",
+      "email": "asdf",
+      "password": "asdf",
+      "fullName": "asdf",
+      "id": 4
+    },
+    {
+      "username": "adsf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasd",
+      "fullName": "asfdasdf",
+      "id": 5
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfsdf@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdfadsf",
+      "id": 6
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdfafds",
+      "id": 7
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfasdfa@gmail.com",
+      "password": "asdfasd",
+      "fullName": "asdfasdf",
+      "id": 8
+    },
+    {
+      "username": "asdfasfd",
+      "email": "asdfasdfasdfasdf@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfafds",
+      "id": 9
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdf@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdf",
+      "id": 10
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfsdf@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdf",
+      "id": 11
+    },
+    {
+      "username": "asdfadsf",
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdf",
+      "id": 12
+    },
+    {
+      "username": "asdfadsf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfafsd",
+      "id": 13
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdf",
+      "id": 14
+    },
+    {
+      "username": "asdfads",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "aasdfadsf",
+      "fullName": "asdfasfd",
+      "id": 15
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdfasdf",
+      "id": 16
+    },
+    {
+      "username": "PullRequest",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdfafsd",
+      "id": 17
+    },
+    {
+      "username": "adsfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfas",
+      "fullName": "asdfasdf",
+      "id": 18
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfasdf@gmail.com",
+      "password": "asdfasdfasfd",
+      "fullName": "asdfasfd",
+      "id": 19
+    },
+    {
+      "username": "asdfasdf",
+      "email": "asdfasdf@gmail.com",
+      "password": "123dasdfadfafd",
+      "fullName": "1212312312",
+      "id": 20
+    },
+    {
+      "username": "yogeshbhatt89@gmail.com",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "fullName": "asdfasdfsdf",
+      "id": 21
+    },
+    {
+      "username": "asdfasdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asadsf123123",
+      "fullName": "asdfasdfasdf",
+      "id": 22
+    },
+    {
+      "username": "asdfadsfadfs",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfadsfasdf",
+      "fullName": "afasdfff",
+      "id": 23
+    },
+    {
+      "username": "yogeshbhatt89@gmail.com",
+      "email": "asdfasdfa@gmail.com",
+      "password": "asdffffffff",
+      "fullName": "asdfadsf",
+      "id": 24
+    },
+    {
+      "username": "123123123",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadfs",
+      "fullName": "asdfasdfasdf",
+      "id": 25
+    },
+    {
+      "username": "123123213",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "22233333123123",
+      "fullName": "aseadsadasd",
+      "id": 26
+    },
+    {
+      "username": "123123123",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdasdfasdfasdfasdf",
+      "id": 27
+    },
+    {
+      "username": "213213123",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "12323123123",
+      "fullName": "123123123213",
+      "id": 28
+    },
+    {
+      "username": "sdfgsdfgsfdgsdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "sdfgsdfgsdfg",
+      "fullName": "sdfgsdfgsdfg",
+      "id": 29
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfafsd",
+      "id": 30
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasfd",
+      "id": 31
+    },
+    {
+      "username": "123123123",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfadfs",
+      "fullName": "asdfasdfadfs",
+      "id": 32
+    },
+    {
+      "username": "asdfasdfadsf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "fullName": "asdfasdf",
+      "id": 33
+    },
+    {
+      "username": "123123123",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asfdasdfasfd",
+      "id": 34
+    },
+    {
+      "username": "3333222222333333333",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "fullName": "asdfasdfasdfadfs",
+      "id": 35
+    },
+    {
+      "username": "asdfasdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasd",
+      "fullName": "fasdfasdfasdf",
+      "id": 36
+    },
+    {
+      "username": "asdfasdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasdf",
+      "id": 37
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "fullName": "asdfasdfasdf",
+      "id": 38
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasdf",
+      "id": 39
+    },
+    {
+      "username": "asdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "adsfasdfafds",
+      "fullName": "asdfasdfasdf",
+      "id": 40
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasdf",
+      "id": 41
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasdf",
+      "id": 42
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdf",
+      "id": 43
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfasdfasdf",
+      "id": 44
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "asdfasdfafsd",
+      "id": 45
+    },
+    {
+      "username": "asdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdf",
+      "fullName": "asdfasdfadsfasdf",
+      "id": 46
+    },
+    {
+      "username": "asdfasdfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf",
+      "fullName": "yogeshbhatt89@gmail.com",
+      "id": 47
+    },
+    {
+      "username": "PullRequest",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdfasdfssss",
+      "fullName": "asdfasdfasdfasdf",
+      "id": 48
+    },
+    {
+      "username": "adsfasdfasdf",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdfasdf12312",
+      "fullName": "asdfasdff",
+      "id": 49
+    },
+    {
+      "username": "yogeshbhatt89@gmail.com",
+      "email": "yogeshbhatt89@gmail.com",
+      "password": "asdfasdf",
+      "fullName": "asdfasdf",
+      "id": 50
+    }
+  ],
+  "symbolLookup": [
+    {
+      "id": 1,
+      "count": 1,
+      "result": [
+        {
+          "symbol": "AAPL",
+          "displaySymbol": "AAPL",
+          "description": "Apple Inc.",
+          "type": "Equity"
+        }
+      ]
+    }
+  ]
 }
