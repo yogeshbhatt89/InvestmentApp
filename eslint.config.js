@@ -12,12 +12,8 @@ export default [
   ...compat.extends('plugin:react/recommended'),
   {
     files: ['**/*.{ts,tsx}'],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 2021,
-      sourceType: 'module',
-    },
     languageOptions: {
+      parser: '@typescript-eslint/parser',
       globals: {
         console: true,
         document: true,
