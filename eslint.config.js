@@ -21,6 +21,12 @@ export default [
         window: true,
         node: true,
         es2021: true,
+        setTimeout: true,
+        HTMLElement: true,
+        localStorage: true,
+        HTMLInputElement: true,
+        HTMLDivElement: true,
+        process: true,
       },
     },
     plugins: {
@@ -32,10 +38,6 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
-    },
-    env: {
-      browser: true,
-      node: true,
     },
   },
 ]
