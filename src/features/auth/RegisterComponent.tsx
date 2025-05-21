@@ -9,7 +9,7 @@ import FormControlWrapper from '@/modules/FormControlWrapper'
 
 const RegisterComponent = () => {
   const { register, isLoading: isRegistering, isSuccess: isRegisterSuccess } = useRegister()
-  const { login, isLoading: isLoggingIn, isSuccess: isLoginSuccess } = useLogin()
+  const { login, isSuccess: isLoginSuccess } = useLogin()
   const navigate = useNavigate()
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [touched, setTouched] = useState({
