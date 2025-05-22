@@ -46,14 +46,6 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },
-    overrides: [
-      {
-        files: ['src/modules/Table/TableWrapperComponent.tsx'],
-        rules: {
-          '@typescript-eslint/no-unused-vars': 'off',
-        },
-      },
-    ],
   },
   {
     files: ['src/modules/Table/TableWrapperComponent.tsx'],
