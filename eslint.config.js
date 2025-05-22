@@ -1,6 +1,6 @@
 import js from '@eslint/js'
 import { FlatCompat } from '@eslint/eslintrc'
-import * as tsPlugin from '@typescript-eslint/eslint-plugin'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
