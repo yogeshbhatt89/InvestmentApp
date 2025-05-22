@@ -1,4 +1,4 @@
-// In TableWrapperComponent.tsx (adjusted snippet)
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import Table, { TableProps } from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
@@ -7,9 +7,6 @@ import { useTable } from './useTable'
 export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
   className?: string
-  //ignore the error due to the use of any
-  // we aren't using any in the code, but the type is required for the component
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   renderRow: (row: any) => React.ReactNode
   data?: any[]
 }
