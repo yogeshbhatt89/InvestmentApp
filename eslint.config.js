@@ -64,4 +64,13 @@ export default [
       ],
     },
   },
+
+  // FINAL OVERRIDE: Force React JSX rules off for all JS/TS files.
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+    },
+  },
 ]
