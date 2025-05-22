@@ -7,8 +7,11 @@ import { useTable } from './useTable'
 export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
   className?: string
-  renderRow: (_row: any) => React.ReactNode
-  data?: any[] // new optional prop
+  //ignore the error due to the use of any
+  // we aren't using any in the code, but the type is required for the component
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  renderRow: (row: any) => React.ReactNode
+  data?: any[]
 }
 
 const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
