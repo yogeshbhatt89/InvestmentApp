@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import Table, { TableProps } from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import { useTable } from './useTable'
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export type RenderRow = (_arg: any) => React.ReactNode
 export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
