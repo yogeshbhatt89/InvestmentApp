@@ -9,12 +9,11 @@ import parser from '@typescript-eslint/parser'
 const compat = new FlatCompat()
 
 export default [
-  js.configs.recommended,
-  ...compat.extends('plugin:react/recommended'),
+  // Global config for all TS/TSX files
   {
     files: ['**/*.{ts,tsx}', 'mock/*.cjs'],
     languageOptions: {
-      parser: parser,
+      parser,
       globals: {
         console: true,
         document: true,
@@ -47,13 +46,14 @@ export default [
       'react/jsx-uses-react': 'off',
     },
   },
+  // File-specific config for TableWrapperComponent.tsx
   {
-    files: ['src/modules/Table/TableWrapperComponent.tsx'],
+    files: ['**/TableWrapperComponent.tsx'],
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
-  // You can include other flat configs or configurations from compat
+  // Extend additional configs (order matters – later items override earlier ones)
   ...compat.extends('plugin:react/recommended'),
   js.configs.recommended,
 ]
