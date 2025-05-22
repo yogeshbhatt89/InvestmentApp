@@ -55,4 +55,13 @@ export default [
       },
     ],
   },
+  {
+    files: ['src/modules/Table/TableWrapperComponent.tsx'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  // You can include other flat configs or configurations from compat
+  ...compat.extends('plugin:react/recommended'),
+  js.configs.recommended,
 ]
