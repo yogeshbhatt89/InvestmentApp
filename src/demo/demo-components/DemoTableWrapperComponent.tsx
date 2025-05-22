@@ -18,10 +18,7 @@ const DemoTableWrapperComponent: React.FC = () => {
   const rowsPerPage = 5
 
   // Calculate the data to display on the current page.
-  const paginatedData: DemoRow[] = data.slice(
-    (page - 1) * rowsPerPage,
-    page * rowsPerPage,
-  )
+  const paginatedData: DemoRow[] = data.slice((page - 1) * rowsPerPage, page * rowsPerPage)
 
   // Handler that adds a new row to the table.
   const handleAddRow = () => {
@@ -69,15 +66,9 @@ const DemoTableWrapperComponent: React.FC = () => {
         containerSx={{ border: '1px solid #ccc', borderRadius: 1 }}
         renderRow={(row: DemoRow) => (
           <tr key={row.id}>
-            <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.id}
-            </td>
-            <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.name}
-            </td>
-            <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.value}
-            </td>
+            <td style={{ border: '1px solid #ccc', padding: '8px' }}>{row.id}</td>
+            <td style={{ border: '1px solid #ccc', padding: '8px' }}>{row.name}</td>
+            <td style={{ border: '1px solid #ccc', padding: '8px' }}>{row.value}</td>
           </tr>
         )}
       />

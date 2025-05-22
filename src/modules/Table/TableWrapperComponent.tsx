@@ -8,7 +8,7 @@ export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
   className?: string
   renderRow: (row: any) => React.ReactNode
-  data?: any[]  // new optional prop
+  data?: any[] // new optional prop
 }
 
 const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
