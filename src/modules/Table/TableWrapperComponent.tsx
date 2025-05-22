@@ -7,7 +7,7 @@ import { useTable } from './useTable'
 export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
   className?: string
-  renderRow: (row: any) => React.ReactNode
+  renderRow: (arg: any) => React.ReactNode;
   data?: any[]
 }
 
