@@ -1,23 +1,19 @@
-// LinearProgressSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@/app/store'
 
 interface LinearProgressState {
   [progressId: string]: {
-    progress: number
     message: string
   }
 }
 
 interface LinearProgressPayload {
   progressId: string
-  progress: number
   message: string
 }
 
 const initialState: LinearProgressState = {
   default: {
-    progress: 0,
     message: '',
   },
 }
@@ -27,8 +23,8 @@ const linearProgressSlice = createSlice({
   initialState,
   reducers: {
     setLinearProgress: (state, action: PayloadAction<LinearProgressPayload>) => {
-      const { progressId, progress, message } = action.payload
-      state[progressId] = { progress, message }
+      const { progressId, message } = action.payload
+      state[progressId] = { message }
     },
   },
 })

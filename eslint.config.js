@@ -36,6 +36,13 @@ export default [
       'react-hooks': reactHooks,
     },
     rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },

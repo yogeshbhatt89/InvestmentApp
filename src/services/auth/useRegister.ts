@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRegisterMutation } from '../api'
 import { useSnackbar } from '@/modules/Snackbar'
 import { useBackdrop } from '@/modules/Backdrop/useBackdrop'
-import { useApiCallTracker } from '@/services/useApiCallTracker'
+import { useLinearProgress } from '@/modules/LinearProgress'
 
 interface RegisterError {
   data?: { message: string }
@@ -12,10 +12,7 @@ interface RegisterError {
 export const useRegister = () => {
   const snackbar = useSnackbar('global-snackbar')
   const backdrop = useBackdrop('global-backdrop')
-  const { updateApiCallProgress, endApiCall } = useApiCallTracker({
-    apiCallId: 'register',
-    totalApiCalls: 1,
-  })
+  const { setProgress } = useLinearProgress('global-progress')
   const [registerMutation, { isLoading, isError, error, isSuccess }] = useRegisterMutation()
 
   const register = (userData: {
@@ -24,30 +21,28 @@ export const useRegister = () => {
     password: string
     fullName: string
   }) => {
-    updateApiCallProgress(10, 'Preparing registration...')
-    backdrop.show()
+    setProgress('Preparing registration...')
+    backdrop.show() // Increments the counter.
     registerMutation(userData).unwrap()
   }
 
   useEffect(() => {
-    if (isLoading && !isSuccess) {
-      updateApiCallProgress(50, 'Registering user...')
+    if (isLoading) {
+      setProgress('Registering user...')
     }
     if (isError) {
-      endApiCall('error', 'Registration failed!')
+      setProgress('Registration failed!')
       const errorMessage = (error as RegisterError)?.data?.message || 'Something went wrong!'
       snackbar.show(errorMessage, 'error')
+      backdrop.hide() // Decrement the counter once on error.
     } else if (isSuccess) {
-      endApiCall('success', 'Registration successful!')
+      setProgress('Registration successful!')
+      // After a short delay, clear the message and hide the backdrop.
+      setTimeout(() => {
+        backdrop.hide() // Decrement the counter once on success.
+      }, 800)
     }
   }, [isLoading, isError, error, isSuccess])
-
-  useEffect(() => {
-    if (!isLoading && !isError && !isSuccess) {
-      updateApiCallProgress(0, '')
-      backdrop.hide()
-    }
-  }, [isLoading, isError, isSuccess])
 
   return {
     register,

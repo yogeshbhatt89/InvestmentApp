@@ -36,6 +36,7 @@ interface TabComponentProps {
   }[]
   orientation?: 'horizontal' | 'vertical'
   variant?: 'standard' | 'scrollable' | 'fullWidth'
+  scrollButtons?: boolean | 'auto'
   className?: string
   sx?: SxProps<Theme>
 }
@@ -45,6 +46,8 @@ const TabComponent: React.FC<TabComponentProps> = ({
   tabs,
   orientation = 'horizontal',
   variant = 'standard',
+  // Default scrollButtons: "auto" if scrollable variant, otherwise false.
+  scrollButtons = variant === 'scrollable' ? 'auto' : false,
   className = '',
   sx,
 }) => {
@@ -61,6 +64,7 @@ const TabComponent: React.FC<TabComponentProps> = ({
         onChange={handleChange}
         orientation={orientation}
         variant={variant}
+        scrollButtons={scrollButtons}
         aria-label={`${reduxId}-tabs`}
       >
         {tabs.map((tab, index) => (

@@ -37,7 +37,7 @@ const BackdropComponent: React.FC<BackdropComponentProps> = ({
       }}
     >
       <BoxComponent className="w-1/4 h-1/4 bg-white rounded-lg p-4 flex flex-col items-center justify-center">
-        <LinearProgressComponent progressId={'global-progress'} />
+        <LinearProgressComponent />
         <TypographyComponent variant="body1" className="text-lg font-bold mt-4 text-gray-600">
           {linearProgress.message}
         </TypographyComponent>

@@ -1,88 +1,102 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '@/app/store'
-import { useLinearProgress } from '@/modules/LinearProgress'
-import { apiCallTrackerActions } from './apiCallTrackerSlice'
+// import { useEffect } from 'react'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { RootState } from '@/app/store'
+// import { useLinearProgress } from '@/modules/LinearProgress'
+// import { apiCallTrackerActions } from './apiCallTrackerSlice'
 
-interface ApiCallTrackerProps {
-  apiCallId: string
-  totalApiCalls: number
-}
-interface ApiCall {
-  status: 'pending' | 'success' | 'error' | 'idle'
-  progress: number
-}
+// interface ApiCallTrackerProps {
+//   apiCallId: string
+// }
 
-interface ApiCalls {
-  [apiCallId: string]: ApiCall
-}
-export const useApiCallTracker = (props: ApiCallTrackerProps) => {
-  const { apiCallId, totalApiCalls } = props
-  const dispatch = useDispatch()
-  const { setProgress } = useLinearProgress('global-progress')
-  const apiCalls = useSelector(
-    (state: RootState) =>
-      state.apiCallTracker.apiCalls || { [apiCallId]: { status: 'pending', progress: 0 } },
-  )
+// interface ApiCall {
+//   status: 'pending' | 'success' | 'error' | 'idle'
+//   progress: number
+// }
 
-  useEffect(() => {
-    if (!apiCalls[apiCallId]) {
-      dispatch(apiCallTrackerActions.initializeApiCall({ apiCallId }))
-    }
-  }, [apiCallId, apiCalls, dispatch])
+// interface ApiCalls {
+//   [apiCallId: string]: ApiCall
+// }
 
-  const startApiCall = () => {
-    dispatch(apiCallTrackerActions.startApiCall({ apiCallId }))
-  }
+// export const useApiCallTracker = (props: ApiCallTrackerProps) => {
+//   const { apiCallId } = props
+//   const dispatch = useDispatch()
+//   const { setProgress, linearProgress } = useLinearProgress('global-progress')
 
-  const updateApiCallProgress = (progress: number, message: string) => {
-    dispatch(apiCallTrackerActions.updateApiCallProgress({ apiCallId, progress }))
-    const totalProgress = calculateTotalProgress(apiCalls, totalApiCalls)
-    setProgress(totalProgress, message)
-  }
+//   // Select the API calls from Redux state.
+//   const apiCalls = useSelector((state: RootState) => state.apiCallTracker.apiCalls)
 
-  const endApiCall = (status: 'success' | 'error', message: string) => {
-    dispatch(apiCallTrackerActions.updateApiCallStatus({ apiCallId, status }))
-    if (status === 'success') {
-      dispatch(apiCallTrackerActions.updateApiCallProgress({ apiCallId, progress: 100 }))
-    } else {
-      dispatch(apiCallTrackerActions.resetApiCallProgress(apiCallId))
-    }
-    const totalProgress = calculateTotalProgress(apiCalls, totalApiCalls)
-    setProgress(totalProgress, message)
-  }
+//   // Initialize the API call if it doesn't exist.
+//   useEffect(() => {
+//     if (!apiCalls[apiCallId]) {
+//       dispatch(apiCallTrackerActions.initializeApiCall({ apiCallId }))
+//     }
+//   }, [apiCallId, apiCalls, dispatch])
 
-  const calculateTotalProgress = (apiCalls: ApiCalls, totalApiCalls: number) => {
-    if (Object.keys(apiCalls).length === 1) {
-      const apiCall = Object.values(apiCalls)[0]
-      if (apiCall.status === 'success') {
-        console.log('apiCall.status', apiCall.status)
-        return 100
-      } else if (apiCall.status === 'pending') {
-        console.log('apiCall.status', apiCall.status)
-        return apiCall.progress
-      } else if (apiCall.status === 'idle') {
-        console.log('apiCall.status', apiCall.status)
-        return apiCall.progress
-      } else {
-        return 0
-      }
-    } else {
-      const totalProgress =
-        Object.values(apiCalls).reduce((acc, call: ApiCall) => {
-          if (call.status === 'success') {
-            return acc + 100
-          } else if (call.status === 'pending') {
-            return acc + call.progress
-          } else if (call.status === 'idle') {
-            return acc
-          } else {
-            return acc
-          }
-        }, 0) / totalApiCalls
-      return totalProgress
-    }
-  }
+//   // Only recalculate global progress if the current call is still pending,
+//   // and only update message if there's not already one set.
+//   useEffect(() => {
+//     const currentCall = apiCalls[apiCallId]
+//     if (currentCall && currentCall.status === 'pending') {
+//       const totalProgress = calculateTotalProgress(apiCalls)
+//       // Only override if there's no message already.
+//       setProgress(totalProgress, linearProgress.message || '')
+//     }
+//   }, [apiCalls, apiCallId, linearProgress.message])
 
-  return { startApiCall, updateApiCallProgress, endApiCall }
-}
+//   const startApiCall = () => {
+//     dispatch(apiCallTrackerActions.startApiCall({ apiCallId }))
+//   }
+
+//   const updateApiCallProgress = (progress: number, message: string) => {
+//     // Update the progress for this specific API call.
+//     dispatch(apiCallTrackerActions.updateApiCallProgress({ apiCallId, progress }))
+
+//     const currentCall = apiCalls[apiCallId] || { progress: 0, status: 'pending' }
+//     const updatedApiCalls: ApiCalls = {
+//       ...apiCalls,
+//       [apiCallId]: { ...currentCall, progress },
+//     }
+//     const updatedTotalProgress = calculateTotalProgress(updatedApiCalls)
+//     setProgress(updatedTotalProgress, message)
+//   }
+
+//   const endApiCall = (status: 'success' | 'error', message: string) => {
+//     dispatch(apiCallTrackerActions.updateApiCallStatus({ apiCallId, status }))
+
+//     if (status === 'success') {
+//       // Update progress to 100%
+//       dispatch(apiCallTrackerActions.updateApiCallProgress({ apiCallId, progress: 100 }))
+//       setProgress(100, message)
+
+//       // After a short delay, reset the API call to idle and reset progress to 0.
+//       setTimeout(() => {
+//         dispatch(apiCallTrackerActions.resetApiCallProgress({ apiCallId }))
+//         setProgress(0, '')
+//       }, 1500)
+//     } else {
+//       // For error state, immediately reset.
+//       dispatch(apiCallTrackerActions.resetApiCallProgress({ apiCallId }))
+//       const updatedApiCalls: ApiCalls = {
+//         ...apiCalls,
+//         [apiCallId]: { progress: 0, status: 'idle' },
+//       }
+//       const updatedTotalProgress = calculateTotalProgress(updatedApiCalls)
+//       setProgress(updatedTotalProgress, message)
+//     }
+//   }
+
+//   // Aggregator: only averages "pending" calls and resets to 0 if none are active.
+//   const calculateTotalProgress = (apiCalls: ApiCalls): number => {
+//     const apiCallList = Object.values(apiCalls)
+//     if (apiCallList.length === 0) return 0
+
+//     // Filter only the active (pending) API calls.
+//     const pendingCalls = apiCallList.filter(call => call.status === 'pending')
+//     if (pendingCalls.length === 0) return 0
+
+//     const total = pendingCalls.reduce((acc, call) => acc + call.progress, 0)
+//     return total / pendingCalls.length
+//   }
+
+//   return { startApiCall, updateApiCallProgress, endApiCall }
+// }

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useLoginMutation } from '../api'
 import { useSnackbar } from '@/modules/Snackbar'
 import { useBackdrop } from '@/modules/Backdrop/useBackdrop'
-import { useApiCallTracker } from '@/services/useApiCallTracker'
+import { useLinearProgress } from '@/modules/LinearProgress'
 
 interface LoginError {
   data?: { message: string }
@@ -12,42 +12,33 @@ interface LoginError {
 export const useLogin = () => {
   const snackbar = useSnackbar('global-snackbar')
   const backdrop = useBackdrop('global-backdrop')
-  const { updateApiCallProgress, endApiCall, startApiCall } = useApiCallTracker({
-    apiCallId: 'login',
-    totalApiCalls: 1,
-  })
+  const { setProgress } = useLinearProgress('global-progress')
   const [loginMutation, { isLoading, isError, error, isSuccess }] = useLoginMutation()
 
   const login = (userData: { email: string; password: string }) => {
-    startApiCall()
-    updateApiCallProgress(10, 'Preparing login...')
+    // Start the global progress and show the backdrop.
+    setProgress('Preparing login...')
     backdrop.show()
+    // Perform the API call.
     loginMutation(userData).unwrap()
   }
 
   useEffect(() => {
     if (isLoading) {
-      updateApiCallProgress(50, 'Logging in...')
+      setProgress('Logging in...')
     }
     if (isError) {
-      endApiCall('error', 'Login failed!')
+      setProgress('Login failed!')
       const errorMessage = (error as LoginError)?.data?.message || 'Something went wrong!'
       snackbar.show(errorMessage, 'error')
+      backdrop.hide()
     } else if (isSuccess) {
-      endApiCall('success', 'Login successful!')
-
+      setProgress('Login successful!')
       setTimeout(() => {
         backdrop.hide()
       }, 800)
     }
   }, [isLoading, isError, error, isSuccess])
-
-  useEffect(() => {
-    if (!isLoading && !isError && !isSuccess) {
-      updateApiCallProgress(0, '')
-      backdrop.hide()
-    }
-  }, [isLoading, isError, isSuccess])
 
   return {
     login,

@@ -7,8 +7,9 @@ import DemoBackdropComponent from '@/demo/demo-components/DemoBackdropComponent'
 import DemoTabsComponent from '@/demo/demo-components/DemoTabsComponent'
 import DemoDropdownComponent from '@/demo/demo-components/DemoDropdownComponent'
 import DemoIconComponent from '@/demo/demo-components/DemoIconComponent'
-import DemoChartComponent from './demo-components/DemoChartComponent'
-import DemoLinearProgressComponent from './demo-components/DemoLinearProgressComponent'
+import DemoChartComponent from '@/demo/demo-components/DemoChartComponent'
+import DemoLinearProgressComponent from '@/demo/demo-components/DemoLinearProgressComponent'
+import DemoTableWrapperComponent from '@/demo/demo-components/DemoTableWrapperComponent'
 import { useNavigate } from 'react-router-dom'
 import ButtonComponent from '@/modules/Button'
 
@@ -31,6 +32,7 @@ const DemoComponent = () => {
       <SnackbarComponent reduxId="info-snackbar" />
       <TabComponent
         reduxId="main-demo-tabs"
+        variant="scrollable"
         sx={{
           '& .MuiTabs-root': {
             borderBottom: '1px solid #e2e8f0',
@@ -95,6 +97,11 @@ const DemoComponent = () => {
             label: 'Linear Progress',
             icon: <IconWrapper name="Timer" size="small" />,
             content: <DemoLinearProgressComponent />,
+          },
+          {
+            label: 'Table',
+            icon: <IconWrapper name="TableRestaurant" size="small" />,
+            content: <DemoTableWrapperComponent />,
           },
         ]}
       />

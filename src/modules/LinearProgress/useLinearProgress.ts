@@ -14,12 +14,14 @@ export const useLinearProgress = (progressId: string) => {
     selectLinearProgressState(state, progressId),
   )
 
+  // Memoize the linearProgress value, providing a default with an empty message if none exists.
   const memoizedLinearProgress = useMemo(() => {
-    return linearProgress || { progress: 0, message: '' }
+    return linearProgress || { message: '' }
   }, [linearProgress])
 
-  const setProgress = (progress: number, message: string) => {
-    dispatch(setLinearProgress({ progressId, progress, message }))
+  // Updated setProgress now accepts only a message.
+  const setProgress = (message: string) => {
+    dispatch(setLinearProgress({ progressId, message }))
   }
 
   return {
