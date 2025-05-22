@@ -9,7 +9,28 @@ import parser from '@typescript-eslint/parser'
 const compat = new FlatCompat()
 
 export default [
-  // Global config for all TS/TSX files
+  // Global settings that apply to all files.
+  {
+    // This configuration object has no "files" property – it’s global.
+    languageOptions: {
+      // With the new JSX transform, you can use parserOptions if necessary.
+      // With flat config, specifying the parser at the top level may help.
+      parser,
+    },
+    plugins: {
+      react: react,
+    },
+    rules: {
+      // Disable these rules globally so that you don't have to import React in every TSX file.
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+    },
+  },
+  // Recommended settings for JavaScript.
+  js.configs.recommended,
+  // Extend the recommended React config.
+  ...compat.extends('plugin:react/recommended'),
+  // Settings for all TypeScript/TSX files.
   {
     files: ['**/*.{ts,tsx}', 'mock/*.cjs'],
     languageOptions: {
@@ -31,29 +52,25 @@ export default [
     plugins: {
       '@typescript-eslint': tsPlugin,
       prettier: prettier,
-      react: react,
       'react-hooks': reactHooks,
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
+          // Unused variables can be ignored if they begin with an underscore.
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
         },
       ],
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
     },
   },
-  // File-specific config for TableWrapperComponent.tsx
+  // File-specific config for TableWrapperComponent.tsx.
   {
-    files: ['**/TableWrapperComponent.tsx'],
+    // Use a glob that accurately matches your file.
+    files: ['src/modules/Table/TableWrapperComponent.tsx'],
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
-  // Extend additional configs (order matters – later items override earlier ones)
-  ...compat.extends('plugin:react/recommended'),
-  js.configs.recommended,
 ]
