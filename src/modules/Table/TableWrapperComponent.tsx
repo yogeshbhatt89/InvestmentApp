@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React from 'react'
 import Table, { TableProps } from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import { useTable } from './useTable'
 
+export type RenderRow = (_arg: any) => React.ReactNode;
 export interface TableWrapperComponentProps extends TableProps {
   containerSx?: object
   className?: string
-  renderRow: (arg: any) => React.ReactNode;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  renderRow: RenderRow;
   data?: any[]
 }
 
