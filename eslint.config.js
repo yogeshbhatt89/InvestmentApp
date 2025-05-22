@@ -11,26 +11,26 @@ const compat = new FlatCompat()
 export default [
   // Global settings that apply to all files.
   {
-    // This configuration object has no "files" property – it’s global.
     languageOptions: {
-      // With the new JSX transform, you can use parserOptions if necessary.
-      // With flat config, specifying the parser at the top level may help.
       parser,
     },
     plugins: {
-      react: react,
+      react,
     },
     rules: {
-      // Disable these rules globally so that you don't have to import React in every TSX file.
+      // Disable these rules globally
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },
   },
-  // Recommended settings for JavaScript.
+
+  // ESLint recommended config
   js.configs.recommended,
-  // Extend the recommended React config.
+
+  // React recommended config (from our compatibility helper)
   ...compat.extends('plugin:react/recommended'),
-  // Settings for all TypeScript/TSX files.
+
+  // Configuration for TS/TSX files.
   {
     files: ['**/*.{ts,tsx}', 'mock/*.cjs'],
     languageOptions: {
@@ -51,26 +51,26 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      prettier: prettier,
+      prettier,
       'react-hooks': reactHooks,
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          // Unused variables can be ignored if they begin with an underscore.
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
         },
       ],
     },
   },
-  // File-specific config for TableWrapperComponent.tsx.
+
+  // FINAL OVERRIDE: Force React JSX rules off for all JS/TS files.
   {
-    // Use a glob that accurately matches your file.
-    files: ['src/modules/Table/TableWrapperComponent.tsx'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     rules: {
-      '@typescript-eslint/no-unused-vars': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
     },
   },
 ]
