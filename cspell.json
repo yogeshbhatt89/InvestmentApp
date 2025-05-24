@@ -1,6 +1,17 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["snackbar", "snackbars", "reduxjs", "tailwindcss"],
-  "ignorePaths": ["node_modules/**", "dist/**", "build/**", "coverage/**"]
+  "words": [
+    "gridlines",
+    "reduxjs",
+    "snackbar",
+    "snackbars",
+    "tailwindcss"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    "coverage/**"
+  ]
 }
