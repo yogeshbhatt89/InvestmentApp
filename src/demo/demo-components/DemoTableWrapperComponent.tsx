@@ -65,15 +65,9 @@ const DemoTableWrapperComponent: React.FC = () => {
         containerSx={{ border: '1px solid #ccc', borderRadius: 1 }}
         renderRow={(row: DemoRow) => (
           <>
-            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.id}
-            </TableCell>
-            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.name}
-            </TableCell>
-            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>
-              {row.value}
-            </TableCell>
+            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>{row.id}</TableCell>
+            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>{row.name}</TableCell>
+            <TableCell sx={{ border: '1px solid #ccc', padding: '8px' }}>{row.value}</TableCell>
           </>
         )}
       />

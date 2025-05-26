@@ -13,7 +13,15 @@ const LinearProgressComponent: React.FC<LinearProgressComponentProps> = ({
   ...linearProgressProps
 }) => {
   return (
-    <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', minHeight: '30px', ...containerSx }}>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        minHeight: '30px',
+        ...containerSx,
+      }}
+    >
       <LinearProgress
         className={className}
         variant="indeterminate"
@@ -23,6 +31,5 @@ const LinearProgressComponent: React.FC<LinearProgressComponentProps> = ({
     </Box>
   )
 }
-
 
 export default LinearProgressComponent

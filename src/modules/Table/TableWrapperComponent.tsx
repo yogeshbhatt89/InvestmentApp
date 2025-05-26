@@ -61,17 +61,16 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
     const cells = renderRow(row)
     return gridlines
       ? React.Children.map(cells, child => {
-        if (React.isValidElement(child)) {
-          const element = child as React.ReactElement<any>
-          return React.cloneElement(element, {
-            sx: { ...(element.props.sx || {}), border: '1px solid #ccc' },
-          })
-        }
-        return child
-      })
+          if (React.isValidElement(child)) {
+            const element = child as React.ReactElement<any>
+            return React.cloneElement(element, {
+              sx: { ...(element.props.sx || {}), border: '1px solid #ccc' },
+            })
+          }
+          return child
+        })
       : cells
   }
-
 
   return (
     <>

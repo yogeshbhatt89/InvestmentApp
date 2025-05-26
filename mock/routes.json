@@ -1,5 +1,5 @@
 {
   "/auth/login": "/login",
   "/auth/register": "/register",
-  "/investments/symbolLookup": "/symbolLookup"
+  "/investments/symbolLookup*": "/symbolLookup"
 }

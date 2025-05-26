@@ -10,6 +10,7 @@ import DemoIconComponent from '@/demo/demo-components/DemoIconComponent'
 import DemoChartComponent from '@/demo/demo-components/DemoChartComponent'
 import DemoLinearProgressComponent from '@/demo/demo-components/DemoLinearProgressComponent'
 import DemoTableWrapperComponent from '@/demo/demo-components/DemoTableWrapperComponent'
+import LiveSearchSymbolLookup from '@/features/LiveSearchSymbolLookup'
 import { useNavigate } from 'react-router-dom'
 import ButtonComponent from '@/modules/Button'
 
@@ -102,6 +103,11 @@ const DemoComponent = () => {
             label: 'Table',
             icon: <IconWrapper name="TableRestaurant" size="small" />,
             content: <DemoTableWrapperComponent />,
+          },
+          {
+            label: 'Symbol Lookup',
+            icon: <IconWrapper name="Search" size="small" />,
+            content: <LiveSearchSymbolLookup />,
           },
         ]}
       />
