@@ -22,6 +22,16 @@ export default defineConfig({
         secure: false, // Disable SSL verification for local development
         rewrite: path => path.replace(/^\/api/, '/api'), // Preserve the /api prefix
       },
+      '/auth': {
+        target: process.env.VITE_API_BASE_URL,
+        changeOrigin: true,
+        secure: false,
+      },
+      '/investments': {
+        target: process.env.VITE_API_BASE_URL,
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
   resolve: {

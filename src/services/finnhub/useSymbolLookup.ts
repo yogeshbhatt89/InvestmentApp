@@ -1,6 +1,6 @@
 import { useSymbolLookupQuery } from '../api'
-import { useState, useEffect } from 'react'
-import { useSnackbar } from '../../modules/Snackbar/SnackbarComponent'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { useSnackbar } from '@/modules/Snackbar'
 import { debounce } from 'lodash'
 
 interface Symbol {
@@ -15,14 +15,26 @@ interface SymbolLookupError {
   status?: number
 }
 
+export interface SymbolLookupResponse {
+  count: number // Number of results
+  result: Array<{
+    symbol: string // Unique symbol
+    displaySymbol: string // Display symbol name
+    description: string // Symbol description
+    type: string // Security type (e.g., "Equity", "ETF")
+  }>
+}
 export const useSymbolLookup = (query: string, exchange: string) => {
-  const { showSnackbar } = useSnackbar()
+  // Pass a unique snackbarId to the useSnackbar hook.
+  const { show } = useSnackbar('symbolLookupSnackbar')
   const [debouncedQuery, setDebouncedQuery] = useState(query)
 
-  // Debounce the search query
-  const debouncedSearch = debounce((value: string) => {
-    setDebouncedQuery(value)
-  }, 500)
+  // Memoize the debounced function so it doesn't recreate on every render.
+  const debouncedSearch = useMemo(() => {
+    return debounce((value: string) => {
+      setDebouncedQuery(value)
+    }, 500)
+  }, [])
 
   useEffect(() => {
     debouncedSearch(query)
@@ -33,11 +45,9 @@ export const useSymbolLookup = (query: string, exchange: string) => {
 
   const shouldSkipQuery = debouncedQuery.trim() === ''
 
+  // Query the API using the debounced value.
   const { data, error, isLoading, isError, isSuccess } = useSymbolLookupQuery(
-    {
-      query: debouncedQuery,
-      exchange,
-    },
+    { query: debouncedQuery, exchange },
     { skip: shouldSkipQuery },
   )
 
@@ -49,20 +59,27 @@ export const useSymbolLookup = (query: string, exchange: string) => {
     }
   }, [data])
 
+  // We use a ref to hold the previous status values so we only show snackbars on transitions.
+  const prevStatusRef = useRef({ isLoading: false, isSuccess: false })
+
+  useEffect(() => {
+    // Only show loading message on transition.
+    if (isLoading && !prevStatusRef.current.isLoading) {
+      show('Searching for symbols...', 'info')
+    }
+    // Only show success message on transition.
+    else if (isSuccess && !prevStatusRef.current.isSuccess) {
+      show('Symbols found!', 'success')
+    }
+    prevStatusRef.current = { isLoading, isSuccess }
+  }, [isLoading, isSuccess])
+
   useEffect(() => {
     if (isError) {
       const errorMessage = (error as SymbolLookupError)?.data?.message || 'Symbol lookup failed!'
-      showSnackbar(errorMessage, 'error')
+      show(errorMessage, 'error')
     }
-  }, [isError, error, showSnackbar])
-
-  useEffect(() => {
-    if (isLoading) {
-      showSnackbar('Searching for symbols...', 'info')
-    } else if (isSuccess) {
-      showSnackbar('Symbols found!', 'success')
-    }
-  }, [isLoading, isSuccess, showSnackbar])
+  }, [isError, error])
 
   return {
     symbols,

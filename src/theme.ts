@@ -75,7 +75,7 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjusted opacity from 0.7 to 0.5
           backdropFilter: 'blur(2px)',
           transition: 'opacity 0.3s ease-in-out',
         },

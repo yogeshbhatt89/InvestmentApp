@@ -1,145 +1,200 @@
-// import { useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { useRegister } from '../../services/auth/useRegister'
-// import TextFieldComponent from '../../modules/TextField/TextFieldComponent'
-// import ButtonComponent from '../../modules/Button/ButtonComponent'
-// import BackdropComponent from '../../modules/BackdropComponent'
-// import ContainerComponent from '../../modules/ContainerComponent'
-// import { useForm, Controller } from 'react-hook-form'
-// import * as yup from 'yup'
-// import { yupResolver } from '@hookform/resolvers/yup'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useRegister } from '@/services/auth/useRegister'
+import { useLogin } from '@/services/auth/useLogin'
+import TextFieldComponent, { useTextField } from '@/modules/TextField'
+import ButtonComponent from '@/modules/Button'
+import BoxComponent from '@/modules/BoxComponent'
+import FormControlWrapper from '@/modules/FormControlWrapper'
 
-// const validationSchema = yup.object({
-//   username: yup.string().required('Username is required'),
-//   email: yup
-//     .string()
-//     .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Enter a valid email')
-//     .required('Email is required'),
-//   password: yup
-//     .string()
-//     .min(6, 'Password must be at least 6 characters')
-//     .required('Password is required'),
-//   fullName: yup.string().required('Full Name is required'),
-// })
+const RegisterComponent = () => {
+  const { register, isLoading: isRegistering, isSuccess: isRegisterSuccess } = useRegister()
+  const { login, isSuccess: isLoginSuccess } = useLogin()
+  const navigate = useNavigate()
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const [touched, setTouched] = useState({
+    username: false,
+    email: false,
+    password: false,
+    fullName: false,
+  })
+  const [pendingLogin, setPendingLogin] = useState<{ email: string; password: string } | null>(null)
 
-// interface FormData {
-//   username: string
-//   email: string
-//   password: string
-//   fullName: string
-// }
+  const {
+    getTextFieldValue: username,
+    isEmpty: isUsernameEmpty,
+    clearValue: clearUsername,
+  } = useTextField('username')
 
-// const RegisterComponent = () => {
-//   const { register, isLoading, backdropOpen, isSuccess } = useRegister()
-//   const navigate = useNavigate()
+  const {
+    getTextFieldValue: email,
+    isEmpty: isEmailEmpty,
+    clearValue: clearEmail,
+  } = useTextField('email')
 
-//   const {
-//     control,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<FormData>({
-//     resolver: yupResolver(validationSchema),
-//   })
+  const {
+    getTextFieldValue: password,
+    isEmpty: isPasswordEmpty,
+    clearValue: clearPassword,
+  } = useTextField('password')
 
-//   const onSubmit = async (data: FormData) => {
-//     await register(data)
-//   }
+  const {
+    getTextFieldValue: fullName,
+    isEmpty: isFullNameEmpty,
+    clearValue: clearFullName,
+  } = useTextField('fullName')
 
-//   useEffect(() => {
-//     if (isSuccess) {
-//       navigate('/login')
-//     }
-//   }, [isSuccess, navigate])
+  useEffect(() => {
+    if (!email) {
+      setErrors(prev => ({ ...prev, email: '' }))
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }))
+    } else {
+      setErrors(prev => ({ ...prev, email: '' }))
+    }
+  }, [email])
 
-//   const handleGoToLogin = () => {
-//     navigate('/login')
-//   }
+  useEffect(() => {
+    setErrors(prev => ({
+      ...prev,
+      username: !username ? 'Username is required' : '',
+    }))
+  }, [username])
 
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-//       <ContainerComponent maxWidth="sm">
-//         <div className="bg-white p-8 rounded-lg shadow-lg w-full">
-//           <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Register</h2>
+  useEffect(() => {
+    if (!password) {
+      setErrors(prev => ({ ...prev, password: '' }))
+    } else if (password.length < 6) {
+      setErrors(prev => ({ ...prev, password: 'Password must be at least 6 characters' }))
+    } else {
+      setErrors(prev => ({ ...prev, password: '' }))
+    }
+  }, [password])
 
-//           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-//             <Controller
-//               name="username"
-//               control={control}
-//               render={({ field }) => (
-//                 <TextFieldComponent
-//                   label="Username"
-//                   name="username"
-//                   value={field.value}
-//                   onChange={field.onChange}
-//                   error={!!errors.username}
-//                   helperText={errors.username?.message}
-//                 />
-//               )}
-//             />
+  useEffect(() => {
+    setErrors(prev => ({
+      ...prev,
+      fullName: !fullName ? 'Full Name is required' : '',
+    }))
+  }, [fullName])
 
-//             <Controller
-//               name="email"
-//               control={control}
-//               render={({ field }) => (
-//                 <TextFieldComponent
-//                   label="Email"
-//                   name="email"
-//                   value={field.value}
-//                   onChange={field.onChange}
-//                   error={!!errors.email}
-//                   helperText={errors.email?.message}
-//                 />
-//               )}
-//             />
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    // Final check before submit
+    const hasError = Object.values(errors).some(Boolean)
+    if (hasError || isUsernameEmpty || isEmailEmpty || isPasswordEmpty || isFullNameEmpty) return
+    await register({ username, email, password, fullName })
+    setPendingLogin({ email, password }) // Save credentials for auto-login
+  }
 
-//             <Controller
-//               name="password"
-//               control={control}
-//               render={({ field }) => (
-//                 <TextFieldComponent
-//                   label="Password"
-//                   name="password"
-//                   type="password"
-//                   value={field.value}
-//                   onChange={field.onChange}
-//                   error={!!errors.password}
-//                   helperText={errors.password?.message}
-//                 />
-//               )}
-//             />
+  useEffect(() => {
+    // After registration success, trigger login
+    if (isRegisterSuccess && pendingLogin) {
+      login(pendingLogin)
+    }
+    // eslint-disable-next-line
+  }, [isRegisterSuccess, pendingLogin])
 
-//             <Controller
-//               name="fullName"
-//               control={control}
-//               render={({ field }) => (
-//                 <TextFieldComponent
-//                   label="Full Name"
-//                   name="fullName"
-//                   value={field.value}
-//                   onChange={field.onChange}
-//                   error={!!errors.fullName}
-//                   helperText={errors.fullName?.message}
-//                 />
-//               )}
-//             />
+  useEffect(() => {
+    // After login success, clear fields and navigate to home
+    if (isLoginSuccess) {
+      clearUsername()
+      clearEmail()
+      clearPassword()
+      clearFullName()
+      navigate('/home')
+    }
+    // eslint-disable-next-line
+  }, [isLoginSuccess])
 
-//             <ButtonComponent reduxId='registerButton' label="Register" type="submit" disabled={isLoading} className="mt-2" />
+  const usernameError = !username ? 'Username is required' : ''
+  const emailError = !email
+    ? 'Email is required'
+    : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+      ? 'Please enter a valid email address'
+      : ''
+  const passwordError = !password
+    ? 'Password is required'
+    : password.length < 6
+      ? 'Password must be at least 6 characters'
+      : ''
+  const fullNameError = !fullName ? 'Full Name is required' : ''
 
-//             <ButtonComponent
-//               reduxId='goToLoginButton'
-//               label="Go to Login"
-//               type="button"
-//               onClick={handleGoToLogin}
-//               variant="outlined"
-//               className="mt-2"
-//             />
-//           </form>
+  const hasAnyError = !!usernameError || !!emailError || !!passwordError || !!fullNameError
 
-//           <BackdropComponent open={backdropOpen} />
-//         </div>
-//       </ContainerComponent>
-//     </div>
-//   )
-// }
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Register</h2>
+        <BoxComponent component="form" onSubmit={handleRegisterSubmit} noValidate>
+          <FormControlWrapper>
+            <TextFieldComponent
+              label="Username"
+              reduxId="username"
+              type="text"
+              onBlur={() => setTouched(t => ({ ...t, username: true }))}
+              error={touched.username && !!usernameError}
+              helperText={touched.username ? usernameError : ''}
+            />
+          </FormControlWrapper>
+          <FormControlWrapper>
+            <TextFieldComponent
+              label="Email"
+              reduxId="email"
+              type="email"
+              onBlur={() => setTouched(t => ({ ...t, email: true }))}
+              error={touched.email && !!emailError}
+              helperText={touched.email ? emailError : ''}
+              placeholder="example@email.com"
+              className="[&_.Mui-error]:text-red-600 [&_.MuiOutlinedInput-root.Mui-error_.MuiOutlinedInput-notchedOutline]:border-red-600"
+            />
+          </FormControlWrapper>
+          <FormControlWrapper>
+            <TextFieldComponent
+              label="Password"
+              reduxId="password"
+              type="password"
+              onBlur={() => setTouched(t => ({ ...t, password: true }))}
+              error={touched.password && !!passwordError}
+              helperText={touched.password ? passwordError : ''}
+            />
+          </FormControlWrapper>
+          <FormControlWrapper>
+            <TextFieldComponent
+              label="Full Name"
+              reduxId="fullName"
+              type="text"
+              onBlur={() => setTouched(t => ({ ...t, fullName: true }))}
+              error={touched.fullName && !!fullNameError}
+              helperText={touched.fullName ? fullNameError : ''}
+            />
+          </FormControlWrapper>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <ButtonComponent
+              reduxId="register"
+              label="Register"
+              type="submit"
+              disabled={
+                isRegistering ||
+                isUsernameEmpty ||
+                isEmailEmpty ||
+                isPasswordEmpty ||
+                isFullNameEmpty ||
+                hasAnyError
+              }
+            />
+            <ButtonComponent
+              reduxId="goToLogin"
+              label="Go to Login"
+              type="button"
+              onClick={() => navigate('/login')}
+              variant="outlined"
+            />
+          </div>
+        </BoxComponent>
+      </div>
+    </div>
+  )
+}
 
-// export default RegisterComponent
+export default RegisterComponent

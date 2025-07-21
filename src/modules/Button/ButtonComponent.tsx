@@ -16,6 +16,7 @@ interface ButtonProps {
   fullWidth?: boolean
   size?: 'small' | 'medium' | 'large'
   sx?: SxProps<Theme>
+  type?: 'button' | 'submit' | 'reset'
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -31,6 +32,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   fullWidth = false,
   size = 'small',
   sx,
+  type = 'button',
 }) => {
   const { buttonState } = useButton(reduxId)
 
@@ -46,6 +48,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
       className={className}
       fullWidth={fullWidth}
       sx={sx}
+      type={type} // <-- Pass the type prop here
     >
       {label}
     </Button>

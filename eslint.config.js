@@ -1,39 +1,73 @@
 import js from '@eslint/js'
 import { FlatCompat } from '@eslint/eslintrc'
-import * as tsParser from '@typescript-eslint/parser'
-import * as tsPlugin from '@typescript-eslint/eslint-plugin'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
-import globals from 'globals'
+import parser from '@typescript-eslint/parser'
 
 const compat = new FlatCompat()
 
 export default [
-  js.configs.recommended,
-  ...compat.extends('plugin:react/recommended'),
+  // Global settings that apply to all files.
   {
-    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
+      parser,
+    },
+    plugins: {
+      react,
+    },
+    rules: {
+      // Disable these rules globally
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+    },
+  },
+
+  // ESLint recommended config
+  js.configs.recommended,
+
+  // React recommended config (from our compatibility helper)
+  ...compat.extends('plugin:react/recommended'),
+
+  // Configuration for TS/TSX files.
+  {
+    files: ['**/*.{ts,tsx}', 'mock/*.cjs'],
+    languageOptions: {
+      parser,
       globals: {
-        ...globals.browser,
-        ...globals.node,
+        console: true,
+        document: true,
+        window: true,
+        node: true,
+        es2021: true,
+        setTimeout: true,
+        HTMLElement: true,
+        localStorage: true,
+        HTMLInputElement: true,
+        HTMLDivElement: true,
+        process: true,
       },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      prettier: prettier,
-      react: react,
+      prettier,
       'react-hooks': reactHooks,
     },
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+
+  // FINAL OVERRIDE: Force React JSX rules off for all JS/TS files.
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',

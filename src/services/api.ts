@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { jwtDecode } from 'jwt-decode'
 import { isUserInactive } from '../utils/userActivityTracker'
+import type { StockQuoteResponseDTO } from './finnhub/useQuoteSearch'
+import type { SymbolLookupResponse } from './finnhub/useSymbolLookup'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
@@ -39,16 +41,6 @@ const isTokenExpired = (token: string): boolean => {
   } catch {
     return true // If decoding fails, treat the token as expired
   }
-}
-
-interface SymbolLookupResponse {
-  count: number // Number of results
-  result: Array<{
-    symbol: string // Unique symbol
-    displaySymbol: string // Display symbol name
-    description: string // Symbol description
-    type: string // Security type (e.g., "Equity", "ETF")
-  }>
 }
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -135,7 +127,13 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
+    quote: builder.query<StockQuoteResponseDTO, { ticker: string }>({
+      query: ({ ticker }) => ({
+        url: `/quote?ticker=${ticker}`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
-export const { useRegisterMutation, useLoginMutation, useSymbolLookupQuery } = api
+export const { useRegisterMutation, useLoginMutation, useSymbolLookupQuery, useQuoteQuery } = api

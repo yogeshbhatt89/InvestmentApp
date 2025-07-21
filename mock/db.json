@@ -1,0 +1,78 @@
+{
+  "login": {
+    "email": "yogeshbhatt89@gmail.com",
+    "password": "asdfasdf"
+  },
+  "register": {
+    "username": "123123123",
+    "email": "yogeshbhatt89@gmail.com",
+    "password": "asdfasdf",
+    "fullName": "asdfasdfasdf"
+  },
+  "symbolLookup": {
+    "id": 1,
+    "count": 10,
+    "result": [
+      {
+        "symbol": "AAPL",
+        "displaySymbol": "AAPL",
+        "description": "Apple Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "MSFT",
+        "displaySymbol": "MSFT",
+        "description": "Microsoft Corporation",
+        "type": "Equity"
+      },
+      {
+        "symbol": "GOOGL",
+        "displaySymbol": "GOOGL",
+        "description": "Alphabet Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "AMZN",
+        "displaySymbol": "AMZN",
+        "description": "Amazon.com, Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "TSLA",
+        "displaySymbol": "TSLA",
+        "description": "Tesla, Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "FB",
+        "displaySymbol": "FB",
+        "description": "Meta Platforms, Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "NFLX",
+        "displaySymbol": "NFLX",
+        "description": "Netflix, Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "NVDA",
+        "displaySymbol": "NVDA",
+        "description": "NVIDIA Corporation",
+        "type": "Equity"
+      },
+      {
+        "symbol": "AMD",
+        "displaySymbol": "AMD",
+        "description": "Advanced Micro Devices, Inc.",
+        "type": "Equity"
+      },
+      {
+        "symbol": "INTC",
+        "displaySymbol": "INTC",
+        "description": "Intel Corporation",
+        "type": "Equity"
+      }
+    ]
+  }
+}

@@ -1,11 +1,18 @@
 import { Outlet } from 'react-router-dom'
-// import RegisterComponent from './features/auth/RegisterComponent'
-// import LoginComponent from './features/auth/LoginComponent'
-// import HomePage from './features/HomePage'
-// import LandingPage from './features/LandingPage';
+import BackdropComponent from '@/modules/Backdrop'
+import SnackbarComponent from '@/modules/Snackbar'
 
 const App = () => {
-  return <Outlet />
+  return (
+    <>
+      <Outlet />
+      <BackdropComponent reduxId="global-backdrop" />
+      <SnackbarComponent
+        reduxId="global-snackbar"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      />
+    </>
+  )
 }
 
 export default App
