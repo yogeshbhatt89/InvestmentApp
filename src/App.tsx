@@ -1,17 +1,18 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import RegisterComponent from "./features/auth/RegisterComponent";
-import LoginComponent from "./features/auth/LoginComponent";
-import HomePage from "./features/HomePage";
+import { Outlet } from 'react-router-dom'
+import BackdropComponent from '@/modules/Backdrop'
+import SnackbarComponent from '@/modules/Snackbar'
+
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/register" element={<RegisterComponent />} />
-        <Route path="/login" element={<LoginComponent />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
-    </Router>
-  );
-};
+    <>
+      <Outlet />
+      <BackdropComponent reduxId="global-backdrop" />
+      <SnackbarComponent
+        reduxId="global-snackbar"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      />
+    </>
+  )
+}
 
-export default App;
+export default App

@@ -1,0 +1,39 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run formatting
+npm run format
+FORMAT_EXIT_CODE=$?
+if [ $FORMAT_EXIT_CODE -eq 0 ]; then
+  # If formatting changed files, add them
+  git add -A
+else
+  echo "Formatting failed. Push aborted."
+  exit 1
+fi
+echo "Formatting passed. Proceeding with linting."
+
+# Run linting
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Push aborted."
+  exit 1
+fi
+echo "Linting passed. Proceeding with tests."
+
+# Run tests
+npm test
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Push aborted."
+  exit 1
+fi
+echo "Tests passed. Proceeding with type checking."
+
+# Run type checking
+npm run typecheck
+if [ $? -ne 0 ]; then
+  echo "Type checking failed. Push aborted."
+  exit 1
+fi
+echo "Type checking passed. Proceeding with push."
+

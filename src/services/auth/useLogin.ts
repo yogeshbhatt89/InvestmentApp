@@ -1,52 +1,44 @@
-import { useEffect, useState } from "react";
-import { useLoginMutation } from "../api";
-import { useSnackbar } from "../../modules/SnackbarComponent";
+import { useEffect } from 'react'
+import { useLoginMutation } from '../api'
+import { useSnackbar } from '@/modules/Snackbar'
+import { useBackdrop } from '@/modules/Backdrop/useBackdrop'
+import { useLinearProgress } from '@/modules/LinearProgress'
 
 interface LoginError {
-  data?: { message: string };
-  status?: number;
-}
-
-interface TokenResponse {
-  accessToken: string;
-  refreshToken: string;
+  data?: { message: string }
+  status?: number
 }
 
 export const useLogin = () => {
-  const { showSnackbar } = useSnackbar();
-  const [loginMutation, { isLoading, isError, error, isSuccess }] =
-    useLoginMutation();
-  const [backdropOpen, setBackdropOpen] = useState(false);
+  const snackbar = useSnackbar('global-snackbar')
+  const backdrop = useBackdrop('global-backdrop')
+  const { setProgress } = useLinearProgress('global-progress')
+  const [loginMutation, { isLoading, isError, error, isSuccess }] = useLoginMutation()
 
-  const login = async (userData: { email: string; password: string }) => {
-    try {
-      setBackdropOpen(true);
-      const response = await loginMutation(userData).unwrap();
-
-      const { accessToken, refreshToken } = response as TokenResponse;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-    } catch (err) {
-      const errorResponse = err as LoginError;
-      const errorMessage =
-        errorResponse?.data?.message || "Login failed due to server error!";
-      showSnackbar(errorMessage, "error");
-    } finally {
-      setBackdropOpen(false);
-    }
-  };
+  const login = (userData: { email: string; password: string }) => {
+    // Start the global progress and show the backdrop.
+    setProgress('Preparing login...')
+    backdrop.show()
+    // Perform the API call.
+    loginMutation(userData).unwrap()
+  }
 
   useEffect(() => {
     if (isLoading) {
-      showSnackbar("Login in progress...", "info");
-    } else if (isError) {
-      const errorMessage =
-        (error as LoginError)?.data?.message || "Something went wrong!";
-      showSnackbar(errorMessage, "error");
-    } else if (isSuccess) {
-      showSnackbar("Login successful!", "success");
+      setProgress('Logging in...')
     }
-  }, [isLoading, isError, error, isSuccess, showSnackbar]);
+    if (isError) {
+      setProgress('Login failed!')
+      const errorMessage = (error as LoginError)?.data?.message || 'Something went wrong!'
+      snackbar.show(errorMessage, 'error')
+      backdrop.hide()
+    } else if (isSuccess) {
+      setProgress('Login successful!')
+      setTimeout(() => {
+        backdrop.hide()
+      }, 800)
+    }
+  }, [isLoading, isError, error, isSuccess])
 
   return {
     login,
@@ -54,6 +46,5 @@ export const useLogin = () => {
     isError,
     isSuccess,
     error,
-    backdropOpen,
-  };
-};
+  }
+}

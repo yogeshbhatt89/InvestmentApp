@@ -1,37 +1,42 @@
-import { useState } from "react";
-
-import NavbarComponent from "../modules/NavbarComponent";
-import TabComponent from "../modules/TabComponent";
-import BoxComponent from "../modules/BoxComponent";
-import SearchComponent from "../modules/SearchComponent"; // Importing SearchComponent
+import React from 'react'
+import NavbarComponent from '@/modules/NavbarComponent'
+import TabComponent from '@/modules/Tab'
+import BoxComponent from '@/modules/BoxComponent'
+// import SearchComponent from '@/modules/SearchComponent'
 
 const HomePage = () => {
-  const [selectedTab, setSelectedTab] = useState("overview"); // State for keeping track of the selected tab
-
-  const handleTabChange = (tabValue: string) => {
-    setSelectedTab(tabValue); // Update selected tab
-    console.log("Selected Tab:", tabValue);
-  };
-
   const tabs = [
-    { label: "Overview", value: "overview" },
-    { label: "Portfolio", value: "portfolio" },
-    { label: "Markets", value: "markets" },
-    { label: "Search", value: "search" }, // Adding the "Search" tab
-  ];
+    {
+      label: 'Overview',
+      content: <div>Overview content goes here</div>,
+    },
+    {
+      label: 'Portfolio',
+      content: <div>Portfolio content goes here</div>,
+    },
+    {
+      label: 'Markets',
+      content: <div>Markets content goes here</div>,
+    },
+    {
+      label: 'Search',
+      content: (
+        <div>
+          {/* <SearchComponent /> */}
+          Search content goes here
+        </div>
+      ),
+    },
+  ]
 
   return (
     <div>
       <NavbarComponent />
       <BoxComponent display="flex" justifyContent="center" alignItems="center">
-        <TabComponent tabs={tabs} onTabChange={handleTabChange} />
-      </BoxComponent>
-
-      <BoxComponent display="flex" justifyContent="center" alignItems="center" style={{ marginTop: '20px' }}>
-        {selectedTab === "search" && <SearchComponent />} {/* Conditionally render SearchComponent when "Search" tab is selected */}
+        <TabComponent reduxId="home-tabs" tabs={tabs} />
       </BoxComponent>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

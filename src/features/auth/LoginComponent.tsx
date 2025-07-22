@@ -1,68 +1,73 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLogin } from "../../services/auth/useLogin";
-import TextFieldComponent, { useTextField } from "../../modules/TextFieldComponent";
-import ButtonComponent from "../../modules/ButtonComponent";
-import BackdropComponent from "../../modules/BackdropComponent";
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useLogin } from '@/services/auth/useLogin'
+import TextFieldComponent, { useTextField } from '@/modules/TextField'
+import ButtonComponent from '@/modules/Button'
+import BoxComponent from '@/modules/BoxComponent'
+import FormControlWrapper from '@/modules/FormControlWrapper'
 
 const LoginComponent = () => {
-  const navigate = useNavigate();
-  const { login, isLoading, backdropOpen, isSuccess } = useLogin();
+  const navigate = useNavigate()
+  const { login, isLoading, isSuccess } = useLogin()
 
-  const { value: email, handleChange: handleEmailChange } = useTextField("email");
-  const { value: password, handleChange: handlePasswordChange } = useTextField("password");
+  const {
+    getTextFieldValue: email,
+    isEmpty: isEmailEmpty,
+    clearValue: clearEmail,
+  } = useTextField('email')
 
-  const handleLoginClick = async () => {
-    await login({ email, password });
-  };
+  const {
+    getTextFieldValue: password,
+    isEmpty: isPasswordEmpty,
+    clearValue: clearPassword,
+  } = useTextField('password')
+
+  const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await login({ email, password })
+  }
 
   const handleRegisterClick = () => {
-    navigate("/register");
-  };
+    navigate('/register')
+  }
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/home");
+      clearEmail()
+      clearPassword()
+      navigate('/home')
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, navigate, clearEmail, clearPassword])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
-
-        <TextFieldComponent
-          label="Email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-
-        <TextFieldComponent
-          label="Password"
-          name="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-4">
-          <ButtonComponent
-            label="Login"
-            onClick={handleLoginClick}
-            disabled={isLoading}
-          />
-          <ButtonComponent
-            label="Go to Register"
-            onClick={handleRegisterClick}
-            variant="outlined"
-          />
-        </div>
-
-        <BackdropComponent open={backdropOpen} />
+        <BoxComponent component="form" onSubmit={handleLoginSubmit} noValidate>
+          <FormControlWrapper>
+            <TextFieldComponent label="Email" reduxId="email" type="email" />
+          </FormControlWrapper>
+          <FormControlWrapper>
+            <TextFieldComponent label="Password" reduxId="password" type="password" />
+          </FormControlWrapper>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <ButtonComponent
+              reduxId="login"
+              label="Login"
+              disabled={isLoading || isEmailEmpty || isPasswordEmpty}
+              type="submit"
+            />
+            <ButtonComponent
+              reduxId="goToRegister"
+              label="Go to Register"
+              onClick={handleRegisterClick}
+              variant="outlined"
+            />
+          </div>
+        </BoxComponent>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginComponent;
+export default LoginComponent
