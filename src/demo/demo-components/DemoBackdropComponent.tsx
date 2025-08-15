@@ -18,9 +18,6 @@ const DemoBackdropComponent = () => {
           <BackdropComponent
             reduxId="demo-backdrop"
             scoped
-            sx={{
-              zIndex: 10,
-            }}
           />
         </div>
 

@@ -20,6 +20,8 @@ import WarningIcon from '@mui/icons-material/Warning'
 import InfoIcon from '@mui/icons-material/Info'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -52,6 +54,8 @@ export const Icons = {
   Info: InfoIcon,
   ArrowBack: ArrowBackIcon,
   ArrowForward: ArrowForwardIcon,
+  ArrowUpward: ArrowUpwardIcon,
+  ArrowDownward: ArrowDownwardIcon,
   MoreVert: MoreVertIcon,
   Dashboard: DashboardIcon,
   Favorite: FavoriteIcon,

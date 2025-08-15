@@ -13,7 +13,7 @@ export const useLogin = () => {
   const snackbar = useSnackbar('global-snackbar')
   const backdrop = useBackdrop('global-backdrop')
   const { setProgress } = useLinearProgress('global-progress')
-  const [loginMutation, { isLoading, isError, error, isSuccess }] = useLoginMutation()
+  const [loginMutation, { isLoading, isError, error, isSuccess, data }] = useLoginMutation()
 
   const login = (userData: { email: string; password: string }) => {
     // Start the global progress and show the backdrop.
@@ -33,12 +33,20 @@ export const useLogin = () => {
       snackbar.show(errorMessage, 'error')
       backdrop.hide()
     } else if (isSuccess) {
-      setProgress('Login successful!')
+      const successMessage = data?.success?.message
+      setProgress(successMessage)
+      const tokenData = data?.data
+      if (tokenData) {
+        const accessToken = tokenData.accessToken
+        const refreshToken = tokenData.refreshToken
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+      }
       setTimeout(() => {
         backdrop.hide()
       }, 800)
     }
-  }, [isLoading, isError, error, isSuccess])
+  }, [isLoading, isError, error, isSuccess, data])
 
   return {
     login,

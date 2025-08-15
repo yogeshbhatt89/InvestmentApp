@@ -13,6 +13,7 @@ import DemoComponent from './demo/DemoComponent'
 import LoginComponent from '@/features/auth/LoginComponent'
 import RegisterComponent from '@/features/auth/RegisterComponent'
 import HomePage from '@/features/HomePage'
+import LandingPage from '@/features/LandingPage'
 
 initializeUserActivityListeners()
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
       children: [
         {
           path: '',
+          element: <LandingPage />, // Add the LandingPage component
+        },
+        {
+          path: 'demo',
           element: <DemoComponent />,
         },
         {

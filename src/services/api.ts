@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode'
 import { isUserInactive } from '../utils/userActivityTracker'
 import type { StockQuoteResponseDTO } from './finnhub/useQuoteSearch'
 import type { SymbolLookupResponse } from './finnhub/useSymbolLookup'
+import { BatchQuoteResponse } from './finnhub/useBatchQuoteSearch'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
@@ -102,7 +103,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   return baseQuery(args, api, extraOptions)
 }
 
-// 👇 API definition
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
@@ -127,13 +127,32 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
+    marketNews: builder.query<any, { category: string; minId?: number }>({
+      query: ({ category, minId }) => ({
+        url: `/investments/marketNews?category=${category}${minId ? `&minId=${minId}` : ''}`,
+        method: 'GET',
+      }),
+    }),
     quote: builder.query<StockQuoteResponseDTO, { ticker: string }>({
       query: ({ ticker }) => ({
-        url: `/quote?ticker=${ticker}`,
+        url: `/investments/quote?ticker=${ticker}`,
+        method: 'GET',
+      }),
+    }),
+    batchQuotes: builder.query<BatchQuoteResponse, { symbols: string }>({
+      query: ({ symbols }) => ({
+        url: `/investments/batchQuotes?symbols=${symbols}`,
         method: 'GET',
       }),
     }),
   }),
 })
 
-export const { useRegisterMutation, useLoginMutation, useSymbolLookupQuery, useQuoteQuery } = api
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useSymbolLookupQuery,
+  useQuoteQuery,
+  useMarketNewsQuery,
+  useBatchQuotesQuery,
+} = api
