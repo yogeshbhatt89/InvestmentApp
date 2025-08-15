@@ -27,7 +27,10 @@ const MarketNewsList: React.FC<MarketNewsListProps> = ({ category, minId }) => {
 
   return (
     <CardWrapperComponent className="mb-4">
-      <TypographyComponent variant="h2" className=" text-lg font-bold text-center flex justify-center items-center mt-4 mb-4">
+      <TypographyComponent
+        variant="h2"
+        className=" text-lg font-bold text-center flex justify-center items-center mt-4 mb-4"
+      >
         Top Stories
       </TypographyComponent>
       <ListWrapperComponent>

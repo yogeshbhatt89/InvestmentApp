@@ -66,11 +66,9 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
     setPage(0)
   }
 
-
   return (
     <>
       <TableContainer className={className} sx={containerSx}>
-
         <Table {...tableProps}>
           <TableBody>
             {displayedRows && displayedRows.length > 0 ? (

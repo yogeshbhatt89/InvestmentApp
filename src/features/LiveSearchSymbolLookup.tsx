@@ -50,13 +50,31 @@ const LiveSearchSymbolLookup: React.FC = () => {
             renderRow={row => {
               return (
                 <>
-                  <TableCell sx={{ border: '1px solid #ccc', padding: '8px', ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}) }}>
+                  <TableCell
+                    sx={{
+                      border: '1px solid #ccc',
+                      padding: '8px',
+                      ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
+                    }}
+                  >
                     {row.symbol}
                   </TableCell>
-                  <TableCell sx={{ border: '1px solid #ccc', padding: '8px', ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}) }}>
+                  <TableCell
+                    sx={{
+                      border: '1px solid #ccc',
+                      padding: '8px',
+                      ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
+                    }}
+                  >
                     {row.description}
                   </TableCell>
-                  <TableCell sx={{ border: '1px solid #ccc', padding: '8px', ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}) }}>
+                  <TableCell
+                    sx={{
+                      border: '1px solid #ccc',
+                      padding: '8px',
+                      ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
+                    }}
+                  >
                     {isBatchFetching ? (
                       <span>Loading...</span>
                     ) : isBatchError ? (
@@ -98,7 +116,6 @@ const LiveSearchSymbolLookup: React.FC = () => {
           />
         </Box>
       )}
-
     </Box>
   )
 }

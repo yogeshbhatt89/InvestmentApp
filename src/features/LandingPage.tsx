@@ -13,7 +13,10 @@ const LandingPage: React.FC = () => {
       <div className="max-w-lg mx-auto p-4 flex flex-col">
         <CardWrapperComponent className="max-w-lg mb-8">
           <div className="p-4 flex justify-center gap-4">
-            <TypographyComponent variant="h2" className="text-lg font-bold text-center flex justify-center items-center">
+            <TypographyComponent
+              variant="h2"
+              className="text-lg font-bold text-center flex justify-center items-center"
+            >
               Sign in to create a Portfolio
             </TypographyComponent>
             <ButtonComponent label="Sign In" variant="contained" color="primary" reduxId="login" />
