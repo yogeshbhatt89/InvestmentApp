@@ -15,10 +15,7 @@ const DemoBackdropComponent = () => {
             Content behind backdrop
           </div>
 
-          <BackdropComponent
-            reduxId="demo-backdrop"
-            scoped
-          />
+          <BackdropComponent reduxId="demo-backdrop" scoped />
         </div>
 
         <div className="flex flex-col gap-2">

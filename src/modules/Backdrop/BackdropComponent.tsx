@@ -9,12 +9,15 @@ interface BackdropComponentProps {
   reduxId: string
   className?: string
   scoped?: boolean
+  container?: boolean
+  children?: React.ReactNode
 }
 
 const BackdropComponent: React.FC<BackdropComponentProps> = ({
   reduxId,
   className,
   scoped = false,
+  children,
 }) => {
   const { isOpen } = useBackdrop(reduxId)
   const { linearProgress } = useLinearProgress('global-progress')
@@ -36,12 +39,14 @@ const BackdropComponent: React.FC<BackdropComponentProps> = ({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
       }}
     >
-      <BoxComponent className="w-1/4 h-1/4 bg-white rounded-lg p-4 flex flex-col items-center justify-center">
-        <LinearProgressComponent />
-        <TypographyComponent variant="body1" className="text-lg font-bold mt-4 text-gray-600">
-          {linearProgress.message}
-        </TypographyComponent>
-      </BoxComponent>
+      {children || (
+        <BoxComponent className="w-1/4 h-1/4 bg-white rounded-lg p-4 flex flex-col items-center justify-center">
+          <LinearProgressComponent />
+          <TypographyComponent variant="body1" className="text-lg font-bold mt-4 text-gray-600">
+            {linearProgress.message}
+          </TypographyComponent>
+        </BoxComponent>
+      )}
     </Backdrop>
   )
 }

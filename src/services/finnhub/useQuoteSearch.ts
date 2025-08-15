@@ -7,19 +7,19 @@ export type TickerInput = string | string[]
 
 export interface StockQuoteResponseDTO {
   /** Current price */
-  c: number;
+  c: number
   /** Change */
-  d: number;
+  d: number
   /** Percent change */
-  dp: number;
+  dp: number
   /** High price of the day */
-  h: number;
+  h: number
   /** Low price of the day */
-  l: number;
+  l: number
   /** Open price of the day */
-  o: number;
+  o: number
   /** Previous close price */
-  pc: number;
+  pc: number
 }
 
 export const useQuoteSearch = (tickerInput: TickerInput) => {

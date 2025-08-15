@@ -39,15 +39,13 @@ export interface BatchQuoteErrorResponse {
 }
 
 export const useBatchQuoteSearch = (symbols: string) => {
-  const shouldSkip = !symbols || symbols.trim().length === 0
-  const { data, error, isLoading, isError, isSuccess } = useBatchQuotesQuery(
-    { symbols },
-    { skip: shouldSkip },
-  )
-
+  const { data, error, isLoading, isError, isSuccess, isFetching } = useBatchQuotesQuery({
+    symbols,
+  })
   return {
     data: data?.data.quotes,
-    isLoading: shouldSkip ? false : isLoading,
+    isLoading,
+    isFetching,
     isError,
     isSuccess,
     error,

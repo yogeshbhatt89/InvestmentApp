@@ -21,8 +21,8 @@ export interface TableWrapperComponentProps extends TableProps {
   gridlines?: boolean
   /** When true, rows will highlight on hover */
   hoverHighlight?: boolean
-  onPageChange?: (_pageNumber: number) => void;
-  onRowsPerPageChange?: (_event: React.ChangeEvent<HTMLInputElement>) => void;
+  onPageChange?: (_pageNumber: number) => void
+  onRowsPerPageChange?: (_event: React.ChangeEvent<HTMLInputElement>) => void
   isLoading?: boolean
 }
 
@@ -43,6 +43,7 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
   // Get data from redux or override.
   const { data } = useTable()
   const rows = overrideData ?? data
+  console.log('isLoading in table', isLoading)
 
   // Local pagination state (0-indexed for TablePagination).
   const [page, setPage] = React.useState(0)
@@ -56,7 +57,7 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
     if (onPageChange) {
-      onPageChange(newPage);
+      onPageChange(newPage)
     }
   }
 
@@ -65,32 +66,17 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
     setPage(0)
   }
 
-  // Optionally add gridlines to each cell by merging in a border style.
-  const renderRowWithGridlines = (row: any) => {
-    const cells = renderRow(row)
-    return gridlines
-      ? React.Children.map(cells, child => {
-        if (React.isValidElement(child)) {
-          const element = child as React.ReactElement<any>
-          return React.cloneElement(element, {
-            sx: { ...(element.props.sx || {}), border: '1px solid #ccc' },
-            ...(isLoading ? { filter: 'blur(3px)', transition: 'filter 0.3s' } : {}),
-          })
-        }
-        return child
-      })
-      : cells
-  }
 
   return (
     <>
       <TableContainer className={className} sx={containerSx}>
+
         <Table {...tableProps}>
           <TableBody>
             {displayedRows && displayedRows.length > 0 ? (
               displayedRows.map((row: any, index: number) => (
                 <TableRow key={index} hover={hoverHighlight}>
-                  {renderRowWithGridlines(row)}
+                  {renderRow(row)}
                 </TableRow>
               ))
             ) : (
@@ -101,6 +87,7 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
                   sx={{
                     padding: '1rem',
                     ...(gridlines ? { border: '1px solid #ccc' } : {}),
+                    ...(isLoading ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
                   }}
                 >
                   No data available.
@@ -110,6 +97,7 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
+
       {enablePagination && totalRows > 0 && (
         <TablePagination
           component="div"

@@ -1,15 +1,20 @@
 // PaginationWrapperComponent.tsx
-import React from 'react';
-import { Pagination } from '@mui/material';
+import React from 'react'
+import { Pagination } from '@mui/material'
 
 interface PaginationWrapperComponentProps {
-  count: number;
-  page: number;
-  onChange: (_: React.ChangeEvent<unknown>, _value: number) => void;
-  className?: string;
+  count: number
+  page: number
+  onChange: (_: React.ChangeEvent<unknown>, _value: number) => void
+  className?: string
 }
 
-const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({ count, page, onChange, className }) => {
+const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({
+  count,
+  page,
+  onChange,
+  className,
+}) => {
   return (
     <Pagination
       count={count}
@@ -21,7 +26,7 @@ const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({
       boundaryCount={0}
       className={className}
     />
-  );
-};
+  )
+}
 
-export default PaginationWrapperComponent;
+export default PaginationWrapperComponent
