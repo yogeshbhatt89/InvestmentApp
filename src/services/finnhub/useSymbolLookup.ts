@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSnackbar } from '@/modules/Snackbar'
 import { debounce } from 'lodash'
 
-interface Symbol {
+export interface Symbol {
   symbol: string
   displaySymbol: string
   description: string
@@ -11,18 +11,27 @@ interface Symbol {
 }
 
 interface SymbolLookupError {
-  data?: { message: string }
-  status?: number
+  code: number
+  message: string
+  details: string
 }
 
 export interface SymbolLookupResponse {
-  count: number // Number of results
-  result: Array<{
-    symbol: string // Unique symbol
-    displaySymbol: string // Display symbol name
-    description: string // Symbol description
-    type: string // Security type (e.g., "Equity", "ETF")
-  }>
+  success: {
+    code: number
+    message: string
+    details: string
+  }
+  data: {
+    count: number
+    result: Symbol[]
+  }
+  timestamp: number
+}
+
+export interface SymbolLookupErrorResponse {
+  error: SymbolLookupError
+  timestamp: number
 }
 export const useSymbolLookup = (query: string, exchange: string) => {
   // Pass a unique snackbarId to the useSnackbar hook.
@@ -54,21 +63,17 @@ export const useSymbolLookup = (query: string, exchange: string) => {
   const [symbols, setSymbols] = useState<Symbol[]>([])
 
   useEffect(() => {
-    if (data && data.result) {
-      setSymbols(data.result)
+    if (data && data.data && data.data.result) {
+      setSymbols(data.data.result)
     }
   }, [data])
 
-  // We use a ref to hold the previous status values so we only show snackbars on transitions.
   const prevStatusRef = useRef({ isLoading: false, isSuccess: false })
 
   useEffect(() => {
-    // Only show loading message on transition.
     if (isLoading && !prevStatusRef.current.isLoading) {
       show('Searching for symbols...', 'info')
-    }
-    // Only show success message on transition.
-    else if (isSuccess && !prevStatusRef.current.isSuccess) {
+    } else if (isSuccess && !prevStatusRef.current.isSuccess) {
       show('Symbols found!', 'success')
     }
     prevStatusRef.current = { isLoading, isSuccess }
@@ -76,7 +81,8 @@ export const useSymbolLookup = (query: string, exchange: string) => {
 
   useEffect(() => {
     if (isError) {
-      const errorMessage = (error as SymbolLookupError)?.data?.message || 'Symbol lookup failed!'
+      const errorMessage =
+        (error as SymbolLookupErrorResponse)?.error?.message || 'Symbol lookup failed!'
       show(errorMessage, 'error')
     }
   }, [isError, error])

@@ -22,7 +22,7 @@ export const useRegister = () => {
     fullName: string
   }) => {
     setProgress('Preparing registration...')
-    backdrop.show() // Increments the counter.
+    backdrop.show()
     registerMutation(userData).unwrap()
   }
 
@@ -34,12 +34,11 @@ export const useRegister = () => {
       setProgress('Registration failed!')
       const errorMessage = (error as RegisterError)?.data?.message || 'Something went wrong!'
       snackbar.show(errorMessage, 'error')
-      backdrop.hide() // Decrement the counter once on error.
+      backdrop.hide()
     } else if (isSuccess) {
       setProgress('Registration successful!')
-      // After a short delay, clear the message and hide the backdrop.
       setTimeout(() => {
-        backdrop.hide() // Decrement the counter once on success.
+        backdrop.hide()
       }, 800)
     }
   }, [isLoading, isError, error, isSuccess])

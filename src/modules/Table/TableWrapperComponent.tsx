@@ -21,6 +21,9 @@ export interface TableWrapperComponentProps extends TableProps {
   gridlines?: boolean
   /** When true, rows will highlight on hover */
   hoverHighlight?: boolean
+  onPageChange?: (_pageNumber: number) => void;
+  onRowsPerPageChange?: (_event: React.ChangeEvent<HTMLInputElement>) => void;
+  isLoading?: boolean
 }
 
 const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
@@ -32,6 +35,9 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
   rowsPerPage = 10,
   gridlines = false,
   hoverHighlight = true,
+  onPageChange,
+  onRowsPerPageChange,
+  isLoading = false,
   ...tableProps
 }) => {
   // Get data from redux or override.
@@ -49,6 +55,9 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
+    if (onPageChange) {
+      onPageChange(newPage);
+    }
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,14 +70,15 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
     const cells = renderRow(row)
     return gridlines
       ? React.Children.map(cells, child => {
-          if (React.isValidElement(child)) {
-            const element = child as React.ReactElement<any>
-            return React.cloneElement(element, {
-              sx: { ...(element.props.sx || {}), border: '1px solid #ccc' },
-            })
-          }
-          return child
-        })
+        if (React.isValidElement(child)) {
+          const element = child as React.ReactElement<any>
+          return React.cloneElement(element, {
+            sx: { ...(element.props.sx || {}), border: '1px solid #ccc' },
+            ...(isLoading ? { filter: 'blur(3px)', transition: 'filter 0.3s' } : {}),
+          })
+        }
+        return child
+      })
       : cells
   }
 
@@ -107,8 +117,8 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={localRowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
+          onRowsPerPageChange={onRowsPerPageChange || handleChangeRowsPerPage}
+          rowsPerPageOptions={[5]}
         />
       )}
     </>
