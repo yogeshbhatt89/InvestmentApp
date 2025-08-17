@@ -6,11 +6,11 @@ import ButtonComponent from '@/modules/Button'
 import BoxComponent from '@/modules/BoxComponent'
 import FormControlWrapper from '@/modules/FormControlWrapper'
 import useDialog from '@/modules/Dialog/useDialog'
-import RegisterComponent from './RegisterComponent';
+import RegisterComponent from './RegisterComponent'
 const LoginComponent = () => {
   const navigate = useNavigate()
   const { login, isLoading, isSuccess } = useLogin()
-  const { openDialog } = useDialog();
+  const { openDialog } = useDialog()
 
   const {
     getTextFieldValue: email,
@@ -30,7 +30,7 @@ const LoginComponent = () => {
   }
 
   const handleRegisterClick = () => {
-    openDialog('', <RegisterComponent />);
+    openDialog('', <RegisterComponent />)
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const LoginComponent = () => {
       clearPassword()
       navigate('/home')
     }
-  }, [isSuccess,])
+  }, [isSuccess])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">

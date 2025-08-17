@@ -7,12 +7,12 @@ import ButtonComponent from '@/modules/Button'
 import BoxComponent from '@/modules/BoxComponent'
 import FormControlWrapper from '@/modules/FormControlWrapper'
 import useDialog from '@/modules/Dialog/useDialog'
-import LoginComponent from './LoginComponent';
+import LoginComponent from './LoginComponent'
 const RegisterComponent = () => {
   const { register, isLoading: isRegistering, isSuccess: isRegisterSuccess } = useRegister()
   const { login, isSuccess: isLoginSuccess } = useLogin()
   const navigate = useNavigate()
-  const { openDialog } = useDialog();
+  const { openDialog } = useDialog()
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [touched, setTouched] = useState({

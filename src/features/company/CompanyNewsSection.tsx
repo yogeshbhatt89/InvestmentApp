@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   ListWrapperComponent,
   ListItemComponent,
   ListItemIconComponent,
   ListItemTextComponent,
-} from '@/modules/List';
-import { useCompanyNews } from '@/services/finnhub/useCompanyNews';
-import { Link } from 'react-router-dom';
-import CardWrapperComponent from '@/modules/CardWrapperComponent';
-import PaginationWrapperComponent from '@/modules/PaginationWrapperComponent';
-import TypographyComponent from '@/modules/TypographyComponent';
+} from '@/modules/List'
+import { useCompanyNews } from '@/services/finnhub/useCompanyNews'
+import { Link } from 'react-router-dom'
+import CardWrapperComponent from '@/modules/CardWrapperComponent'
+import PaginationWrapperComponent from '@/modules/PaginationWrapperComponent'
+import TypographyComponent from '@/modules/TypographyComponent'
 
 interface CompanyNewsSectionProps {
-  symbol: string;
-  from: string;
-  to: string;
+  symbol: string
+  from: string
+  to: string
 }
 
 const CompanyNewsSection: React.FC<CompanyNewsSectionProps> = ({ symbol, from, to }) => {
-  const { news } = useCompanyNews(symbol, from, to);
-  const [page, setPage] = useState(1);
-  const pageSize = 5;
+  const { news } = useCompanyNews(symbol, from, to)
+  const [page, setPage] = useState(1)
+  const pageSize = 5
 
   const handlePageChange = (_: any, value: number) => {
-    setPage(value);
-  };
+    setPage(value)
+  }
 
   if (news.length === 0) {
     return (
@@ -36,7 +36,7 @@ const CompanyNewsSection: React.FC<CompanyNewsSectionProps> = ({ symbol, from, t
           No company news
         </TypographyComponent>
       </CardWrapperComponent>
-    );
+    )
   }
 
   return (
@@ -78,7 +78,7 @@ const CompanyNewsSection: React.FC<CompanyNewsSectionProps> = ({ symbol, from, t
         showLastButton={true}
       />
     </CardWrapperComponent>
-  );
-};
+  )
+}
 
-export default CompanyNewsSection;
+export default CompanyNewsSection

@@ -1,30 +1,29 @@
 // src/features/LandingPage.tsx
-import React, { useState } from 'react';
-import MarketNewsList from './MarketNewsList';
-import LiveSearchSymbolLookup from './LiveSearchSymbolLookup';
-import CompanySectionComponent from './company/CompanySectionComponent';
-import MarketStatus from './MarketStatus';
-import NavbarComponent from '@/modules/NavbarComponent';
-import CompanyQuoteSection from './company/CompanyQuoteSection';
-import { getLastWeekDate, getTodayDate } from '@/utils/utils';
-import CompanyNewsSection from './company/CompanyNewsSection';
-import WelcomeSection from './WelcomeSection';
+import React, { useState } from 'react'
+import MarketNewsList from './MarketNewsList'
+import LiveSearchSymbolLookup from './LiveSearchSymbolLookup'
+import CompanySectionComponent from './company/CompanySectionComponent'
+import MarketStatus from './MarketStatus'
+import NavbarComponent from '@/modules/NavbarComponent'
+import CompanyQuoteSection from './company/CompanyQuoteSection'
+import { getLastWeekDate, getTodayDate } from '@/utils/utils'
+import CompanyNewsSection from './company/CompanyNewsSection'
+import WelcomeSection from './WelcomeSection'
 const LandingPage = () => {
-  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null)
 
   const handleRowClick = (symbol: string) => {
-    setSelectedSymbol(symbol);
-  };
+    setSelectedSymbol(symbol)
+  }
 
   const handleBackClick = () => {
-    setSelectedSymbol(null);
-  };
+    setSelectedSymbol(null)
+  }
 
   return (
     <div>
       <NavbarComponent />
       <div className="max-w-4xl mx-auto p-4 flex flex-col">
-
         <div className="flex justify-between mb-4">
           <div className="w-1/2">
             {selectedSymbol ? (
@@ -35,17 +34,16 @@ const LandingPage = () => {
                 <WelcomeSection />
               </>
             )}
-
           </div>
           <div className="w-1/2 pl-4">
-            {selectedSymbol ? (
-              <CompanyQuoteSection symbol={selectedSymbol} />
-            ) : (
-              <MarketStatus />
-            )}
+            {selectedSymbol ? <CompanyQuoteSection symbol={selectedSymbol} /> : <MarketStatus />}
             <div className="mt-4">
               {selectedSymbol ? (
-                <CompanyNewsSection symbol={selectedSymbol} from={getLastWeekDate()} to={getTodayDate()} />
+                <CompanyNewsSection
+                  symbol={selectedSymbol}
+                  from={getLastWeekDate()}
+                  to={getTodayDate()}
+                />
               ) : (
                 <MarketNewsList category="general" minId={10} />
               )}
@@ -54,7 +52,7 @@ const LandingPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage

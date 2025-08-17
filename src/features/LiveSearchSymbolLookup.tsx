@@ -11,11 +11,10 @@ import CardWrapperComponent from '@/modules/CardWrapperComponent'
 import BoxComponent from '@/modules/BoxComponent'
 import TypographyComponent from '@/modules/TypographyComponent'
 interface LiveSearchSymbolLookupProps {
-  onRowClick: (_symbol: string) => void;
+  onRowClick: (_symbol: string) => void
 }
 
 const LiveSearchSymbolLookup: React.FC<LiveSearchSymbolLookupProps> = ({ onRowClick }) => {
-
   const { getTextFieldValue, setTextFieldValue } = useTextField('symbolLookupSearch')
   const { symbols, isLoading, isError, isSuccess } = useSymbolLookup(getTextFieldValue, 'US')
   const {
@@ -37,7 +36,7 @@ const LiveSearchSymbolLookup: React.FC<LiveSearchSymbolLookupProps> = ({ onRowCl
           reduxId="symbolLookupSearch"
           label="Search for Stocks"
           placeholder="Type a symbol, e.g., AAPL..."
-          type='text'
+          type="text"
           onClear={handleClearSearch}
         />
         {getTextFieldValue === '' && (
@@ -51,11 +50,7 @@ const LiveSearchSymbolLookup: React.FC<LiveSearchSymbolLookupProps> = ({ onRowCl
           </BoxComponent>
         )}
         {isLoading && <Box sx={{ mt: 2, fontStyle: 'italic' }}>Loading symbols...</Box>}
-        {isError && (
-          <Box sx={{ mt: 2, color: 'red' }}>
-            No results
-          </Box>
-        )}
+        {isError && <Box sx={{ mt: 2, color: 'red' }}>No results</Box>}
 
         {isSuccess && getTextFieldValue && symbols.length > 0 && (
           <Box sx={{ mt: 2 }}>
@@ -87,10 +82,8 @@ const LiveSearchSymbolLookup: React.FC<LiveSearchSymbolLookupProps> = ({ onRowCl
                         padding: '8px',
                         ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
                         cursor: 'pointer',
-
                       }}
                       onClick={() => onRowClick(row.symbol)}
-
                     >
                       {row.description}
                     </TableCell>
@@ -100,10 +93,8 @@ const LiveSearchSymbolLookup: React.FC<LiveSearchSymbolLookupProps> = ({ onRowCl
                         padding: '8px',
                         ...(isBatchFetching ? { filter: 'blur(4px)', pointerEvents: 'none' } : {}),
                         cursor: 'pointer',
-
                       }}
                       onClick={() => onRowClick(row.symbol)}
-
                     >
                       {isBatchFetching ? (
                         <span>Loading...</span>

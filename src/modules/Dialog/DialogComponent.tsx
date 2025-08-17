@@ -1,10 +1,10 @@
-import React from 'react';
-import { Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import useDialog from './useDialog';
+import React from 'react'
+import { Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
+import useDialog from './useDialog'
 
 const DialogComponent = () => {
-  const { isOpen, title, content, closeDialog } = useDialog();
+  const { isOpen, title, content, closeDialog } = useDialog()
 
   return (
     <Dialog open={isOpen} onClose={closeDialog}>
@@ -24,7 +24,7 @@ const DialogComponent = () => {
       </DialogTitle>
       <DialogContent>{content}</DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default DialogComponent;
+export default DialogComponent

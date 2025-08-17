@@ -1,10 +1,15 @@
 // src/components/WelcomeSection.tsx
-import React from 'react';
-import TypographyComponent from '@/modules/TypographyComponent';
-import CardWrapperComponent from '@/modules/CardWrapperComponent';
-import SignIn from './SignIn';
-import { ListWrapperComponent, ListItemComponent, ListItemIconComponent, ListItemTextComponent } from '@/modules/List';
-import IconWrapper from '@/modules/Icon/IconWrapper';
+import React from 'react'
+import TypographyComponent from '@/modules/TypographyComponent'
+import CardWrapperComponent from '@/modules/CardWrapperComponent'
+import SignIn from './SignIn'
+import {
+  ListWrapperComponent,
+  ListItemComponent,
+  ListItemIconComponent,
+  ListItemTextComponent,
+} from '@/modules/List'
+import IconWrapper from '@/modules/Icon/IconWrapper'
 
 const WelcomeSection = () => {
   return (
@@ -17,24 +22,27 @@ const WelcomeSection = () => {
           <ListItemIconComponent>
             <IconWrapper name="Search" size="large" sx={{ color: '#FF6B6B' }} />
           </ListItemIconComponent>
-          <ListItemTextComponent primary="Search for stocks by symbol or company name" secondary='' />
+          <ListItemTextComponent
+            primary="Search for stocks by symbol or company name"
+            secondary=""
+          />
         </ListItemComponent>
         <ListItemComponent>
           <ListItemIconComponent>
             <IconWrapper name="InsertChart" size="large" sx={{ color: '#4ECDC4' }} />
           </ListItemIconComponent>
-          <ListItemTextComponent primary="Create a virtual portfolio" secondary='' />
+          <ListItemTextComponent primary="Create a virtual portfolio" secondary="" />
         </ListItemComponent>
         <ListItemComponent>
           <ListItemIconComponent>
             <IconWrapper name="MonetizationOn" size="large" sx={{ color: '#34A85A' }} />
           </ListItemIconComponent>
-          <ListItemTextComponent primary="Mock trade stocks with fake money" secondary='' />
+          <ListItemTextComponent primary="Mock trade stocks with fake money" secondary="" />
         </ListItemComponent>
       </ListWrapperComponent>
       <SignIn />
     </CardWrapperComponent>
-  );
-};
+  )
+}
 
-export default WelcomeSection;
+export default WelcomeSection

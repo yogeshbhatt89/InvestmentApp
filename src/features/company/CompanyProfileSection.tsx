@@ -17,9 +17,7 @@ const CompanyProfileSection: React.FC<CompanyProfileSectionProps> = ({ symbol })
         <TypographyComponent variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
           Company Profile ({symbol})
         </TypographyComponent>
-        {isLoading && (
-          <TypographyComponent variant="body2">Loading...</TypographyComponent>
-        )}
+        {isLoading && <TypographyComponent variant="body2">Loading...</TypographyComponent>}
         {isError && (
           <TypographyComponent variant="body2" color="error">
             Unable to fetch company profile.
@@ -36,17 +34,16 @@ const CompanyProfileSection: React.FC<CompanyProfileSectionProps> = ({ symbol })
             <TypographyComponent variant="body2">
               Industry: {profile.finnhubIndustry}
             </TypographyComponent>
-            <TypographyComponent variant="body2">
-              Exchange: {profile.exchange}
-            </TypographyComponent>
+            <TypographyComponent variant="body2">Exchange: {profile.exchange}</TypographyComponent>
             <TypographyComponent variant="body2">
               Market Cap: ${profile.marketCapitalization?.toLocaleString()}
             </TypographyComponent>
+            <TypographyComponent variant="body2">IPO: {profile.ipo}</TypographyComponent>
             <TypographyComponent variant="body2">
-              IPO: {profile.ipo}
-            </TypographyComponent>
-            <TypographyComponent variant="body2">
-              Website: <a href={profile.weburl} target="_blank" rel="noopener noreferrer">{profile.weburl}</a>
+              Website:{' '}
+              <a href={profile.weburl} target="_blank" rel="noopener noreferrer">
+                {profile.weburl}
+              </a>
             </TypographyComponent>
           </>
         )}

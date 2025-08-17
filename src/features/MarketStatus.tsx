@@ -32,7 +32,10 @@ const MarketStatus: React.FC<MarketStatusProps> = ({ exchange = 'US' }) => {
         )}
         {marketStatus && (
           <>
-            <TypographyComponent variant="body2" color={marketStatus.isOpen ? 'success.main' : 'error.main'}>
+            <TypographyComponent
+              variant="body2"
+              color={marketStatus.isOpen ? 'success.main' : 'error.main'}
+            >
               {marketStatus.isOpen ? 'Open' : 'Closed'}
             </TypographyComponent>
             <TypographyComponent variant="caption" color="text.secondary">

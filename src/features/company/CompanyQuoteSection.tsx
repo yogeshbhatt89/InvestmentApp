@@ -27,9 +27,7 @@ const CompanyQuoteSection: React.FC<CompanyQuoteSectionProps> = ({ symbol }) => 
         <TypographyComponent variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
           {symbol} Information
         </TypographyComponent>
-        {isLoading && (
-          <TypographyComponent variant="body2">Loading...</TypographyComponent>
-        )}
+        {isLoading && <TypographyComponent variant="body2">Loading...</TypographyComponent>}
         {isError && (
           <TypographyComponent variant="body2" color="error">
             Unable to fetch quote information.

@@ -7,7 +7,7 @@ interface BreadcrumbWrapperComponentProps {
   items: Array<{ label: string; onClick?: () => void }>
 }
 
- const BreadcrumbWrapperComponent: React.FC<BreadcrumbWrapperComponentProps> = ({ items }) => (
+const BreadcrumbWrapperComponent: React.FC<BreadcrumbWrapperComponentProps> = ({ items }) => (
   <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
     {items.map((item, _idx) =>
       item.onClick ? (
@@ -24,7 +24,7 @@ interface BreadcrumbWrapperComponentProps {
         <Typography key={item.label} color="text.primary">
           {item.label}
         </Typography>
-      )
+      ),
     )}
   </Breadcrumbs>
 )
