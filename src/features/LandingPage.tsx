@@ -1,36 +1,60 @@
-import React from 'react'
-import MarketNewsList from './MarketNewsList'
-import LiveSearchSymbolLookup from './LiveSearchSymbolLookup'
-import ButtonComponent from '@/modules/Button'
-import CardWrapperComponent from '@/modules/CardWrapperComponent'
-import TypographyComponent from '@/modules/TypographyComponent'
-import NavbarComponent from '@/modules/NavbarComponent'
+// src/features/LandingPage.tsx
+import React, { useState } from 'react';
+import MarketNewsList from './MarketNewsList';
+import LiveSearchSymbolLookup from './LiveSearchSymbolLookup';
+import CompanySectionComponent from './company/CompanySectionComponent';
+import MarketStatus from './MarketStatus';
+import NavbarComponent from '@/modules/NavbarComponent';
+import CompanyQuoteSection from './company/CompanyQuoteSection';
+import { getLastWeekDate, getTodayDate } from '@/utils/utils';
+import CompanyNewsSection from './company/CompanyNewsSection';
+import WelcomeSection from './WelcomeSection';
+const LandingPage = () => {
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
 
-const LandingPage: React.FC = () => {
+  const handleRowClick = (symbol: string) => {
+    setSelectedSymbol(symbol);
+  };
+
+  const handleBackClick = () => {
+    setSelectedSymbol(null);
+  };
+
   return (
     <div>
       <NavbarComponent />
-      <div className="max-w-lg mx-auto p-4 flex flex-col">
-        <CardWrapperComponent className="max-w-lg mb-8">
-          <div className="p-4 flex justify-center gap-4">
-            <TypographyComponent
-              variant="h2"
-              className="text-lg font-bold text-center flex justify-center items-center"
-            >
-              Sign in to create a Portfolio
-            </TypographyComponent>
-            <ButtonComponent label="Sign In" variant="contained" color="primary" reduxId="login" />
+      <div className="max-w-4xl mx-auto p-4 flex flex-col">
+
+        <div className="flex justify-between mb-4">
+          <div className="w-1/2">
+            {selectedSymbol ? (
+              <CompanySectionComponent symbol={selectedSymbol} onBackClick={handleBackClick} />
+            ) : (
+              <>
+                <LiveSearchSymbolLookup onRowClick={handleRowClick} />
+                <WelcomeSection />
+              </>
+            )}
+
           </div>
-        </CardWrapperComponent>
-        <div className="flex-1 mb-8">
-          <LiveSearchSymbolLookup />
-        </div>
-        <div className="flex-1">
-          <MarketNewsList category="general" minId={10} />
+          <div className="w-1/2 pl-4">
+            {selectedSymbol ? (
+              <CompanyQuoteSection symbol={selectedSymbol} />
+            ) : (
+              <MarketStatus />
+            )}
+            <div className="mt-4">
+              {selectedSymbol ? (
+                <CompanyNewsSection symbol={selectedSymbol} from={getLastWeekDate()} to={getTodayDate()} />
+              ) : (
+                <MarketNewsList category="general" minId={10} />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;

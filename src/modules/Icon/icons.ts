@@ -30,7 +30,8 @@ import LoopIcon from '@mui/icons-material/Loop'
 import TimerIcon from '@mui/icons-material/Timer'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant'
-
+import InsertChartIcon from '@mui/icons-material/InsertChart'
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 export const Icons = {
   Email: EmailIcon,
   Notifications: NotificationsIcon,
@@ -64,6 +65,8 @@ export const Icons = {
   Timer: TimerIcon,
   BarChart: BarChartIcon,
   TableRestaurant: TableRestaurantIcon,
+  InsertChart: InsertChartIcon,
+  MonetizationOn: MonetizationOnIcon,
 } as const
 
 export type IconName = keyof typeof Icons

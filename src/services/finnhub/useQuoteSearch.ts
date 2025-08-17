@@ -7,21 +7,31 @@ export type TickerInput = string | string[]
 
 export interface StockQuoteResponseDTO {
   /** Current price */
-  c: number
-  /** Change */
-  d: number
+  currentPrice: number
+  /** Price change */
+  priceChange: number
   /** Percent change */
-  dp: number
+  percentChange: number
   /** High price of the day */
-  h: number
+  highPrice: number
   /** Low price of the day */
-  l: number
+  lowPrice: number
   /** Open price of the day */
-  o: number
+  openPrice: number
   /** Previous close price */
-  pc: number
+  prevClosePrice: number
+  /** Timestamp */
+  timestamp: number
 }
-
+export interface QuoteResponseDTO {
+  success: {
+    code: number
+    message: string
+    details: string
+  }
+  data: StockQuoteResponseDTO
+  timestamp: number
+}
 export const useQuoteSearch = (tickerInput: TickerInput) => {
   const { show } = useSnackbar('quoteSearchSnackbar')
 
@@ -43,17 +53,20 @@ export const useQuoteSearch = (tickerInput: TickerInput) => {
     } else if (isSuccess) {
       show('Quote(s) retrieved!', 'success')
     }
-  }, [isLoading, isSuccess, show])
+  }, [isLoading, isSuccess])
 
   useEffect(() => {
     if (isError) {
       const errorMessage = (error as any)?.data?.message || 'Quote lookup failed!'
       show(errorMessage, 'error')
     }
-  }, [isError, error, show])
+  }, [isError, error])
+
+  const quoteResponse = data as QuoteResponseDTO
+  const quote = quoteResponse && quoteResponse.data
 
   return {
-    quote: data,
+    quote,
     isLoading,
     isError,
     isSuccess,

@@ -43,7 +43,6 @@ const TableWrapperComponent: React.FC<TableWrapperComponentProps> = ({
   // Get data from redux or override.
   const { data } = useTable()
   const rows = overrideData ?? data
-  console.log('isLoading in table', isLoading)
 
   // Local pagination state (0-indexed for TablePagination).
   const [page, setPage] = React.useState(0)

@@ -68,6 +68,12 @@ export const useSymbolLookup = (query: string, exchange: string) => {
     }
   }, [data])
 
+  useEffect(() => {
+    if (shouldSkipQuery) {
+      setSymbols([])
+    }
+  }, [shouldSkipQuery])
+
   const prevStatusRef = useRef({ isLoading: false, isSuccess: false })
 
   useEffect(() => {

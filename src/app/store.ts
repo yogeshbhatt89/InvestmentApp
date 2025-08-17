@@ -9,6 +9,7 @@ import { dropdownReducer } from '@/modules/Dropdown'
 import { chartReducer } from '@/modules/Chart'
 import { linearProgressReducer } from '@/modules/LinearProgress'
 import { tableReducer } from '@/modules/Table'
+import { dialogReducer } from '@/modules/Dialog'
 export const store = configureStore({
   reducer: {
     textField: inputFieldReducer,
@@ -20,6 +21,7 @@ export const store = configureStore({
     chart: chartReducer,
     linearProgress: linearProgressReducer,
     table: tableReducer,
+    dialog: dialogReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),

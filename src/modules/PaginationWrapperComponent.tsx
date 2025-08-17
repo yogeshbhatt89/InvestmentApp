@@ -7,6 +7,8 @@ interface PaginationWrapperComponentProps {
   page: number
   onChange: (_: React.ChangeEvent<unknown>, _value: number) => void
   className?: string
+  showFirstButton?: boolean
+  showLastButton?: boolean
 }
 
 const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({
@@ -14,6 +16,8 @@ const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({
   page,
   onChange,
   className,
+  showFirstButton = false,
+  showLastButton = false,
 }) => {
   return (
     <Pagination
@@ -21,8 +25,8 @@ const PaginationWrapperComponent: React.FC<PaginationWrapperComponentProps> = ({
       page={page}
       onChange={onChange}
       variant="text"
-      showFirstButton={false}
-      showLastButton={false}
+      showFirstButton={showFirstButton}
+      showLastButton={showLastButton}
       boundaryCount={0}
       className={className}
     />

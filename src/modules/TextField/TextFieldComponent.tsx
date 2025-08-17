@@ -1,5 +1,6 @@
 import React from 'react'
-import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material'
+import { TextField, TextFieldProps as MuiTextFieldProps, InputAdornment, IconButton } from '@mui/material'
+import ClearIcon from '@mui/icons-material/Clear'
 import { useTextField } from './useTextField'
 
 // Omit props that we want to control or modify
@@ -15,6 +16,7 @@ interface TextFieldComponentProps extends Omit<MuiTextFieldProps, OmittedProps> 
   disabled?: boolean
   placeholder?: string
   type?: 'text' | 'password' | 'email' | 'number'
+  onClear?: () => void
 }
 
 const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
@@ -27,6 +29,7 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   disabled = false,
   placeholder,
   type = 'text',
+  onClear,
   ...muiProps
 }) => {
   const { getTextFieldValue, setTextFieldValue } = useTextField(reduxId)
@@ -44,6 +47,23 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
       disabled={disabled}
       placeholder={placeholder}
       type={type}
+      InputProps={{
+        endAdornment: getTextFieldValue ? (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="clear search"
+              onClick={() => {
+                setTextFieldValue('')
+                onClear?.()
+              }}
+              edge="end"
+              size="small"
+            >
+              <ClearIcon />
+            </IconButton>
+          </InputAdornment>
+        ) : undefined,
+      }}
     />
   )
 }

@@ -2,10 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { jwtDecode } from 'jwt-decode'
 import { isUserInactive } from '../utils/userActivityTracker'
-import type { StockQuoteResponseDTO } from './finnhub/useQuoteSearch'
+import type { QuoteResponseDTO } from './finnhub/useQuoteSearch'
 import type { SymbolLookupResponse } from './finnhub/useSymbolLookup'
 import { BatchQuoteResponse } from './finnhub/useBatchQuoteSearch'
-
+import type { RecommendationTrendsResponse } from './finnhub/useRecommendationTrends'
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
   prepareHeaders: (headers, { endpoint }) => {
@@ -133,7 +133,7 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
-    quote: builder.query<StockQuoteResponseDTO, { ticker: string }>({
+    quote: builder.query<QuoteResponseDTO, { ticker: string }>({
       query: ({ ticker }) => ({
         url: `/investments/quote?ticker=${ticker}`,
         method: 'GET',
@@ -142,6 +142,30 @@ export const api = createApi({
     batchQuotes: builder.query<BatchQuoteResponse, { symbols: string }>({
       query: ({ symbols }) => ({
         url: `/investments/batchQuotes?symbols=${symbols}`,
+        method: 'GET',
+      }),
+    }),
+    marketStatus: builder.query<any, { exchange: string }>({
+      query: ({ exchange }) => ({
+        url: `/investments/marketStatus?exchange=${exchange}`,
+        method: 'GET',
+      }),
+    }),
+    companyProfile: builder.query<any, { symbol: string }>({
+      query: ({ symbol }) => ({
+        url: `/investments/companyProfile?symbol=${symbol}`,
+        method: 'GET',
+      }),
+    }),
+    companyNews: builder.query<any, { symbol: string; from: string; to: string }>({
+      query: ({ symbol, from, to }) => ({
+        url: `/investments/companyNews?symbol=${symbol}&from=${from}&to=${to}`,
+        method: 'GET',
+      }),
+    }),
+    recommendationTrends: builder.query<RecommendationTrendsResponse, { ticker: string }>({
+      query: ({ ticker }) => ({
+        url: `/investments/recommendationTrends?ticker=${ticker}`,
         method: 'GET',
       }),
     }),
@@ -155,4 +179,8 @@ export const {
   useQuoteQuery,
   useMarketNewsQuery,
   useBatchQuotesQuery,
+  useMarketStatusQuery,
+  useCompanyProfileQuery,
+  useCompanyNewsQuery,
+  useRecommendationTrendsQuery,
 } = api
