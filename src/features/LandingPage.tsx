@@ -1,5 +1,4 @@
-// src/features/LandingPage.tsx
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MarketNewsList from './MarketNewsList'
 import LiveSearchSymbolLookup from './LiveSearchSymbolLookup'
 import CompanySectionComponent from './company/CompanySectionComponent'

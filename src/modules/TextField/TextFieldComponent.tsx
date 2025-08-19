@@ -39,6 +39,10 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
 }) => {
   const { getTextFieldValue, setTextFieldValue } = useTextField(reduxId)
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTextFieldValue(e.target.value)
+  }
+
   return (
     <TextField
       {...muiProps}
@@ -46,7 +50,7 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
       fullWidth={fullWidth}
       label={label}
       value={getTextFieldValue}
-      onChange={e => setTextFieldValue(e.target.value)}
+      onChange={handleChange}
       error={error}
       helperText={helperText}
       disabled={disabled}

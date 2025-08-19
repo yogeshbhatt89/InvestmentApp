@@ -6,6 +6,7 @@ import type { QuoteResponseDTO } from './finnhub/useQuoteSearch'
 import type { SymbolLookupResponse } from './finnhub/useSymbolLookup'
 import { BatchQuoteResponse } from './finnhub/useBatchQuoteSearch'
 import type { RecommendationTrendsResponse } from './finnhub/useRecommendationTrends'
+import { Country, Language } from './utils/useLookups'
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
   prepareHeaders: (headers, { endpoint }) => {
@@ -121,6 +122,18 @@ export const api = createApi({
         body: userData,
       }),
     }),
+    countries: builder.query<Country[], void>({
+      query: () => ({
+        url: '/lookups/countries',
+        method: 'GET',
+      }),
+    }),
+    languages: builder.query<Language[], void>({
+      query: () => ({
+        url: '/lookups/languages',
+        method: 'GET',
+      }),
+    }),
     symbolLookup: builder.query<SymbolLookupResponse, { query: string; exchange: string }>({
       query: ({ query, exchange }) => ({
         url: `/investments/symbolLookup?q=${query}&exchange=${exchange}`,
@@ -175,6 +188,8 @@ export const api = createApi({
 export const {
   useRegisterMutation,
   useLoginMutation,
+  useCountriesQuery,
+  useLanguagesQuery,
   useSymbolLookupQuery,
   useQuoteQuery,
   useMarketNewsQuery,

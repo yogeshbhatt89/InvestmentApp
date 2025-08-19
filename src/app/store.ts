@@ -10,6 +10,7 @@ import { chartReducer } from '@/modules/Chart'
 import { linearProgressReducer } from '@/modules/LinearProgress'
 import { tableReducer } from '@/modules/Table'
 import { dialogReducer } from '@/modules/Dialog'
+import { datePickerReducer } from '@/modules/DatePicker'
 export const store = configureStore({
   reducer: {
     textField: inputFieldReducer,
@@ -22,6 +23,7 @@ export const store = configureStore({
     linearProgress: linearProgressReducer,
     table: tableReducer,
     dialog: dialogReducer,
+    datePicker: datePickerReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
