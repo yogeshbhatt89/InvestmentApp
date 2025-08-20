@@ -34,6 +34,7 @@ interface DropdownComponentProps {
   sx?: SxProps<Theme>
   isLoading?: boolean
   onBlur?: () => void
+  renderOption?: (_option: DropdownOption) => React.ReactNode
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
@@ -52,6 +53,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   sx,
   isLoading = false,
   onBlur,
+  renderOption,
 }) => {
   const { selectedValue, setValue } = useDropdown(reduxId, multiple)
 
@@ -88,8 +90,12 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         >
           {options.map(option => (
             <MenuItem key={option.value} value={option.value} disabled={option.disabled}>
-              {option.icon && <span className="mr-2">{option.icon}</span>}
-              {option.label}
+              {renderOption ? renderOption(option) : (
+                <>
+                  {option.icon && <span className="mr-2">{option.icon}</span>}
+                  {option.label}
+                </>
+              )}
             </MenuItem>
           ))}
         </Select>

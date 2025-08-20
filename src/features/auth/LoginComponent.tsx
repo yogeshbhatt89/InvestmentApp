@@ -5,13 +5,12 @@ import TextFieldComponent, { useTextField } from '@/modules/TextField'
 import ButtonComponent from '@/modules/Button'
 import BoxComponent from '@/modules/BoxComponent'
 import FormControlWrapper from '@/modules/FormControlWrapper'
-import useDialog from '@/modules/Dialog/useDialog'
-import RegisterComponent from './RegisterComponent'
+import { useDialog } from '@/modules/Dialog/useDialog'
 const LoginComponent = () => {
   const navigate = useNavigate()
   const { login, isLoading, isSuccess } = useLogin()
-  const { openDialog } = useDialog()
-
+  const { openDialog } = useDialog('register-dialog')
+  const { closeDialog } = useDialog('login-dialog')
   const {
     getTextFieldValue: email,
     isEmpty: isEmailEmpty,
@@ -30,7 +29,8 @@ const LoginComponent = () => {
   }
 
   const handleRegisterClick = () => {
-    openDialog('', <RegisterComponent />)
+    closeDialog()
+    openDialog()
   }
 
   useEffect(() => {

@@ -1,16 +1,17 @@
-import React from 'react'
-import TypographyComponent from '@/modules/TypographyComponent'
-import ButtonComponent from '@/modules/Button'
-import DialogComponent from '@/modules/Dialog/DialogComponent'
-import useDialog from '@/modules/Dialog/useDialog'
-import LoginComponent from '@/features/auth/LoginComponent'
-
+// SignIn.tsx
+import React from 'react';
+import TypographyComponent from '@/modules/TypographyComponent';
+import ButtonComponent from '@/modules/Button';
+import DialogComponent from '@/modules/Dialog/DialogComponent';
+import { useDialog } from '@/modules/Dialog/useDialog';
+import LoginComponent from '@/features/auth/LoginComponent';
+import RegisterComponent from './auth/RegisterComponent';
 const SignIn: React.FC = () => {
-  const { openDialog } = useDialog()
+  const { openDialog } = useDialog('login-dialog');
 
   const handleSignInClick = () => {
-    openDialog('', <LoginComponent />)
-  }
+    openDialog();
+  };
 
   return (
     <div className="p-4 flex justify-center gap-4">
@@ -27,9 +28,17 @@ const SignIn: React.FC = () => {
         reduxId="login"
         onClick={handleSignInClick}
       />
-      <DialogComponent />
+      <DialogComponent
+        reduxId="login-dialog"
+        title=""
+        content={<LoginComponent />}
+      />
+      <DialogComponent
+        reduxId="register-dialog"
+        title=""
+        content={<RegisterComponent />}
+      />
     </div>
-  )
-}
-
-export default SignIn
+  );
+};
+export default SignIn;

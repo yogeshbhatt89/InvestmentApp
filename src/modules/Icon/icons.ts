@@ -109,3 +109,25 @@ export const Icons = {
 } as const
 
 export type IconName = keyof typeof Icons
+
+export const profileIcons: IconName[] = [
+  'Face2TwoTone',
+  'Face3TwoTone',
+  'Face4TwoTone',
+  'Face5TwoTone',
+  'Face6TwoTone',
+  'FaceRetouchingNaturalTwoTone',
+  'FaceRetouchingOffTwoTone',
+  'FaceTwoTone',
+  'TagFacesTwoTone',
+  'AccountBoxTwoTone',
+  'AccountCircleTwoTone',
+  'SentimentSatisfiedAltTwoTone',
+  'SentimentVerySatisfiedTwoTone',
+  'MoodBadTwoTone',
+  'SentimentDissatisfiedTwoTone',
+  'SentimentNeutralTwoTone',
+  'SentimentVeryDissatisfiedTwoTone',
+  'SickTwoTone',
+  'SupportAgentTwoTone',
+]

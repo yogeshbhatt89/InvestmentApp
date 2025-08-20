@@ -1,28 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit'
 import React from 'react'
+
 interface DialogState {
-  isOpen: boolean
-  title: string
-  content: React.ReactNode
+  [reduxId: string]: {
+    isOpen: boolean
+    title: string
+    content: React.ReactNode
+  }
 }
 
-const initialState: DialogState = {
-  isOpen: false,
-  title: '',
-  content: null,
-}
+const initialState: DialogState = {}
 
 const dialogSlice = createSlice({
   name: 'dialog',
   initialState,
   reducers: {
     openDialog(state, action) {
-      state.isOpen = true
-      state.title = action.payload.title
-      state.content = action.payload.content
+      const { reduxId } = action.payload
+      if (!state[reduxId]) {
+        state[reduxId] = {
+          isOpen: true,
+          title: '',
+          content: null,
+        }
+      } else {
+        state[reduxId].isOpen = true
+      }
     },
-    closeDialog(state) {
-      state.isOpen = false
+    closeDialog(state, action) {
+      const { reduxId } = action.payload
+      if (!state[reduxId]) {
+        state[reduxId] = {
+          isOpen: false,
+          title: '',
+          content: null,
+        }
+      } else {
+        state[reduxId].isOpen = false
+      }
     },
   },
 })

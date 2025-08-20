@@ -107,7 +107,7 @@ const DemoComponent = () => {
           {
             label: 'Symbol Lookup',
             icon: <IconWrapper name="Search" size="small" />,
-            content: <LiveSearchSymbolLookup />,
+            content: <LiveSearchSymbolLookup onRowClick={() => { }} />,
           },
         ]}
       />

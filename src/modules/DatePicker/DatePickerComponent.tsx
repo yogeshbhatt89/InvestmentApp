@@ -1,32 +1,33 @@
 import React from 'react';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { useDatePicker } from './useDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker, type DatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import { useDatePicker } from './useDatePicker';
+import dayjs from 'dayjs';
 
-interface DatePickerProps {
-  className?: string;
+interface DatePickerComponentProps {
   reduxId: string;
+  label?: string;
 }
 
-const DatePickerComponent: React.FC<DatePickerProps> = ({
-  className,
-  reduxId,
-  ...props
-}) => {
-  const { value, onChange } = useDatePicker(reduxId);
+const DatePickerComponent: React.FC<DatePickerComponentProps> = ({ reduxId, label }) => {
+  const { onChange } = useDatePicker(reduxId);
 
-  const handleDateChange = (value: any, _context: any) => {
-    onChange(value);
+  const handleChange: DatePickerProps['onChange'] = (value, _context) => {
+    const dayJsValue = dayjs(value);
+    const formattedDate = dayJsValue.format("MM-DD-YYYY");
+    const dateObject = dayjs(formattedDate).toDate();
+    onChange(dateObject);
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        className={className}
-        value={value}
-        onChange={handleDateChange}
-        {...props}
+        label={label || 'Select Date'}
+        onChange={handleChange}
+        format="MM-DD-YYYY"
+        className="w-full h-10"
+        sx={{ width: '100%', height: '20px' }}
       />
     </LocalizationProvider>
   );

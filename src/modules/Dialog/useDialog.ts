@@ -3,18 +3,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/app/store'
 import { openDialog, closeDialog } from './DialogSlice'
 
-const useDialog = () => {
-  const dispatch = useDispatch()
-  const isOpen = useSelector((state: RootState) => state.dialog.isOpen)
-  const title = useSelector((state: RootState) => state.dialog.title)
-  const content = useSelector((state: RootState) => state.dialog.content)
+export interface DialogState {
+  [reduxId: string]: {
+    isOpen: boolean
+    title: string
+    content: React.ReactNode
+  }
+}
 
-  const handleOpenDialog = (title: string, content: React.ReactNode) => {
-    dispatch(openDialog({ title, content }))
+export const useDialog = (reduxId: string) => {
+  const dispatch = useDispatch()
+  const isOpen = useSelector((state: RootState) => state.dialog[reduxId]?.isOpen ?? false)
+  const title = useSelector((state: RootState) => state.dialog[reduxId]?.title ?? '')
+  const content = useSelector((state: RootState) => state.dialog[reduxId]?.content ?? null)
+
+  const handleOpenDialog = () => {
+    dispatch(openDialog({ reduxId }))
   }
 
   const handleCloseDialog = () => {
-    dispatch(closeDialog())
+    dispatch(closeDialog({ reduxId }))
   }
 
   return {
@@ -25,5 +33,3 @@ const useDialog = () => {
     closeDialog: handleCloseDialog,
   }
 }
-
-export default useDialog

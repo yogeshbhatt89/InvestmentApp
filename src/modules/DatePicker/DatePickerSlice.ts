@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 interface DatePickerState {
   [reduxId: string]: {
-    date: Date | null
+    date: string | null
     isOpen: boolean
   }
 }
@@ -13,11 +12,10 @@ const datePickerSlice = createSlice({
   name: 'datePicker',
   initialState,
   reducers: {
-    setDate(state, action: PayloadAction<{ reduxId: string; date: Date | null }>) {
-      state[action.payload.reduxId] = {
-        ...state[action.payload.reduxId],
-        date: action.payload.date,
-      }
+    setDate(state, action) {
+      const { reduxId, date } = action.payload
+      state[reduxId] = state[reduxId] || { date: null, isOpen: false }
+      state[reduxId].date = date
     },
     setIsOpen(state, action: PayloadAction<{ reduxId: string; isOpen: boolean }>) {
       state[action.payload.reduxId] = {
